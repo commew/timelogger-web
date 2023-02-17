@@ -1,0 +1,7 @@
+node_modules/
+.next/
+coverage/
+next-env.d.ts
+*.config.js
+__mocks__
+storybook-static/
