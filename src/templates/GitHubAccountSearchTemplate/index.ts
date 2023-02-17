@@ -1,0 +1,1 @@
+export { GitHubAccountSearchTemplate } from './GitHubAccountSearchTemplate';
