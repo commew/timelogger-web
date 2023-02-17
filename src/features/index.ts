@@ -1,0 +1,1 @@
+export { appUrls } from './url';
