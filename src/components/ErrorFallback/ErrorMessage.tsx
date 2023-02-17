@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 import { Alert } from '@mantine/core';
+import { GitHubAccountNotFoundError } from '@/features';
 
 const createDisplayErrorMessage = (error: Error) => {
-  if (error.name === 'GitHubAccountNotFoundError') {
+  if (error instanceof GitHubAccountNotFoundError) {
     return 'GitHubアカウントは見つかりませんでした。';
   }
 
