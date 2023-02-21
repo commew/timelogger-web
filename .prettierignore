@@ -7,3 +7,4 @@ next-env.d.ts
 *.config.js
 __mocks__
 storybook-static/
+public/mockServiceWorker.js
