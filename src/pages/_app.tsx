@@ -1,6 +1,10 @@
 import { MantineProvider } from '@mantine/core';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { getNullableGoogleTagManagerId } from '@/features';
+import { GoogleTagManager } from '@/components/GoogleTagManager';
+
+const googleTagManagerId = getNullableGoogleTagManagerId();
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
@@ -21,6 +25,11 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
           colorScheme: 'light',
         }}
       >
+        {googleTagManagerId !== null ? (
+          <GoogleTagManager googleTagManagerId={googleTagManagerId} />
+        ) : (
+          ''
+        )}
         <Component {...pageProps} />
       </MantineProvider>
     </>
