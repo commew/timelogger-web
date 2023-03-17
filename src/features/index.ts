@@ -1,4 +1,4 @@
-export { appUrls } from './url';
+export { appUrls, appUrl } from './url';
 export { GitHubAccountNotFoundError } from './gitHub';
 export type { GitHubAccount, FetchGitHubAccount } from './gitHub';
 export { httpStatusCode } from './httpStatusCode';

@@ -21,6 +21,11 @@ export const HeaderMenu: FC = () => {
             {appUrls.gitHubAccountSearch.name}
           </Link>
         </Menu.Item>
+        <Menu.Item>
+          <Link href={appUrls.login.path} prefetch={false}>
+            {appUrls.login.name}
+          </Link>
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );
