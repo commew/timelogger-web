@@ -6,3 +6,5 @@ export type { HttpStatusCode } from './httpStatusCode';
 export type { GoogleTagManagerId } from './googleTagManagerId';
 export { getNullableGoogleTagManagerId } from './googleTagManagerId';
 export { sampleFunc } from './sample';
+export { isOidcProvider } from './auth';
+export type { OidcProvider } from './auth';
