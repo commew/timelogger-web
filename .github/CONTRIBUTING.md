@@ -77,7 +77,70 @@ react-icons については https://react-icons.github.io/react-icons/ を参照
 
 ちなみに必須なのは 1 行目だけ、1 行だけで簡潔に分かるのがベストだしそうすべきだが、詳細説明が必要な場合は 3 行目以降に詳細なメッセージを書きます。
 
-## 2. PR のレビューを依頼する
+## 2. PR（Draft Pull Request）の作成を行う
+
+出来るだけレビュー時の手戻りを少なくする為、早めに PR を作成する事を推奨します。
+
+通常はソースコードに変更がないとコミットが出来ないですが、以下のように空コミットを行えば変更内容がゼロでも PR を作成する事が可能です。
+
+```
+git commit --allow-empty
+```
+
+この時に作成する PR は [Draft Pull Request](https://github.blog/jp/2019-02-19-introducing-draft-pull-requests/) とします。
+
+この形であれば間違ってマージされる事はないですし、まだ作業途中である事が明らかに分かるからです。
+
+PR を作成すると（正確にはコミットを GitHub 上にプッシュすると）Vercel への Preview 環境へデプロイが行われます。
+
+Preview 環境の URL は以下から確認出来ます。
+
+正確にはコミット毎に Preview 環境の URL が生成されるのですが、以下の箇所から確認出来る URL は対象ブランチの最新コミットを参照するので、レビューや検証時には下記から確認出来る URL を利用する事を推奨します。
+
+![DraftPullRequest1](https://user-images.githubusercontent.com/11032365/226935374-58157b71-12d6-4cf4-b0b0-f01a4e7f789d.png)
+
+例えば [この PR](https://github.com/commew/timelogger-web/pull/38) だと Preview 環境の URL は https://timelogger-web-git-feature-issue11add-docs-commew.vercel.app になります。
+
+https://console.cloud.google.com/apis/credentials?project=timelogger-api の認証情報から「timmew（開発環境用）」の承認済みのリダイレクト URI を編集します。
+
+これを行わないと Preview 環境の URL から Google アカウントによるログインが実行出来ない為です。
+
+登録が必要なリダイレクト URI は `Preview環境のURL` + `/api/auth/callback/google` となります。
+
+先程の例だと `https://timelogger-web-git-feature-issue11add-docs-commew.vercel.app/api/auth/callback/google` が登録するリダイレクト URI になります。
+
+以下のように登録を行い保存を押下すると完了です。
+
+![add_ redirect_uri](https://user-images.githubusercontent.com/11032365/226938811-efdb25f9-852b-433f-9688-8ffd4d1e1d03.png)
+
+続いて Vercel の環境変数を編集します。
+
+以下の URL に遷移します。
+
+https://vercel.com/commew/timelogger-web/settings/environment-variables
+
+編集する値は下記の通りです。（Preview 環境の値だけ編集をお願いします。）
+
+- `NEXTAUTH_URL`
+- `NEXT_PUBLIC_APP_URL`
+
+![update_vercel_env1](https://user-images.githubusercontent.com/11032365/226942084-a7bd3030-e9c5-4110-9309-5d25c7bfc9e1.png)
+
+この 2 つの値を Preview 環境の URL で上書きします。
+
+![update_vercel_env2](https://user-images.githubusercontent.com/11032365/226942103-adc8917d-3e24-4c83-9c62-49da3428cf4d.png)
+
+ただしデプロイを行わないと環境変数の変更は反映されません。
+
+変更内容をコミットするとデプロイが行われるので変更内容をコミットしてプッシュすると良いでしょう。
+
+ここまでの手順で Preview 環境の URL で Google ログインを行う事が可能です。
+
+少々面倒ですが、Google ログインが利用する OpenID Connect という手法ではリダイレクト URI が登録している値と完全一致している必要がありますし、この部分に関しては仕方ないと思っています。
+
+何か良い方法があればこのプロセスは見直す予定です。
+
+## 3. PR のレビューを依頼する
 
 準備が出来たら Reviewers にレビューして欲しい人を追加して PR を `Ready for review` 状態にします。
 
@@ -92,13 +155,60 @@ react-icons については https://react-icons.github.io/react-icons/ を参照
 
 また開発メンバーの 1 人である [keitakn](https://github.com/keitakn) が書いた [GitHub のコードレビューを受ける際に気をつける事](https://zenn.dev/keitakn/articles/github-code-review-reviewee) を見て頂けると嬉しいです。
 
-## 3. main ブランチへのマージ
+ちなみにこれはレビュアー向けの情報ですが、レビューコメントに関してはコメントと共に以下のラベルをつける事を推奨します。
+
+### ![badge](https://img.shields.io/badge/review-must-red.svg)
+
+このラベルが付いている場合はレビューイは必ず修正を取り込む必要があります。
+
+ただし出来る限りこのラベルは使わない事が望ましいと考えています。
+
+コードレビューはレビュアーの考え方を一方的に押し付ける為の「検査」ではなくレビューイと共に同じ成果物を作り上げる為の行為だと思っています。
+
+その為、以下のように誰の目から見ても明らかに修正が必要だと思う事だけこのラベルを使う事を推奨します。
+
+- セキュリティ上重大なリスクがある
+- 実装に仕様の誤りがある
+
+### ![badge](https://img.shields.io/badge/review-imo-orange.svg)
+
+レビュアーから見て自分ならこうするけど、どうでしょうか？と問いかける際に利用します。
+
+修正を行うかどうかはレビューイが判断します。
+
+修正を取り込まない場合、取り込めない理由を返信する必要があると考えています。
+
+### ![badge](https://img.shields.io/badge/review-nits-green.svg)
+
+些細な指摘です。（typo など）
+
+### ![badge](https://img.shields.io/badge/review-ask-blue.svg)
+
+意図が分からないのでレビュアーがレビューイに質問する時に利用します。
+
+少し前にこんな話題がありましたが、このラベルが付けられている場合は質問以上の意図はないので、意図や理由を述べずに「修正しました。」等になるコミュニケーションは避けたいと考えています。
+
+https://twitter.com/jnchito/status/1624955218655072257?s=20
+
+https://togetter.com/li/2078491
+
+### ![badge](https://img.shields.io/badge/review-suggestion-blue.svg)
+
+こちらはレビュアーからの具体的な提案です。
+
+必ず具体的な修正内容がセットで記載されます。
+
+場合によっては GitHub の以下の機能とセットで利用するのも良いでしょう。
+
+https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/incorporating-feedback-in-your-pull-request
+
+## 4. main ブランチへのマージ
 
 PR で 1 名以上から `Approve` をもらえたら `main` ブランチへのマージをお願いします。
 
 この時点で本番環境 https://timmew.commew.net へデプロイが実施されます。
 
-## 4. リリースページの作成
+## 5. リリースページの作成
 
 以下の手順でリリースページを作成します。
 
