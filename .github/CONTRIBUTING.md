@@ -58,7 +58,7 @@ https://smallbusinessprogramming.com/optimal-pull-request-size/
 コミットメッセージフォーマットは以下の形を推奨します。
 
 ```
-1行目： [変更内容の種類（後で説明します）] # + [GitHubのissueNUmber] 変更内容の要約（タイトル、概要）
+1行目： # + [GitHubのissueNUmber] 変更内容の要約（タイトル、概要）
 2行目： 空行
 3行目以降： 変更した理由（内容、詳細）
 ```
