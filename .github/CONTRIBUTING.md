@@ -140,6 +140,8 @@ https://vercel.com/commew/timelogger-web/settings/environment-variables
 
 何か良い方法があればこのプロセスは見直す予定です。
 
+開発の際は [ディレクトリ構成の説明](https://github.com/commew/timelogger-web/blob/main/src/README.md) に目を通して頂きたいです。
+
 ## 3. PR のレビューを依頼する
 
 準備が出来たら Reviewers にレビューして欲しい人を追加して PR を `Ready for review` 状態にします。
