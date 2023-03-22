@@ -136,7 +136,7 @@ Git タグは [セマンティック バージョニング](https://semver.org/l
 
 リリースには複数の PR を含んでも問題はありませんが、ある程度機能が使えるようになったら細かい単位でのリリースを推奨しております。
 
-![create_release1](https://user-images.githubusercontent.com/11032365/226859151-fe6fbf99-0d46-4d0d-bc4f-9147f830548c.png)
+![create_release3](https://user-images.githubusercontent.com/11032365/226930108-e5259dc6-1077-4582-97e0-b0561c4a0fae.png)
 
 `Release title` を記載します。
 
