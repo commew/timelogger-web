@@ -9,6 +9,8 @@
 
 本リポジトリのコントリビューターは [ローカル開発環境構築手順](https://github.com/commew/timelogger-web/blob/main/docs/setup.md) を参考にローカル PC 上に開発環境の構築をお願いします。
 
+[CONTRIBUTING](https://github.com/commew/timelogger-web/blob/main/.github/CONTRIBUTING.md) の確認もお願いします。
+
 環境構築には https://vercel.com/commew への参加が必要です。
 
 申請に関しては @muchoco-dev までお願いします。
