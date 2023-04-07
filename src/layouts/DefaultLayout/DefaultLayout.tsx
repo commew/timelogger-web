@@ -2,7 +2,7 @@ import type { FC, ReactNode } from 'react';
 import { Container } from '@mantine/core';
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
-import { HeaderMenu, TitleText } from '@/components';
+import { HeaderMenu, TitleText, HeaderNavigation } from '@/components';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
@@ -26,6 +26,7 @@ export const DefaultLayout: FC<Props> = ({ children }) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta name="robots" content="noindex , nofollow" />
     </Head>
+    <HeaderNavigation></HeaderNavigation>
     <Container my="md">
       <TitleText title={title} />
       <HeaderMenu />

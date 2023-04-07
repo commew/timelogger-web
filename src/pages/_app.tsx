@@ -23,6 +23,9 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
         theme={{
           /** Put your mantine theme override here */
           colorScheme: 'light',
+          colors: {
+            timmew: ['#FADF7B'],
+          },
         }}
       >
         {googleTagManagerId !== null ? (
