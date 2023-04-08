@@ -1,4 +1,22 @@
 import { initialize, mswDecorator } from 'msw-storybook-addon';
+import { addDecorator } from '@storybook/react';
+import { MantineProvider } from '@mantine/core';
+
+addDecorator((storyFn) => (
+  <MantineProvider
+    withGlobalStyles
+    withNormalizeCSS
+    theme={{
+      /** Put your mantine theme override here */
+      colorScheme: 'light',
+      colors: {
+        timmew: ['#FADF7B'],
+      },
+    }}
+  >
+    {storyFn()}
+  </MantineProvider>
+));
 
 initialize();
 
