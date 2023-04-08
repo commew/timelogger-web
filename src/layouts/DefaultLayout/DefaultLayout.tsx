@@ -2,7 +2,8 @@ import type { FC, ReactNode } from 'react';
 import { Container } from '@mantine/core';
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
-import { HeaderMenu, TitleText, HeaderNavigation } from '@/components';
+import { HeaderMenu, TitleText, HeaderNavigation, SideBar } from '@/components';
+import styles from '@/styles/defaultLayout.module.css';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
@@ -27,12 +28,17 @@ export const DefaultLayout: FC<Props> = ({ children }) => (
       <meta name="robots" content="noindex , nofollow" />
     </Head>
     <HeaderNavigation></HeaderNavigation>
-    <Container my="md">
-      <TitleText title={title} />
-      <HeaderMenu />
-      <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>
-        {children}
-      </ErrorBoundary>
+    <Container size="xl">
+      <div className={styles.layoutWrapper}>
+        <SideBar></SideBar>
+        <div className={styles.mainContent}>
+          <TitleText title={title} />
+          <HeaderMenu />
+          <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>
+            {children}
+          </ErrorBoundary>
+        </div>
+      </div>
     </Container>
   </>
 );
