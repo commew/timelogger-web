@@ -147,6 +147,42 @@ paths:
                   dateOfBirth: '1996-08-24'
         description: Post the necessary fields for the API to create a new user.
       description: Create a new user.
+  /accounts:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-accounts
+    post:
+      summary: ''
+      operationId: postAccounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: アカウント登録を行うAPI
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Authorization: Basic の形で送信する'
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenIdProvider'
+            examples:
+              Example 1:
+                value:
+                  sub: '10769150350006150715113082367'
+                  provider: google
+        description: ''
 components:
   schemas:
     User:
@@ -189,3 +225,61 @@ components:
         - lastName
         - email
         - emailVerified
+    Account:
+      title: account
+      x-stoplight:
+        id: d81ba26a96905
+      type: object
+      description: アカウント
+      examples:
+        - id: 1
+          name: NekoKoneko
+          openIdProvider:
+            - sub: '10769150350006150715113082367'
+              provider: google
+        - id: 2
+          name: MyCat
+          openIdProvider:
+            - sub: '999999999999999999999999999'
+              provider: google
+            - sub: lineid99999999999999999999999
+              provider: line
+      properties:
+        id:
+          type: number
+          minimum: 1
+          description: アカウントの識別子
+        name:
+          type: string
+          description: アカウント名
+        openIdProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenIdProvider'
+      required:
+        - id
+        - name
+        - openIdProviders
+    OpenIdProvider:
+      title: OpenIdProvider
+      x-stoplight:
+        id: e1ambjwj1ixhm
+      type: object
+      description: 登録・ログイン時に利用するOpenIdProvider
+      properties:
+        sub:
+          type: string
+          example: '10769150350006150715113082367'
+          description: OpenIdProviderのユーザー識別子
+        provider:
+          type: string
+          pattern: /^(google|line|apple|facebook)$/
+          description: 'OpenIdProviderの種類を表す .e.g. google, line'
+      required:
+        - sub
+        - provider
+      examples:
+        - sub: '10769150350006150715113082367'
+          provider: google
+        - sub: lineid99999999999999999999999
+          provider: line
