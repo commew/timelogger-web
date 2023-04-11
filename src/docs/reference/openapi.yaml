@@ -95,7 +95,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
               examples:
-                ExampleAuthenticated:
+                ExampleUnAuthenticated:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
