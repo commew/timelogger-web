@@ -11,7 +11,7 @@ servers:
 paths:
   /accounts:
     get:
-      summary: Your GET endpoint
+      summary: 'アカウントを1件取得する'
       tags:
         - accounts
       responses:
@@ -57,7 +57,7 @@ paths:
       security:
         - Authorization: []
     post:
-      summary: ''
+      summary: 'アカウント登録を行う'
       operationId: postAccounts
       responses:
         '201':
