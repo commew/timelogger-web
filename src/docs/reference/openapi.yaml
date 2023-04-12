@@ -180,6 +180,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenIdProvider'
+      additionalProperties: false
       required:
         - id
         - name
@@ -203,6 +204,7 @@ components:
         provider:
           type: string
           description: 'OpenIdProviderの種類を表す .e.g. google, line'
+      additionalProperties: false
       required:
         - sub
         - provider
@@ -220,6 +222,7 @@ components:
           type: string
           example: Account is not authenticated.
           description: RFC7807 エラーのタイトル。
+      additionalProperties: false
       required:
         - type
         - title
@@ -242,6 +245,7 @@ components:
           description: RFC7807 バリデーションエラーの詳細情報
           items:
             $ref: '#/components/schemas/InvalidParam'
+      additionalProperties: false
       required:
         - type
         - title
@@ -258,6 +262,7 @@ components:
         reason:
           type: string
           description: バリデーションエラーが発生した理由が格納される
+      additionalProperties: false
       required:
         - name
         - reason
