@@ -189,6 +189,11 @@ components:
         id: e1ambjwj1ixhm
       type: object
       description: 登録・ログイン時に利用するOpenIdProvider
+      examples:
+        - sub: '10769150350006150715113082367'
+          provider: google
+        - sub: lineid99999999999999999999999
+          provider: line
       properties:
         sub:
           type: string
@@ -196,16 +201,10 @@ components:
           description: OpenIdProviderのユーザー識別子
         provider:
           type: string
-          pattern: /^(google|line|apple|facebook)$/
           description: 'OpenIdProviderの種類を表す .e.g. google, line'
       required:
         - sub
         - provider
-      examples:
-        - sub: '10769150350006150715113082367'
-          provider: google
-        - sub: lineid99999999999999999999999
-          provider: line
     ProblemDetails:
       title: ProblemDetails
       x-stoplight:
