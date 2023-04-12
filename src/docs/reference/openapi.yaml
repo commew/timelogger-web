@@ -12,7 +12,8 @@ paths:
   /accounts:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - accounts
       responses:
         '200':
           description: OK
