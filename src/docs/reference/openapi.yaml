@@ -33,7 +33,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
         '401':
           description: Unauthorized
           content:
@@ -49,7 +49,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
         '500':
           description: Internal Server Error
           content:
@@ -65,7 +65,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
       operationId: getAccounts
       description: アカウントを1件取得する。アカウントの識別子はAuthorizationに指定したJWT形式のトークンの物が利用される。
       parameters:
@@ -73,7 +73,7 @@ paths:
             type: string
           in: header
           name: Request-Id
-          description: ユニークなID、これを指定した場合はレスポンス時にそのまま返ってくる
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
       security:
         - Authorization: []
     post:
@@ -102,7 +102,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
         '400':
           description: Bad Request
           content:
@@ -118,7 +118,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
         '401':
           description: Unauthorized
           content:
@@ -134,7 +134,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -155,7 +155,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
         '500':
           description: Internal Server Error
           content:
@@ -171,7 +171,7 @@ paths:
             Request-Id:
               schema:
                 type: string
-              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
       description: アカウント登録を行うAPI
       parameters:
         - schema:
@@ -185,7 +185,7 @@ paths:
             type: string
           in: header
           name: Request-Id
-          description: ユニークなID、これを指定した場合はレスポンス時にそのまま返ってくる
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
       requestBody:
         content:
           application/json:
