@@ -200,7 +200,7 @@ paths:
 components:
   schemas:
     Account:
-      title: account
+      title: Account
       x-stoplight:
         id: d81ba26a96905
       type: object
@@ -276,30 +276,43 @@ components:
       required:
         - type
         - title
+      description: エラー発生時に返す構造体（RFC7807を参考にしている）
+      examples:
+        - type: UNAUTHENTICATED
+          title: Account is not authenticated.
     ValidationProblemDetails:
       title: ValidationProblemDetails
       x-stoplight:
         id: y6a6qh2azlqdi
       type: object
+      additionalProperties: false
+      description: バリデーションエラーの発生時に返す構造体（RFC7807を参考にしている）
       properties:
         type:
           type: string
           description: RFC7807を参照。エラーの種類を表す文字列。
-          pattern: /^UNPROCESSABLE_ENTITY$/
+          example: UNPROCESSABLE_ENTITY
         title:
           type: string
           description: RFC7807 エラーのタイトル。
-          pattern: /^Unprocessable Entity\.$/
+          example: Unprocessable Entity.
         invalidParams:
           type: array
           description: RFC7807 バリデーションエラーの詳細情報
           items:
             $ref: '#/components/schemas/InvalidParam'
-      additionalProperties: false
       required:
         - type
         - title
         - invalidParams
+      examples:
+        - type: UNPROCESSABLE_ENTITY
+          title: Unprocessable Entity.
+          invalidParams:
+            - name: email
+              reason: email is required.
+            - name: phoneNumber
+              reason: phoneNumber is required.
     InvalidParam:
       title: InvalidParam
       x-stoplight:
@@ -316,6 +329,10 @@ components:
       required:
         - name
         - reason
+      examples:
+        - name: email
+          reason: email is required.
+      description: バリデーションエラーの詳細を表す（RFC7807を参考にしている）
   securitySchemes:
     Authorization:
       type: http
