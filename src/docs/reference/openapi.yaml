@@ -11,7 +11,7 @@ servers:
 paths:
   /accounts:
     get:
-      summary: 'アカウントを1件取得する'
+      summary: アカウントを1件取得する
       tags:
         - accounts
       responses:
@@ -29,6 +29,11 @@ paths:
                     openIdProvider:
                       - sub: '10769150350006150715113082367'
                         provider: google
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
         '401':
           description: Unauthorized
           content:
@@ -40,6 +45,11 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Account is not authenticated.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
         '500':
           description: Internal Server Error
           content:
@@ -51,13 +61,23 @@ paths:
                   value:
                     type: INTERNAL_SERVER_ERROR
                     title: Internal Server Error.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
       operationId: getAccounts
       description: アカウントを1件取得する。アカウントの識別子はAuthorizationに指定したJWT形式のトークンの物が利用される。
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、これを指定した場合はレスポンス時にそのまま返ってくる
       security:
         - Authorization: []
     post:
-      summary: 'アカウント登録を行う'
+      summary: アカウント登録を行う
       operationId: postAccounts
       responses:
         '201':
@@ -78,6 +98,11 @@ paths:
               schema:
                 type: object
                 properties: {}
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
         '400':
           description: Bad Request
           content:
@@ -89,6 +114,11 @@ paths:
                   value:
                     type: BAD_REQUEST
                     title: Account is already registered.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
         '401':
           description: Unauthorized
           content:
@@ -100,6 +130,11 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -116,6 +151,11 @@ paths:
                         reason: sub is required.
                       - name: provider
                         reason: invalid provider format.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
         '500':
           description: Internal Server Error
           content:
@@ -127,6 +167,11 @@ paths:
                   value:
                     type: INTERNAL_SERVER_ERROR
                     title: Internal Server Error.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト時に指定された場合はそのまま返す
       description: アカウント登録を行うAPI
       parameters:
         - schema:
@@ -136,6 +181,11 @@ paths:
           name: Authorization
           description: 'Authorization: Basic の形で送信する'
           required: true
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、これを指定した場合はレスポンス時にそのまま返ってくる
       requestBody:
         content:
           application/json:
