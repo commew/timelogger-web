@@ -176,7 +176,6 @@ paths:
       parameters:
         - schema:
             type: string
-            example: Basic YWRtaW5Vc2VyOnBhc3N3b3JkMTIzNA==
           in: header
           name: Authorization
           description: 'Authorization: Basic の形で送信する'
