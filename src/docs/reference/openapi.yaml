@@ -26,7 +26,7 @@ paths:
                   value:
                     id: 1
                     name: NekoKoneko
-                    openIdProvider:
+                    openIdProviders:
                       - sub: '10769150350006150715113082367'
                         provider: google
           headers:
@@ -91,7 +91,7 @@ paths:
                   value:
                     id: 1
                     name: NekoKoneko
-                    openIdProvider:
+                    openIdProviders:
                       - sub: '10769150350006150715113082367'
                         provider: google
             application/xml:
@@ -207,12 +207,12 @@ components:
       examples:
         - id: 1
           name: NekoKoneko
-          openIdProvider:
+          openIdProviders:
             - sub: '10769150350006150715113082367'
               provider: google
         - id: 2
           name: MyCat
-          openIdProvider:
+          openIdProviders:
             - sub: '999999999999999999999999999'
               provider: google
             - sub: lineid99999999999999999999999
