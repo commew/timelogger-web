@@ -27,7 +27,7 @@ export const HeaderNavigation: FC = () => {
   const { classes } = useStyles();
 
   return (
-    <Header height={60} mb={60} px={60} className={classes.header}>
+    <Header height={60} mb={20} px={60} className={classes.header}>
       <div className={classes.inner}>
         <MantineLogo size={28} />
         <Group spacing={4} pl={30}>
