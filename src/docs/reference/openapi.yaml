@@ -1,0 +1,339 @@
+openapi: 3.1.0
+x-stoplight:
+  id: i8i3l2jkf1i6e
+info:
+  title: timmew
+  version: '1.0'
+  description: 'https://timmew.commew.net で利用するREST API'
+servers:
+  - url: 'http://localhost:5757'
+    description: local
+paths:
+  /accounts:
+    get:
+      summary: アカウントを1件取得する
+      tags:
+        - accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                ExampleSuccess:
+                  value:
+                    id: 1
+                    name: NekoKoneko
+                    openIdProviders:
+                      - sub: '10769150350006150715113082367'
+                        provider: google
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Account is not authenticated.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      operationId: getAccounts
+      description: アカウントを1件取得する。アカウントの識別子はAuthorizationに指定したJWT形式のトークンの物が利用される。
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      security:
+        - Authorization: []
+    post:
+      summary: アカウント登録を行う
+      operationId: postAccounts
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                ExampleSuccess:
+                  value:
+                    id: 1
+                    name: NekoKoneko
+                    openIdProviders:
+                      - sub: '10769150350006150715113082367'
+                        provider: google
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleAccountAlreadyRegistered:
+                  value:
+                    type: BAD_REQUEST
+                    title: Account is already registered.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Basic Authentication parameters are incorrect.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              examples:
+                ExampleValidationError:
+                  value:
+                    type: UNPROCESSABLE_ENTITY
+                    title: Unprocessable Entity.
+                    invalidParams:
+                      - name: sub
+                        reason: sub is required.
+                      - name: provider
+                        reason: invalid provider format.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      description: アカウント登録を行うAPI
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Authorization: Basic の形で送信する'
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenIdProvider'
+            examples:
+              Example 1:
+                value:
+                  sub: '10769150350006150715113082367'
+                  provider: google
+        description: ''
+components:
+  schemas:
+    Account:
+      title: Account
+      x-stoplight:
+        id: d81ba26a96905
+      type: object
+      description: アカウント
+      examples:
+        - id: 1
+          name: NekoKoneko
+          openIdProviders:
+            - sub: '10769150350006150715113082367'
+              provider: google
+        - id: 2
+          name: MyCat
+          openIdProviders:
+            - sub: '999999999999999999999999999'
+              provider: google
+            - sub: lineid99999999999999999999999
+              provider: line
+      properties:
+        id:
+          type: number
+          minimum: 1
+          description: アカウントの識別子
+        name:
+          type: string
+          description: アカウント名
+        openIdProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenIdProvider'
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - openIdProviders
+    OpenIdProvider:
+      title: OpenIdProvider
+      x-stoplight:
+        id: e1ambjwj1ixhm
+      type: object
+      description: 登録・ログイン時に利用するOpenIdProvider
+      examples:
+        - sub: '10769150350006150715113082367'
+          provider: google
+        - sub: lineid99999999999999999999999
+          provider: line
+      properties:
+        sub:
+          type: string
+          example: '10769150350006150715113082367'
+          description: OpenIdProviderのユーザー識別子
+        provider:
+          type: string
+          description: 'OpenIdProviderの種類を表す .e.g. google, line'
+      additionalProperties: false
+      required:
+        - sub
+        - provider
+    ProblemDetails:
+      title: ProblemDetails
+      x-stoplight:
+        id: h75jw6u0neq18
+      type: object
+      properties:
+        type:
+          type: string
+          example: UNAUTHENTICATED
+          description: RFC7807を参照。エラーの種類を表す文字列。
+        title:
+          type: string
+          example: Account is not authenticated.
+          description: RFC7807 エラーのタイトル。
+      additionalProperties: false
+      required:
+        - type
+        - title
+      description: エラー発生時に返す構造体（RFC7807を参考にしている）
+      examples:
+        - type: UNAUTHENTICATED
+          title: Account is not authenticated.
+    ValidationProblemDetails:
+      title: ValidationProblemDetails
+      x-stoplight:
+        id: y6a6qh2azlqdi
+      type: object
+      additionalProperties: false
+      description: バリデーションエラーの発生時に返す構造体（RFC7807を参考にしている）
+      properties:
+        type:
+          type: string
+          description: RFC7807を参照。エラーの種類を表す文字列。
+          example: UNPROCESSABLE_ENTITY
+        title:
+          type: string
+          description: RFC7807 エラーのタイトル。
+          example: Unprocessable Entity.
+        invalidParams:
+          type: array
+          description: RFC7807 バリデーションエラーの詳細情報
+          items:
+            $ref: '#/components/schemas/InvalidParam'
+      required:
+        - type
+        - title
+        - invalidParams
+      examples:
+        - type: UNPROCESSABLE_ENTITY
+          title: Unprocessable Entity.
+          invalidParams:
+            - name: email
+              reason: email is required.
+            - name: phoneNumber
+              reason: phoneNumber is required.
+    InvalidParam:
+      title: InvalidParam
+      x-stoplight:
+        id: o53o6997g1shv
+      type: object
+      properties:
+        name:
+          type: string
+          description: バリデーションエラーとなったキー名が格納される
+        reason:
+          type: string
+          description: バリデーションエラーが発生した理由が格納される
+      additionalProperties: false
+      required:
+        - name
+        - reason
+      examples:
+        - name: email
+          reason: email is required.
+      description: バリデーションエラーの詳細を表す（RFC7807を参考にしている）
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+      description: Bearer + 半角スペース + JWT形式のトークンで指定する。
