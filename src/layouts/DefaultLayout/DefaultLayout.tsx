@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from 'react';
-import { Container } from '@mantine/core';
+import { Container, createStyles } from '@mantine/core';
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
-import { HeaderMenu, TitleText, HeaderNavigation } from '@/components';
+import { HeaderMenu, TitleText, HeaderNavigation, SideBar } from '@/components';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
@@ -17,22 +17,41 @@ const onError = (error: Error, info: { componentStack: string }) => {
 
 const title = 'Time Logger（仮）';
 
+const useStyles = createStyles(() => ({
+  layoutWrapper: {
+    display: 'flex',
+    width: '100%',
+  },
+  mainContent: {
+    width: '70%',
+  },
+}));
+
 // eslint-disable-next-line max-lines-per-function
-export const DefaultLayout: FC<Props> = ({ children }) => (
-  <>
-    <Head>
-      <title>Time Logger（仮）</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <meta name="robots" content="noindex , nofollow" />
-    </Head>
-    <HeaderNavigation></HeaderNavigation>
-    <Container my="md">
-      <TitleText title={title} />
-      <HeaderMenu />
-      <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>
-        {children}
-      </ErrorBoundary>
-    </Container>
-  </>
-);
+export const DefaultLayout: FC<Props> = ({ children }) => {
+  const { classes } = useStyles();
+
+  return (
+    <>
+      <Head>
+        <title>Time Logger（仮）</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="robots" content="noindex , nofollow" />
+      </Head>
+      <HeaderNavigation></HeaderNavigation>
+      <Container size="xl">
+        <div className={classes.layoutWrapper}>
+          <SideBar></SideBar>
+          <div className={classes.mainContent}>
+            <TitleText title={title} />
+            <HeaderMenu />
+            <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>
+              {children}
+            </ErrorBoundary>
+          </div>
+        </div>
+      </Container>
+    </>
+  );
+};
