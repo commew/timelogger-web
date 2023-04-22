@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
-import { DefaultLayout } from '@/layouts';
+import { LoginLayout } from '@/layouts';
 import { LoginTemplate } from '@/templates/LoginTemplate';
 
 const LoginPage: NextPage = () => {
   return (
-    <DefaultLayout>
+    <LoginLayout>
       <LoginTemplate />
-    </DefaultLayout>
+    </LoginLayout>
   );
 };
 
