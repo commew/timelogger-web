@@ -196,6 +196,8 @@ paths:
                   sub: '10769150350006150715113082367'
                   provider: google
         description: ''
+      tags:
+        - accounts
 components:
   schemas:
     Account:
