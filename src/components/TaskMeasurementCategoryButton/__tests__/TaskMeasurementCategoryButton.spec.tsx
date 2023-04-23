@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { CategoryButton } from '@/components';
+import { TaskMeasurementCategoryButton } from '@/components';
 
-describe('src/components/CategoryButton/CategoryButton.tsx TestCases', () => {
+describe('src/components/TaskMeasurementCategoryButton/TaskMeasurementCategoryButton.tsx TestCases', () => {
   it('should display the name', () => {
     const expected = 'カテゴリ名';
 
-    render(<CategoryButton name="カテゴリ名" />);
+    render(<TaskMeasurementCategoryButton name="カテゴリ名" />);
 
     expect(screen.getByText(expected)).toBeTruthy();
   });

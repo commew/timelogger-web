@@ -28,7 +28,7 @@ type Props = {
   name: string;
 };
 
-export const CategoryButton: FC<Props> = ({ name }) => {
+export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
   const { classes, theme } = useStyles();
   const { hovered, ref } = useHover();
 
@@ -47,7 +47,7 @@ export const CategoryButton: FC<Props> = ({ name }) => {
       </Box>
       {hovered ? (
         <Image
-          src={'/CategoryButton/hover.svg'}
+          src={'/TaskMeasurementCategoryButton/hover.svg'}
           alt={'ホバー時に表示されるボタン'}
           width={32}
           height={32}
