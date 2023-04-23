@@ -1,18 +1,36 @@
-import type { FC, MouseEvent } from 'react';
-import { Group } from '@mantine/core';
-import { signIn } from 'next-auth/react';
-import { GoogleLoginButton } from '@/components';
+import type { FC, MouseEventHandler } from 'react';
+import { Group, createStyles } from '@mantine/core';
+import Image from 'next/image';
 
-export const LoginTemplate: FC = () => {
-  const handleLogin = async (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+const useStyles = createStyles(() => ({
+  loginContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+  googleBtn: {
+    cursor: 'pointer',
+  },
+}));
 
-    await signIn('google');
-  };
+type Props = {
+  handleLogin: MouseEventHandler;
+};
+
+export const LoginTemplate: FC<Props> = ({ handleLogin }) => {
+  const { classes } = useStyles();
 
   return (
-    <Group position="center">
-      <GoogleLoginButton onClick={handleLogin} />
+    <Group className={classes.loginContent} pl={20} pt={20}>
+      <Image src="/mantine_logo.webp" alt="logo" width={80} height={80} />
+      <Image
+        src="/btn_google_signin_dark_normal_web@2x.webp"
+        alt="Google Login"
+        width={252}
+        height={63}
+        onClick={handleLogin}
+        className={classes.googleBtn}
+      />
     </Group>
   );
 };
