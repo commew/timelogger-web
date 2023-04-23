@@ -6,7 +6,7 @@ import Link from 'next/link';
 const useStyles = createStyles((theme) => ({
   header: {
     backgroundColor: theme.colors.timmew[0],
-    borderButtom: 0,
+    borderBottom: 0,
   },
   inner: {
     height: 60,
