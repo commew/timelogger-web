@@ -2,8 +2,9 @@ import type { FC } from 'react';
 import { createStyles, Box } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
-import Image from 'next/image';
-import hoveredImageSrc from './hover.webp';
+import Image, { type StaticImageData } from 'next/image';
+import hoveredImage from './hover.webp';
+const hoveredImageSrc: StaticImageData = hoveredImage;
 
 const useStyles = createStyles((theme) => ({
   button: {
