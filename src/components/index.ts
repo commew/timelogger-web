@@ -5,3 +5,4 @@ export { HeaderMenu } from './HeaderMenu';
 export { GoogleLoginButton } from './GoogleLoginButton';
 export { HeaderNavigation } from './HeaderNavigation';
 export { SideBar } from './SideBar';
+export { CategoryButton } from './CategoryButton';
