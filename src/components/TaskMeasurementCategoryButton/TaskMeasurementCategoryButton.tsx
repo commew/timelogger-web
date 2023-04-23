@@ -3,6 +3,7 @@ import { createStyles, Box } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
 import Image from 'next/image';
+import hoveredImageSrc from './hover.webp';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -47,7 +48,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
       </Box>
       {hovered ? (
         <Image
-          src={'/TaskMeasurementCategoryButton/hover.svg'}
+          src={hoveredImageSrc}
           alt={'ホバー時に表示されるボタン'}
           width={32}
           height={32}
