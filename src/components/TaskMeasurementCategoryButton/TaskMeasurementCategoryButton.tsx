@@ -49,7 +49,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
       {hovered ? (
         <Image
           src={hoveredImageSrc}
-          alt={'ホバー時に表示されるボタン'}
+          alt={'タスクの計測を開始'}
           width={32}
           height={32}
         />
