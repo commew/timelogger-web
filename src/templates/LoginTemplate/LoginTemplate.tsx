@@ -1,7 +1,6 @@
-import type { FC, MouseEvent } from 'react';
+import type { FC, MouseEventHandler } from 'react';
 import { Group, createStyles } from '@mantine/core';
 import Image from 'next/image';
-import { signIn } from 'next-auth/react';
 
 const useStyles = createStyles(() => ({
   loginContent: {
@@ -9,29 +8,28 @@ const useStyles = createStyles(() => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
   },
-  google_btn: {
+  googleBtn: {
     cursor: 'pointer',
   },
 }));
 
-export const LoginTemplate: FC = () => {
-  const { classes } = useStyles();
-  const handleLogin = async (event: MouseEvent<HTMLImageElement>) => {
-    event.preventDefault();
+type Props = {
+  handleLogin: MouseEventHandler;
+};
 
-    await signIn('google');
-  };
+export const LoginTemplate: FC<Props> = ({ handleLogin }) => {
+  const { classes } = useStyles();
 
   return (
     <Group className={classes.loginContent} pl={20} pt={20}>
-      <Image src="/mantine-logo.svg" alt="logo" width={80} height={80} />
+      <Image src="/mantine_logo.webp" alt="logo" width={80} height={80} />
       <Image
-        src="/btn_google_signin_dark_normal_web@2x.png"
+        src="/btn_google_signin_dark_normal_web@2x.webp"
         alt="Google Login"
         width={252}
         height={63}
         onClick={handleLogin}
-        className={classes.google_btn}
+        className={classes.googleBtn}
       />
     </Group>
   );

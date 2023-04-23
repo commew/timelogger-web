@@ -3,6 +3,7 @@ import { LoginTemplate } from '@/templates';
 
 const story = {
   component: LoginTemplate,
+  argTypes: { handleLogin: { action: 'handleLogin' } },
 };
 
 export default story;
