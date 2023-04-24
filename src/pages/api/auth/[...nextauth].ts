@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // eslint-disable-next-line @typescript-eslint/require-await
     redirect: async ({ baseUrl }) => {
-      return `${baseUrl}${appUrls.gitHubAccountSearch.path}`;
+      return `${baseUrl}${appUrls.top.path}`;
     },
     session: async ({
       session,
