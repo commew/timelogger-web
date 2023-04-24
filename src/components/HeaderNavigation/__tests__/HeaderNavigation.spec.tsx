@@ -1,5 +1,5 @@
 import { MantineProvider } from '@mantine/core';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { HeaderNavigation } from '@/components';
 
 const renderWithTheme = (component: JSX.Element) => {
@@ -21,12 +21,24 @@ const renderWithTheme = (component: JSX.Element) => {
 };
 
 describe('src/components/HeaderNavigation/HeaderNavigation.tsx TestCases', () => {
-  it('should display the link label', () => {
-    renderWithTheme(<HeaderNavigation />);
+  it('renders the HeaderNavigation component', () => {
+    const handleLogout = jest.fn();
+    renderWithTheme(<HeaderNavigation handleLogout={handleLogout} />);
 
-    const linkLabels = ['計測', '集計', 'タスク履歴', '各種設定', 'ログアウト'];
+    const linkLabels = ['計測', '集計', 'タスク履歴', '各種設定'];
     linkLabels.forEach((label) => {
       expect(screen.getByText(label)).toBeTruthy();
     });
+    const logoutBtn = screen.getByRole('button', { name: 'ログアウト' });
+    expect(logoutBtn).toBeTruthy();
+  });
+
+  it('calls the handleLogout function when the logout button is clicked', () => {
+    const handleLogout = jest.fn();
+    renderWithTheme(<HeaderNavigation handleLogout={handleLogout} />);
+
+    const logoutBtn = screen.getByRole('button', { name: 'ログアウト' });
+    fireEvent.click(logoutBtn);
+    expect(handleLogout).toHaveBeenCalledTimes(1);
   });
 });
