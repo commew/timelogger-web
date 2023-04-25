@@ -3,8 +3,7 @@ import { createStyles, Box } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
 import Image, { type StaticImageData } from 'next/image';
-import hoveredImage from './hover.webp';
-const hoveredImageSrc: StaticImageData = hoveredImage;
+import hoveredImageSrc from './hover.webp';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -30,6 +29,21 @@ type Props = {
   name: string;
 };
 
+const isStaticImageData = (value: unknown): value is StaticImageData => {
+  if (typeof value !== 'object' || value === null) {
+    return false;
+  }
+
+  const imageObject = value as Record<string, unknown>;
+
+  return (
+    typeof imageObject.src === 'string' &&
+    typeof imageObject.height === 'number' &&
+    typeof imageObject.width === 'number' &&
+    typeof imageObject.blurDataURL === 'string'
+  );
+};
+
 export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
   const { classes, theme } = useStyles();
   const { hovered, ref } = useHover();
@@ -47,7 +61,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
         <IconHome size="1rem" stroke={1.5} color={theme.colors.blue[6]} />
         {name}
       </Box>
-      {hovered ? (
+      {hovered && isStaticImageData(hoveredImageSrc) ? (
         <Image
           role="button"
           src={hoveredImageSrc}
