@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { createStyles, Box } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image';
 import hoveredImageSrc from './hover.webp';
 
 const useStyles = createStyles((theme) => ({
@@ -29,21 +29,6 @@ type Props = {
   name: string;
 };
 
-const isStaticImageData = (value: unknown): value is StaticImageData => {
-  if (typeof value !== 'object' || value === null) {
-    return false;
-  }
-
-  const imageObject = value as Record<string, unknown>;
-
-  return (
-    typeof imageObject.src === 'string' &&
-    typeof imageObject.height === 'number' &&
-    typeof imageObject.width === 'number' &&
-    typeof imageObject.blurDataURL === 'string'
-  );
-};
-
 export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
   const { classes, theme } = useStyles();
   const { hovered, ref } = useHover();
@@ -61,9 +46,10 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
         <IconHome size="1rem" stroke={1.5} color={theme.colors.blue[6]} />
         {name}
       </Box>
-      {hovered && isStaticImageData(hoveredImageSrc) ? (
+      {hovered ? (
         <Image
           role="button"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={hoveredImageSrc}
           alt={'タスクの計測を開始'}
           width={32}
