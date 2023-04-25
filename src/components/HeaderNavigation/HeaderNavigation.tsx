@@ -1,12 +1,12 @@
-import type { FC } from 'react';
-import { createStyles, Header, Group, Menu, Center } from '@mantine/core';
+import type { FC, MouseEventHandler } from 'react';
+import { createStyles, Header, Group, Menu, Button } from '@mantine/core';
 import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   header: {
     backgroundColor: theme.colors.timmew[0],
-    borderButtom: 0,
+    borderBottom: 0,
   },
   inner: {
     height: 60,
@@ -15,15 +15,26 @@ const useStyles = createStyles((theme) => ({
   },
   link: {
     textDecoration: 'none',
-  },
-  linkLabel: {
     marginRight: 40,
     fontWeight: 700,
     color: theme.colors.dark[6],
   },
+  logoutBtn: {
+    textDecoration: 'none',
+    marginRight: 40,
+    fontWeight: 700,
+    color: theme.colors.dark[6],
+    '&:hover': {
+      background: 'none',
+    },
+  },
 }));
 
-export const HeaderNavigation: FC = () => {
+type Props = {
+  handleLogout: MouseEventHandler;
+};
+
+export const HeaderNavigation: FC<Props> = ({ handleLogout }) => {
   const { classes } = useStyles();
 
   return (
@@ -34,46 +45,40 @@ export const HeaderNavigation: FC = () => {
           <Menu>
             <Menu.Target>
               <Link href={'/'} className={classes.link}>
-                <Center>
-                  <span className={classes.linkLabel}>計測</span>
-                </Center>
+                計測
               </Link>
             </Menu.Target>
           </Menu>
           <Menu>
             <Menu.Target>
               <Link href={'/'} className={classes.link}>
-                <Center>
-                  <span className={classes.linkLabel}>集計</span>
-                </Center>
+                集計
               </Link>
             </Menu.Target>
           </Menu>
           <Menu>
             <Menu.Target>
               <Link href={'/'} className={classes.link}>
-                <Center>
-                  <span className={classes.linkLabel}>タスク履歴</span>
-                </Center>
+                タスク履歴
               </Link>
             </Menu.Target>
           </Menu>
           <Menu>
             <Menu.Target>
               <Link href={'/'} className={classes.link}>
-                <Center>
-                  <span className={classes.linkLabel}>各種設定</span>
-                </Center>
+                各種設定
               </Link>
             </Menu.Target>
           </Menu>
         </Group>
         <Group position="right" ml={'auto'}>
-          <Link href={'/'} className={classes.link}>
-            <Center>
-              <span className={classes.linkLabel}>ログアウト</span>
-            </Center>
-          </Link>
+          <Button
+            onClick={handleLogout}
+            className={classes.logoutBtn}
+            variant="subtle"
+          >
+            ログアウト
+          </Button>
         </Group>
       </div>
     </Header>

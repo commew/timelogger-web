@@ -3,6 +3,7 @@ import { HeaderNavigation } from './HeaderNavigation';
 
 const story = {
   component: HeaderNavigation,
+  argTypes: { handleLogout: { action: 'handleLogout' } },
 };
 
 export default story;

@@ -1,6 +1,7 @@
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, MouseEvent } from 'react';
 import { Container, createStyles } from '@mantine/core';
 import Head from 'next/head';
+import { signOut } from 'next-auth/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HeaderMenu, TitleText, HeaderNavigation, SideBar } from '@/components';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
@@ -27,6 +28,12 @@ const useStyles = createStyles(() => ({
   },
 }));
 
+const handleLogout = async (event: MouseEvent<HTMLButtonElement>) => {
+  event.preventDefault();
+
+  await signOut({ callbackUrl: '/login' });
+};
+
 // eslint-disable-next-line max-lines-per-function
 export const DefaultLayout: FC<Props> = ({ children }) => {
   const { classes } = useStyles();
@@ -39,7 +46,7 @@ export const DefaultLayout: FC<Props> = ({ children }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="noindex , nofollow" />
       </Head>
-      <HeaderNavigation></HeaderNavigation>
+      <HeaderNavigation handleLogout={handleLogout}></HeaderNavigation>
       <Container size="xl">
         <div className={classes.layoutWrapper}>
           <SideBar></SideBar>
