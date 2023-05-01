@@ -16,7 +16,8 @@
     "format": "run-s fix:*",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
+    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
+    "api-mock:start": "prism mock -p 5757 public/docs/api/openapi.yaml"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
+    "@stoplight/prism-cli": "^4.13.0",
     "@storybook/addon-a11y": "^6.5.16",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
