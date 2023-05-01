@@ -117,3 +117,57 @@ npm run build-storybook
 README にも記載がありますが、以下の URL から最新の Storybook を確認出来ます。
 
 https://main--63d52217f1430a5ad69846cd.chromatic.com
+
+## OpenAPI の MockServer を起動する
+
+以下のコマンドで `5757` ポートで起動します。
+
+```bash
+npm run api-mock:start
+```
+
+以下は `curl` コマンドでのリクエスト例です。
+
+````bash
+
+```bash
+curl -v \
+-X POST \
+-H "Prefer: code=201, example=ExampleSuccess" \
+-H "Content-Type: application/json" \
+-H "Authorization: Basic YWRtaW5Vc2VyOnBhc3N3b3JkMTIzNA==" \
+-d '
+{
+  "sub": "99999999999999999999999999999",
+  "provider": "google"
+}
+' \
+http://127.0.0.1:5757/accounts | jq
+````
+
+テストコード内では [msw](https://mswjs.io/) で Mock 化していますが、開発時にはこの MockServer を利用する事で実際の API と同じ挙動を確認する事が出来ます。
+
+`Prefer` Header を送信している点に注目して下さい。
+
+この Header を送信することで意図したレスポンス結果を得る事が出来ます。
+
+例えば `POST /accounts` で認証エラーのレスポンスを得る為には以下のようにリクエストを行います。
+
+```bash
+curl -v \
+-X POST \
+-H "Prefer: code=401, example=ExampleUnAuthenticated" \
+-H "Content-Type: application/json" \
+-H "Authorization: Basic YWRtaW5Vc2VyOnBhc3N3b3JkMTIzNA==" \
+-d '
+{
+  "sub": "99999999999999999999999999999",
+  "provider": "google"
+}
+' \
+http://127.0.0.1:5757/accounts | jq
+```
+
+詳しくは以下の公式ドキュメントの記述を参照して下さい。
+
+https://meta.stoplight.io/docs/prism/beeaad4dc0227-prism-cli#modifying-responses
