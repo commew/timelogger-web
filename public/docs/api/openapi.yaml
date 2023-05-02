@@ -1,6 +1,6 @@
 openapi: 3.1.0
 x-stoplight:
-  id: i8i3l2jkf1i6e
+  id: tgzmkz7cuzak8
 info:
   title: timmew
   version: '1.0'
@@ -198,12 +198,111 @@ paths:
         description: ''
       tags:
         - accounts
+  /task-groups:
+    get:
+      summary: タスクグループ一覧を取得する
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groups:
+                    x-stoplight:
+                      id: qlhpx6qp9gfi5
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaskGroup'
+                      x-stoplight:
+                        id: ye1dwohxyg8oy
+              examples:
+                ExampleSuccess:
+                  value:
+                    groups:
+                      - id: 1
+                        name: 仕事
+                        categories:
+                          - id: 1
+                            name: 会議
+                          - id: 2
+                            name: 資料作成
+                      - id: 2
+                        name: 学習
+                        categories:
+                          - id: 3
+                            name: TOEIC
+                      - id: 3
+                        name: 趣味
+                        categories:
+                          - id: 4
+                            name: 散歩
+                          - id: 5
+                            name: 読書
+                      - id: 4
+                        name: グループ未分類
+                        categories:
+                          - id: 6
+                            name: 移動・外出
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+        '401':
+          description: Unauthorized
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Account is not authenticated.
+        '500':
+          description: Internal Server Error
+          headers:
+            Request-Id:
+              schema:
+                type: string
+              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
+      operationId: getTaskGroups
+      description: タスクグループ一覧を取得する。
+      security:
+        - Authorization: []
+      tags:
+        - task-groups
+    parameters: []
 components:
   schemas:
     Account:
       title: Account
       x-stoplight:
-        id: d81ba26a96905
+        id: ml2tf554l87mn
       type: object
       description: アカウント
       examples:
@@ -239,7 +338,7 @@ components:
     OpenIdProvider:
       title: OpenIdProvider
       x-stoplight:
-        id: e1ambjwj1ixhm
+        id: tl33m6vtgm5qv
       type: object
       description: 登録・ログイン時に利用するOpenIdProvider
       examples:
@@ -262,7 +361,7 @@ components:
     ProblemDetails:
       title: ProblemDetails
       x-stoplight:
-        id: h75jw6u0neq18
+        id: l0yvg4cs5le0w
       type: object
       properties:
         type:
@@ -284,7 +383,7 @@ components:
     ValidationProblemDetails:
       title: ValidationProblemDetails
       x-stoplight:
-        id: y6a6qh2azlqdi
+        id: 5k1wlls7997f2
       type: object
       additionalProperties: false
       description: バリデーションエラーの発生時に返す構造体（RFC7807を参考にしている）
@@ -317,7 +416,7 @@ components:
     InvalidParam:
       title: InvalidParam
       x-stoplight:
-        id: o53o6997g1shv
+        id: 7j13v38e1h6uo
       type: object
       properties:
         name:
@@ -334,6 +433,60 @@ components:
         - name: email
           reason: email is required.
       description: バリデーションエラーの詳細を表す（RFC7807を参考にしている）
+    TaskGroup:
+      title: TaskGroup
+      x-stoplight:
+        id: 129ajah3xa6ta
+      type: object
+      examples:
+        - id: 1
+          name: 学習
+          categories:
+            - id: 1
+              name: TOEIC
+        - id: 1
+          name: 仕事
+          categories:
+            - id: 1
+              name: 会議
+            - id: 2
+              name: 資料作成
+      description: タスクグループ
+      properties:
+        id:
+          type: number
+          x-stoplight:
+            id: 9ctglmyprnnn8
+        name:
+          type: string
+          x-stoplight:
+            id: fhy78gzh082ec
+        categories:
+          x-stoplight:
+            id: 7gacgxyblqmdd
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskCategory'
+            x-stoplight:
+              id: 8g4wlz0w3pfhh
+    TaskCategory:
+      title: TaskCategory
+      x-stoplight:
+        id: ih6883wnfrtso
+      type: object
+      description: タスクカテゴリ
+      examples:
+        - id: 1
+          name: 会議
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: g0qttm6pr1nmw
+        name:
+          type: string
+          x-stoplight:
+            id: s7y8see8uup4g
   securitySchemes:
     Authorization:
       type: http
