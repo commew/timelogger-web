@@ -207,7 +207,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskGroup'
+                type: object
+                properties:
+                  groups:
+                    x-stoplight:
+                      id: qlhpx6qp9gfi5
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaskGroup'
+                      x-stoplight:
+                        id: ye1dwohxyg8oy
               examples:
                 ExampleSuccess:
                   value:
