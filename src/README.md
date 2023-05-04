@@ -81,6 +81,16 @@ TypeScript の汎用エラーは使わずに何のエラーなのか分かりや
 
 レイアウト用の Component を格納します。
 
+## openapi
+
+OpenAPI で定義したスキーマを TypeScript に変換したものを格納します。
+
+このディレクトリ内には `src/openapi/schema.ts` というファイルのみが存在します。
+
+`npm run generate:schema` で自動生成されたファイルなので Linter によるチェックや Formatter での整形の対象外となっています。
+
+ファイルの性質上、同一ディレクトリ内に `index.ts` の配置も行いません。
+
 ## pages
 
 Next.js の page 用 Component を格納します。
