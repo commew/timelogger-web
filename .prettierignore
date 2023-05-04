@@ -8,3 +8,4 @@ next-env.d.ts
 __mocks__
 storybook-static/
 public/mockServiceWorker.js
+src/openapi/schema.ts
