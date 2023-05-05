@@ -171,3 +171,9 @@ http://127.0.0.1:5757/accounts | jq
 詳しくは以下の公式ドキュメントの記述を参照して下さい。
 
 https://meta.stoplight.io/docs/prism/beeaad4dc0227-prism-cli#modifying-responses
+
+## OpenAPI の設定ファイルから型定義を生成する
+
+`npm run generate:schema` というコマンドを実行すると `src/types/schema.ts` に型定義が生成されます。
+
+API 設計で `public/docs/api/openapi.yaml` を変更した場合はこのコマンドを実行して型定義を更新・コミットをお願いします。
