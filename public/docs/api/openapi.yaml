@@ -1,6 +1,6 @@
 openapi: 3.1.0
 x-stoplight:
-  id: tgzmkz7cuzak8
+  id: 5u6g82zr14z2o
 info:
   title: timmew
   version: '1.0'
@@ -211,12 +211,12 @@ paths:
                 properties:
                   groups:
                     x-stoplight:
-                      id: qlhpx6qp9gfi5
+                      id: azgl0riy7kre6
                     type: array
                     items:
                       $ref: '#/components/schemas/TaskGroup'
                       x-stoplight:
-                        id: ye1dwohxyg8oy
+                        id: 5m4v1py905eno
               examples:
                 ExampleSuccess:
                   value:
@@ -304,11 +304,7 @@ paths:
       responses:
         '201':
           description: Created
-          headers:
-            Request-Id:
-              schema:
-                type: string
-              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+          headers: {}
           content:
             application/json:
               schema:
@@ -322,11 +318,7 @@ paths:
                     taskCategoryId: 1
         '401':
           description: Unauthorized
-          headers:
-            Request-Id:
-              schema:
-                type: string
-              description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+          headers: {}
           content:
             application/json:
               schema:
@@ -338,6 +330,18 @@ paths:
                     title: Basic Authentication parameters are incorrect.
         '422':
           description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+              examples:
+                ExampleValidationError:
+                  value:
+                    type: UNPROCESSABLE_ENTITY
+                    title: Unprocessable Entity.
+                    invalidParams:
+                      - name: taskCategoryId
+                        reason: taskCategoryId is required.
         '500':
           description: Internal Server Error
           content:
@@ -362,27 +366,22 @@ paths:
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
-        - schema:
-            type: string
-          in: query
       tags:
         - tasks
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TaskCategory'
+              type: object
+              required:
+                - taskCategoryId
+              properties:
+                taskCategoryId:
+                  type: integer
             examples:
               Example 1:
                 value:
-                  id: 1
-                  name: 会議
-      x-ExampleValidationError:
-        type: UNPROCESSABLE_ENTITY
-        title: Unprocessable Entity.
-        invalidParams:
-          - name: taskCategoryId
-            reason: taskCategoryId is required.
+                  taskCategoryId: 1
     parameters: []
   '/tasks/{taskId}/stop':
     parameters:
@@ -410,6 +409,28 @@ paths:
                     endAt: '2019-08-24T16:15:22Z'
                     duration: 7200
                     taskCategoryId: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Basic Authentication parameters are incorrect.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
       description: タスクの記録を停止するAPI
       tags:
         - tasks
@@ -451,6 +472,28 @@ paths:
                     endAt: '2019-08-24T18:15:22Z'
                     duration: 14400
                     taskCategoryId: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Basic Authentication parameters are incorrect.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
       tags:
         - tasks
       description: タスクの記録を終了するAPI
@@ -466,12 +509,172 @@ paths:
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+  /tasks/recording:
+    get:
+      summary: 記録中のタスク一覧を取得する
+      tags:
+        - tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    x-stoplight:
+                      id: sfa6bjg19rsp4
+                    items:
+                      $ref: '#/components/schemas/Task'
+                      x-stoplight:
+                        id: 7l1o6ne9mv21h
+              examples:
+                ExampleSuccess:
+                  value:
+                    tasks:
+                      - id: 1
+                        status: recording
+                        startAt: '2019-08-24T14:15:22Z'
+                        endAt: '2019-08-24T18:15:22Z'
+                        duration: 14400
+                        taskCategoryId: 1
+                      - id: 2
+                        status: recording
+                        startAt: '2019-08-24T14:15:22Z'
+                        endAt: '2019-08-24T18:15:22Z'
+                        duration: 14400
+                        taskCategoryId: 1
+                      - id: 3
+                        status: recording
+                        startAt: '2019-08-24T14:15:22Z'
+                        endAt: '2019-08-24T18:15:22Z'
+                        duration: 14400
+                        taskCategoryId: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Basic Authentication parameters are incorrect.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
+      operationId: getTasksRecording
+      description: 記録中のタスク一覧を取得する。
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Authorization: Basic の形で送信する'
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+    parameters: []
+  /tasks/pending:
+    get:
+      summary: 停止中のタスク一覧を取得する
+      tags:
+        - tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    x-stoplight:
+                      id: sfa6bjg19rsp4
+                    items:
+                      $ref: '#/components/schemas/Task'
+                      x-stoplight:
+                        id: 7l1o6ne9mv21h
+              examples:
+                ExampleSuccess:
+                  value:
+                    tasks:
+                      - id: 1
+                        status: pending
+                        startAt: '2019-08-24T14:15:22Z'
+                        endAt: '2019-08-24T18:15:22Z'
+                        duration: 14400
+                        taskCategoryId: 1
+                      - id: 2
+                        status: pending
+                        startAt: '2019-08-24T14:15:22Z'
+                        endAt: '2019-08-24T18:15:22Z'
+                        duration: 14400
+                        taskCategoryId: 1
+                      - id: 3
+                        status: pending
+                        startAt: '2019-08-24T14:15:22Z'
+                        endAt: '2019-08-24T18:15:22Z'
+                        duration: 14400
+                        taskCategoryId: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Basic Authentication parameters are incorrect.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
+      operationId: getTasksPending
+      description: 停止中のタスク一覧を取得する。
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Authorization: Basic の形で送信する'
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+    parameters: []
 components:
   schemas:
     Account:
       title: Account
       x-stoplight:
-        id: ml2tf554l87mn
+        id: n7chuif0qzxhl
       type: object
       description: アカウント
       examples:
@@ -507,7 +710,7 @@ components:
     OpenIdProvider:
       title: OpenIdProvider
       x-stoplight:
-        id: tl33m6vtgm5qv
+        id: 52j77qyprvni2
       type: object
       description: 登録・ログイン時に利用するOpenIdProvider
       examples:
@@ -530,7 +733,7 @@ components:
     ProblemDetails:
       title: ProblemDetails
       x-stoplight:
-        id: l0yvg4cs5le0w
+        id: xggehgjzbrxmm
       type: object
       properties:
         type:
@@ -552,7 +755,7 @@ components:
     ValidationProblemDetails:
       title: ValidationProblemDetails
       x-stoplight:
-        id: 5k1wlls7997f2
+        id: 9vwd2ysq9999g
       type: object
       additionalProperties: false
       description: バリデーションエラーの発生時に返す構造体（RFC7807を参考にしている）
@@ -585,7 +788,7 @@ components:
     InvalidParam:
       title: InvalidParam
       x-stoplight:
-        id: 7j13v38e1h6uo
+        id: 5gi5egelw83fi
       type: object
       properties:
         name:
@@ -605,7 +808,7 @@ components:
     TaskGroup:
       title: TaskGroup
       x-stoplight:
-        id: 129ajah3xa6ta
+        id: 6fwmbeglrmr7x
       type: object
       examples:
         - id: 1
@@ -625,23 +828,23 @@ components:
         id:
           type: number
           x-stoplight:
-            id: 9ctglmyprnnn8
+            id: kbkp5g70qiw28
         name:
           type: string
           x-stoplight:
-            id: fhy78gzh082ec
+            id: yxpgl7yeewke0
         categories:
           x-stoplight:
-            id: 7gacgxyblqmdd
+            id: xbj1tvi6odqhn
           type: array
           items:
             $ref: '#/components/schemas/TaskCategory'
             x-stoplight:
-              id: 8g4wlz0w3pfhh
+              id: 3iawylhneqia8
     TaskCategory:
       title: TaskCategory
       x-stoplight:
-        id: ih6883wnfrtso
+        id: vzjytydc7y2fc
       type: object
       description: タスクカテゴリ
       examples:
@@ -651,17 +854,17 @@ components:
         id:
           type: integer
           x-stoplight:
-            id: g0qttm6pr1nmw
+            id: xo11v7e5vyicg
         name:
           type: string
           x-stoplight:
-            id: s7y8see8uup4g
+            id: 4p0h35pv7qzpk
       required:
         - id
     Task:
       title: Task
       x-stoplight:
-        id: gr3zbxjan5r8l
+        id: ani6v6i4ioovm
       type: object
       examples:
         - id: 1
@@ -676,7 +879,7 @@ components:
         status:
           type: string
           x-stoplight:
-            id: ku9niltlnucyn
+            id: l0jrifsezec6x
           enum:
             - pending
             - completed
@@ -685,24 +888,24 @@ components:
         startAt:
           type: string
           x-stoplight:
-            id: nixs5cv8zmw5i
+            id: ur3cg0rdsb07p
           format: date-time
           description: タスク開始の開始時刻
         endAt:
           type: string
           x-stoplight:
-            id: jrjxiaefj6w5w
+            id: 073v6n9qjo0pn
           format: date-time
           description: タスク開始の停止時刻
         duration:
           type: integer
           x-stoplight:
-            id: 9si4y55sji4ka
+            id: mb7srxqn0s3ou
           description: タスクの実行時間（秒）
         taskCategoryId:
           type: integer
           x-stoplight:
-            id: pfgxog02nn0vn
+            id: 7gzgodcnccwvi
       required:
         - taskCategoryId
   securitySchemes:
