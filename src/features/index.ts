@@ -7,4 +7,6 @@ export type { GoogleTagManagerId } from './googleTagManagerId';
 export { getNullableGoogleTagManagerId } from './googleTagManagerId';
 export { isOidcProvider } from './auth';
 export type { OidcProvider } from './auth';
-export type { CreateAccount, FindAccount } from './account';
+export { isAccount } from './account';
+export type { Account, CreateAccount, FindAccount } from './account';
+export { InvalidResponseBodyError, UnexpectedFeatureError } from './errors';
