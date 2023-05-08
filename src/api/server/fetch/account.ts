@@ -5,6 +5,7 @@ import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   isAccount,
+  createBackendApiBasicAuthCredential,
 } from '@/features';
 import type { components } from '@/openapi/schema';
 
@@ -19,6 +20,7 @@ export const createAccount: CreateAccount = async (dto) => {
   const response = await fetch(getBackendApiUrl('accounts'), {
     method: 'POST',
     headers: {
+      Authorization: `Basic ${createBackendApiBasicAuthCredential()}}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(requestBody),

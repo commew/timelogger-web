@@ -5,7 +5,7 @@ export { httpStatusCode } from './httpStatusCode';
 export type { HttpStatusCode } from './httpStatusCode';
 export type { GoogleTagManagerId } from './googleTagManagerId';
 export { getNullableGoogleTagManagerId } from './googleTagManagerId';
-export { isOidcProvider } from './auth';
+export { isOidcProvider, createBackendApiBasicAuthCredential } from './auth';
 export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
