@@ -40,6 +40,8 @@ GOOGLE_OIDC_CLIENT_SECRET=GoogleのOpenIDConnectのクライアントシーク�
 NEXTAUTH_URL=http://localhost:5656
 NEXTAUTH_SECRET=十分に長い文字列
 BACKEND_API_BASE_URL=http://localhost:5757
+API_BASIC_AUTH_USER=Vercelの値を参照
+API_BASIC_AUTH_PASSWORD=Vercelの値を参照
 NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=設定は必須ではないですがGA等のデバッグを行いたい場合はVercelの値を参照
 NEXT_PUBLIC_APP_URL=http://localhost:5656
 ```
