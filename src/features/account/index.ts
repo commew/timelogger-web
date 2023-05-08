@@ -1,1 +1,2 @@
-export type { CreateAccount, FindAccount } from './account';
+export { isAccount } from './account';
+export type { CreateAccount, FindAccount, Account } from './account';
