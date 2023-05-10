@@ -47,6 +47,14 @@ Component の内部で React hooks を利用する事は問題ありません。
 
 Component 名と同様のディレクトリ名を作成して `index.ts` を使って外部公開が必要な Component だけを export するようにします。
 
+## api
+
+API に通信を行う関数を格納します。
+
+現状は `src/api/fetch/` しか存在しませんが `fetch` の部分には HTTP クライアントが入ります。
+
+実装する際は `features/` 配下に関数のインターフェースを実装して、それを利用する形で実装します。
+
 ## constants
 
 アプリケーション全体で利用する定数を格納します。
