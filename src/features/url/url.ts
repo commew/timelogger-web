@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { type paths } from '@/openapi/schema';
 
 const appUrlIdList = ['top', 'gitHubAccountSearch', 'login'] as const;
 
@@ -58,4 +59,40 @@ export const appUrl = (): AppUrl => {
   }
 
   return 'http://localhost:3000';
+};
+
+type BackendApiPaths = {
+  accounts: keyof Pick<paths, '/accounts'>;
+  taskGroups: keyof Pick<paths, '/task-groups'>;
+};
+
+const backendApiPaths: BackendApiPaths = {
+  accounts: '/accounts',
+  taskGroups: '/task-groups',
+};
+
+type BackendApiPath = keyof BackendApiPaths;
+
+type BackendApiUrl = AppUrl;
+
+const isBackendApiUrl = (value: unknown): value is BackendApiUrl => {
+  return isAppUrl(value);
+};
+
+const backendApiUrl = (): BackendApiUrl => {
+  if (isBackendApiUrl(process.env.BACKEND_API_BASE_URL)) {
+    return process.env.BACKEND_API_BASE_URL;
+  }
+
+  return 'http://localhost:5757';
+};
+
+export const getBackendApiUrl = (
+  path: BackendApiPath
+): `${BackendApiUrl}${keyof paths}` => {
+  const apiUrl = backendApiUrl();
+
+  const apiPath: keyof paths = backendApiPaths[path];
+
+  return `${apiUrl}${apiPath}`;
 };

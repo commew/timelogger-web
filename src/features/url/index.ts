@@ -1,1 +1,1 @@
-export { appUrls, appUrl } from './url';
+export { appUrls, appUrl, getBackendApiUrl } from './url';
