@@ -20,7 +20,7 @@ export const createAccount: CreateAccount = async (dto) => {
   const response = await fetch(getBackendApiUrl('accounts'), {
     method: 'POST',
     headers: {
-      Authorization: `Basic ${createBackendApiBasicAuthCredential()}}`,
+      Authorization: `Basic ${createBackendApiBasicAuthCredential()}`,
       'Content-Type': 'application/json',
       // TODO APIのDEBUGを行う時は環境変数に NEXT_PUBLIC_DEBUG_MOCK_API=1 を設定してPreferを書き換える
       // TODO Preferは https://github.com/commew/timelogger-web/issues/77 で削除する
