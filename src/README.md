@@ -24,7 +24,10 @@ Component の作成は [Mantine](https://mantine.dev/pages/getting-started/) を
 
 これは export の範囲を限定可する事でリファクタリング時の影響範囲を小さくする事が主な目的です。
 
-ただし例外的に `src/pages/` に関しては Next.js のルール上、ここに置かれた物がそのままルーティングとして解釈されてしまうので `index.ts` の配置は行いません。
+ただし以下のディレクトリでは例外的に `index.ts` を作成しません。
+
+- `src/pages/` に関しては Next.js のルール上、ここに置かれた物がそのままルーティングとして解釈されてしまうので `index.ts` の配置は行いません。
+- `src/api/` に関しては `index.ts` を置くと各 HTTP クライアント毎に違う関数名で命名する必要が出てくるので `index.ts` の配置は行いません。
 
 ## `export default` について
 
