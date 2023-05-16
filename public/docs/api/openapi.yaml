@@ -423,6 +423,18 @@ paths:
                     endAt: '2019-08-24T16:15:22Z'
                     duration: 7200
                     taskCategoryId: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInvalidRequest:
+                  value:
+                    type: INVALID_STATUS_TRANSITION
+                    title: Invalid status transition.
+                    detail: A task with a status of completed cannot be set to pending.
         '401':
           description: Unauthorized
           content:
@@ -499,6 +511,18 @@ paths:
                     endAt: '2019-08-24T18:15:22Z'
                     duration: 14400
                     taskCategoryId: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInvalidRequest:
+                  value:
+                    type: INVALID_STATUS_TRANSITION
+                    title: Invalid status transition.
+                    detail: Status is already completed.
         '401':
           description: Unauthorized
           content:
@@ -801,6 +825,11 @@ components:
       x-stoplight:
         id: xggehgjzbrxmm
       type: object
+      additionalProperties: false
+      description: エラー発生時に返す構造体（RFC7807を参考にしている）
+      examples:
+        - type: UNAUTHENTICATED
+          title: Account is not authenticated.
       properties:
         type:
           type: string
@@ -810,14 +839,14 @@ components:
           type: string
           example: Account is not authenticated.
           description: RFC7807 エラーのタイトル。
-      additionalProperties: false
+        detail:
+          type: string
+          x-stoplight:
+            id: 57w443cr2e50u
+          description: RFC7807を参照。エラーのsを表す文字列。
       required:
         - type
         - title
-      description: エラー発生時に返す構造体（RFC7807を参考にしている）
-      examples:
-        - type: UNAUTHENTICATED
-          title: Account is not authenticated.
     ValidationProblemDetails:
       title: ValidationProblemDetails
       x-stoplight:
