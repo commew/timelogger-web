@@ -328,6 +328,17 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnauthorized:
+                  value:
+                    type: UNAUTHORIZED
+                    title: Account is not authorized.
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -359,7 +370,7 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: 'Authorization: Basic の形で送信する'
+          description: Bearer + 半角スペース + JWT形式のトークンで指定する。
           required: true
         - schema:
             type: string
@@ -382,6 +393,9 @@ paths:
               Example 1:
                 value:
                   taskCategoryId: 1
+        description: ''
+      security:
+        - Authorization: []
     parameters: []
   '/tasks/{taskId}/stop':
     parameters:
@@ -420,6 +434,17 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnauthorized:
+                  value:
+                    type: UNAUTHORIZED
+                    title: Account is not authorized.
         '500':
           description: Internal Server Error
           content:
@@ -439,13 +464,15 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: 'Authorization: Basic の形で送信する'
+          description: Bearer + 半角スペース + JWT形式のトークンで指定する。
           required: true
         - schema:
             type: string
           in: header
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
           name: Request-Id
+      security:
+        - Authorization: []
   '/tasks/{taskId}/complete':
     parameters:
       - schema:
@@ -483,6 +510,17 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnauthorized:
+                  value:
+                    type: UNAUTHORIZED
+                    title: Account is not authorized.
         '500':
           description: Internal Server Error
           content:
@@ -503,12 +541,14 @@ paths:
           in: header
           name: Authorization
           required: true
-          description: 'Authorization: Basic の形で送信する'
+          description: Bearer + 半角スペース + JWT形式のトークンで指定する。
         - schema:
             type: string
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      security:
+        - Authorization: []
   /tasks/recording:
     get:
       summary: 記録中のタスク一覧を取得する
@@ -563,6 +603,17 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnauthorized:
+                  value:
+                    type: UNAUTHORIZED
+                    title: Account is not authorized.
         '500':
           description: Internal Server Error
           content:
@@ -581,13 +632,15 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: 'Authorization: Basic の形で送信する'
+          description: Bearer + 半角スペース + JWT形式のトークンで指定する。
           required: true
         - schema:
             type: string
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      security:
+        - Authorization: []
     parameters: []
   /tasks/pending:
     get:
@@ -643,6 +696,17 @@ paths:
                   value:
                     type: UNAUTHENTICATED
                     title: Basic Authentication parameters are incorrect.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnauthorized:
+                  value:
+                    type: UNAUTHORIZED
+                    title: Account is not authorized.
         '500':
           description: Internal Server Error
           content:
@@ -661,13 +725,15 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: 'Authorization: Basic の形で送信する'
+          description: Bearer + 半角スペース + JWT形式のトークンで指定する。
           required: true
         - schema:
             type: string
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      security:
+        - Authorization: []
     parameters: []
 components:
   schemas:
