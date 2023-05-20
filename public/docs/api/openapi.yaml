@@ -1,6 +1,6 @@
 openapi: 3.1.0
 x-stoplight:
-  id: 5u6g82zr14z2o
+  id: h0tzwk3uync88
 info:
   title: timmew
   version: '1.0'
@@ -211,12 +211,12 @@ paths:
                 properties:
                   groups:
                     x-stoplight:
-                      id: azgl0riy7kre6
+                      id: 9iqpaan35qat3
                     type: array
                     items:
                       $ref: '#/components/schemas/TaskGroup'
                       x-stoplight:
-                        id: 5m4v1py905eno
+                        id: x5wywt1igi2pg
               examples:
                 ExampleSuccess:
                   value:
@@ -327,7 +327,7 @@ paths:
                 ExampleUnAuthenticated:
                   value:
                     type: UNAUTHENTICATED
-                    title: Basic Authentication parameters are incorrect.
+                    title: Please set appToken in Authorization Header.
         '403':
           description: Forbidden
           content:
@@ -445,7 +445,7 @@ paths:
                 ExampleUnAuthenticated:
                   value:
                     type: UNAUTHENTICATED
-                    title: Basic Authentication parameters are incorrect.
+                    title: Please set appToken in Authorization Header.
         '403':
           description: Forbidden
           content:
@@ -533,7 +533,7 @@ paths:
                 ExampleUnAuthenticated:
                   value:
                     type: UNAUTHENTICATED
-                    title: Basic Authentication parameters are incorrect.
+                    title: Please set appToken in Authorization Header.
         '403':
           description: Forbidden
           content:
@@ -589,11 +589,11 @@ paths:
                   tasks:
                     type: array
                     x-stoplight:
-                      id: sfa6bjg19rsp4
+                      id: sqo6mgyxp4lqf
                     items:
                       $ref: '#/components/schemas/Task'
                       x-stoplight:
-                        id: 7l1o6ne9mv21h
+                        id: 7sb54n7vf51n7
               examples:
                 ExampleSuccess:
                   value:
@@ -626,7 +626,7 @@ paths:
                 ExampleUnAuthenticated:
                   value:
                     type: UNAUTHENTICATED
-                    title: Basic Authentication parameters are incorrect.
+                    title: Please set appToken in Authorization Header.
         '403':
           description: Forbidden
           content:
@@ -682,11 +682,11 @@ paths:
                   tasks:
                     type: array
                     x-stoplight:
-                      id: sfa6bjg19rsp4
+                      id: 7x23cj7cb22im
                     items:
                       $ref: '#/components/schemas/Task'
                       x-stoplight:
-                        id: 7l1o6ne9mv21h
+                        id: 8gkkyh1itcoiz
               examples:
                 ExampleSuccess:
                   value:
@@ -719,7 +719,7 @@ paths:
                 ExampleUnAuthenticated:
                   value:
                     type: UNAUTHENTICATED
-                    title: Basic Authentication parameters are incorrect.
+                    title: Please set appToken in Authorization Header.
         '403':
           description: Forbidden
           content:
@@ -764,7 +764,7 @@ components:
     Account:
       title: Account
       x-stoplight:
-        id: n7chuif0qzxhl
+        id: zdqmyvdfetmvo
       type: object
       description: アカウント
       examples:
@@ -800,7 +800,7 @@ components:
     OpenIdProvider:
       title: OpenIdProvider
       x-stoplight:
-        id: 52j77qyprvni2
+        id: 1ofuv2pxl2mft
       type: object
       description: 登録・ログイン時に利用するOpenIdProvider
       examples:
@@ -823,7 +823,7 @@ components:
     ProblemDetails:
       title: ProblemDetails
       x-stoplight:
-        id: xggehgjzbrxmm
+        id: m734l2dezcaxw
       type: object
       additionalProperties: false
       description: エラー発生時に返す構造体（RFC7807を参考にしている）
@@ -842,7 +842,7 @@ components:
         detail:
           type: string
           x-stoplight:
-            id: 57w443cr2e50u
+            id: ogplydljky7yx
           description: RFC7807を参照。エラーのsを表す文字列。
       required:
         - type
@@ -850,7 +850,7 @@ components:
     ValidationProblemDetails:
       title: ValidationProblemDetails
       x-stoplight:
-        id: 9vwd2ysq9999g
+        id: 31j9xxlyuaog0
       type: object
       additionalProperties: false
       description: バリデーションエラーの発生時に返す構造体（RFC7807を参考にしている）
@@ -883,7 +883,7 @@ components:
     InvalidParam:
       title: InvalidParam
       x-stoplight:
-        id: 5gi5egelw83fi
+        id: hocnwkrvj455h
       type: object
       properties:
         name:
@@ -903,7 +903,7 @@ components:
     TaskGroup:
       title: TaskGroup
       x-stoplight:
-        id: 6fwmbeglrmr7x
+        id: woovnu5i1e8pp
       type: object
       examples:
         - id: 1
@@ -923,23 +923,23 @@ components:
         id:
           type: number
           x-stoplight:
-            id: kbkp5g70qiw28
+            id: 2mn9522zynwyr
         name:
           type: string
           x-stoplight:
-            id: yxpgl7yeewke0
+            id: rs1u9kjoqhz8n
         categories:
           x-stoplight:
-            id: xbj1tvi6odqhn
+            id: m8552x2mg7v2c
           type: array
           items:
             $ref: '#/components/schemas/TaskCategory'
             x-stoplight:
-              id: 3iawylhneqia8
+              id: tru4044rlb4sq
     TaskCategory:
       title: TaskCategory
       x-stoplight:
-        id: vzjytydc7y2fc
+        id: 4och16fl40wyw
       type: object
       description: タスクカテゴリ
       examples:
@@ -949,17 +949,17 @@ components:
         id:
           type: integer
           x-stoplight:
-            id: xo11v7e5vyicg
+            id: 0p9agopjfd82a
         name:
           type: string
           x-stoplight:
-            id: 4p0h35pv7qzpk
+            id: r7gswuiwuqn7z
       required:
         - id
     Task:
       title: Task
       x-stoplight:
-        id: ani6v6i4ioovm
+        id: 0dlk8ocssbwth
       type: object
       examples:
         - id: 1
@@ -974,7 +974,7 @@ components:
         status:
           type: string
           x-stoplight:
-            id: l0jrifsezec6x
+            id: fbrfne1nwy96v
           enum:
             - pending
             - completed
@@ -983,24 +983,24 @@ components:
         startAt:
           type: string
           x-stoplight:
-            id: ur3cg0rdsb07p
+            id: gcv5r8hxoaf1o
           format: date-time
           description: タスク開始の開始時刻
         endAt:
           type: string
           x-stoplight:
-            id: 073v6n9qjo0pn
+            id: 83at7gcxo649h
           format: date-time
           description: タスク開始の停止時刻
         duration:
           type: integer
           x-stoplight:
-            id: mb7srxqn0s3ou
+            id: czb6s8y8640ud
           description: タスクの実行時間（秒）
         taskCategoryId:
           type: integer
           x-stoplight:
-            id: 7gzgodcnccwvi
+            id: qpc2w8w438i7c
       required:
         - taskCategoryId
   securitySchemes:
