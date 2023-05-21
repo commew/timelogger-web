@@ -400,7 +400,7 @@ paths:
   '/tasks/{taskId}/stop':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: taskId
         in: path
         required: true
@@ -488,7 +488,7 @@ paths:
   '/tasks/{taskId}/complete':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: taskId
         in: path
         required: true
