@@ -6,6 +6,7 @@ import NextAuth, {
 } from 'next-auth';
 import type { JWT } from 'next-auth/jwt/types';
 import GoogleProvider from 'next-auth/providers/google';
+import { createAccount, findAccount } from '@/api/server/fetch/account';
 import { appUrls, isOidcProvider } from '@/features';
 
 export const authOptions: NextAuthOptions = {
@@ -45,6 +46,17 @@ export const authOptions: NextAuthOptions = {
           },
           String(process.env.NEXTAUTH_SECRET)
         );
+
+        // TODO APIが完成したらこの条件分岐を削除する、対応issueは https://github.com/commew/timelogger-web/issues/77
+        if (process.env.NEXT_PUBLIC_DEBUG_MOCK_API === '1') {
+          const account = await findAccount({ appToken: session.appToken });
+          if (account === null) {
+            await createAccount({
+              sub: token.sub,
+              oidcProvider: token.provider,
+            });
+          }
+        }
       }
 
       return session;
