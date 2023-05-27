@@ -24,6 +24,51 @@ export interface paths {
      */
     get: operations["getTaskGroups"];
   };
+  "/tasks": {
+    /**
+     * タスクの記録を開始する 
+     * @description タスクの記録を開始するAPI
+     */
+    post: operations["postTasks"];
+  };
+  "/tasks/{taskId}/stop": {
+    /**
+     * タスクの記録を停止する 
+     * @description タスクの記録を停止するAPI
+     */
+    patch: operations["patchTaskStopById"];
+    parameters: {
+      path: {
+        taskId: string;
+      };
+    };
+  };
+  "/tasks/{taskId}/complete": {
+    /**
+     * タスクの記録を終了する 
+     * @description タスクの記録を終了するAPI
+     */
+    patch: operations["patchTaskCompleteById"];
+    parameters: {
+      path: {
+        taskId: string;
+      };
+    };
+  };
+  "/tasks/recording": {
+    /**
+     * 記録中のタスク一覧を取得する 
+     * @description 記録中のタスク一覧を取得する。
+     */
+    get: operations["getTasksRecording"];
+  };
+  "/tasks/pending": {
+    /**
+     * 停止中のタスク一覧を取得する 
+     * @description 停止中のタスク一覧を取得する。
+     */
+    get: operations["getTasksPending"];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -112,8 +157,30 @@ export interface components {
      * @description タスクカテゴリ
      */
     TaskCategory: {
-      id?: number;
+      id: number;
       name?: string;
+    };
+    /** Task */
+    Task: {
+      id?: number;
+      /**
+       * @default recording 
+       * @enum {string}
+       */
+      status?: "pending" | "completed" | "recording";
+      /**
+       * Format: date-time 
+       * @description タスク開始の開始時刻
+       */
+      startAt?: string;
+      /**
+       * Format: date-time 
+       * @description タスク開始の停止時刻
+       */
+      endAt?: string;
+      /** @description タスクの実行時間（秒） */
+      duration?: number;
+      taskCategoryId: number;
     };
   };
   responses: never;
@@ -279,6 +346,203 @@ export interface operations {
           /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
           "Request-Id"?: string;
         };
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+    };
+  };
+  /**
+   * タスクの記録を開始する 
+   * @description タスクの記録を開始するAPI
+   */
+  postTasks: {
+    parameters: {
+      header: {
+        /** @description Authorization: Basic の形で送信する */
+        Authorization: string;
+        /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
+        "Request-Id"?: string;
+      };
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          taskCategoryId: number;
+        };
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+        };
+        content: {
+          "application/json": components["schemas"]["Task"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+        };
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Unprocessable Entity (WebDAV) */
+      422: {
+        content: {
+          "application/json": components["schemas"]["ValidationProblemDetails"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+    };
+  };
+  /**
+   * タスクの記録を停止する 
+   * @description タスクの記録を停止するAPI
+   */
+  patchTaskStopById: {
+    parameters: {
+      header: {
+        /** @description Authorization: Basic の形で送信する */
+        Authorization: string;
+        /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
+        "Request-Id"?: string;
+      };
+      path: {
+        taskId: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Task"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+    };
+  };
+  /**
+   * タスクの記録を終了する 
+   * @description タスクの記録を終了するAPI
+   */
+  patchTaskCompleteById: {
+    parameters: {
+      header: {
+        /** @description Authorization: Basic の形で送信する */
+        Authorization: string;
+        /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
+        "Request-Id"?: string;
+      };
+      path: {
+        taskId: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Task"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+    };
+  };
+  /**
+   * 記録中のタスク一覧を取得する 
+   * @description 記録中のタスク一覧を取得する。
+   */
+  getTasksRecording: {
+    parameters: {
+      header: {
+        /** @description Authorization: Basic の形で送信する */
+        Authorization: string;
+        /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
+        "Request-Id"?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            tasks?: (components["schemas"]["Task"])[];
+          };
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+    };
+  };
+  /**
+   * 停止中のタスク一覧を取得する 
+   * @description 停止中のタスク一覧を取得する。
+   */
+  getTasksPending: {
+    parameters: {
+      header: {
+        /** @description Authorization: Basic の形で送信する */
+        Authorization: string;
+        /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
+        "Request-Id"?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            tasks?: (components["schemas"]["Task"])[];
+          };
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
         content: {
           "application/json": components["schemas"]["ProblemDetails"];
         };
