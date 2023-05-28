@@ -51,75 +51,25 @@ type CategoryGroup = Readonly<{
 const mockGroups: CategoryGroup[] = [
   {
     id: 1,
-    name: 'グループ名1',
+    name: '仕事',
     categories: [
-      {
-        id: 1,
-        name: 'カテゴリ名1',
-      },
-      {
-        id: 2,
-        name: 'カテゴリ名2',
-      },
-      {
-        id: 3,
-        name: 'カテゴリ名3',
-      },
+      { id: 1, name: '会議' },
+      { id: 2, name: '資料作成' },
     ],
   },
-  {
-    id: 2,
-    name: 'グループ名2',
-    categories: [
-      {
-        id: 4,
-        name: 'カテゴリ名4',
-      },
-      {
-        id: 5,
-        name: 'カテゴリ名5',
-      },
-      {
-        id: 6,
-        name: 'カテゴリ名6',
-      },
-    ],
-  },
+  { id: 2, name: '学習', categories: [{ id: 3, name: 'TOEIC' }] },
   {
     id: 3,
-    name: 'グループ名3',
+    name: '趣味',
     categories: [
-      {
-        id: 7,
-        name: 'カテゴリ名7',
-      },
-      {
-        id: 8,
-        name: 'カテゴリ名8',
-      },
-      {
-        id: 9,
-        name: 'カテゴリ名9',
-      },
+      { id: 4, name: '散歩' },
+      { id: 5, name: '読書' },
     ],
   },
   {
     id: 4,
-    name: 'グループ名4',
-    categories: [
-      {
-        id: 10,
-        name: 'カテゴリ名10',
-      },
-      {
-        id: 11,
-        name: 'カテゴリ名11',
-      },
-      {
-        id: 12,
-        name: 'カテゴリ名12',
-      },
-    ],
+    name: 'グループ未分類',
+    categories: [{ id: 6, name: '移動・外出' }],
   },
 ];
 
