@@ -82,7 +82,10 @@ export const SideBar: FC = () => {
     <Navbar height={800} p="md" className={classes.navbar}>
       <Navbar.Section grow>
         {mockGroups.map((group) => (
-          <Group key={group.id}>
+          <Group
+            key={group.id}
+            sx={{ rowGap: theme.spacing.xs, paddingBottom: theme.spacing.xs }}
+          >
             <UnstyledButton
               onClick={() => {
                 setOpened((prevOpened) => ({
@@ -108,16 +111,14 @@ export const SideBar: FC = () => {
                 </Box>
               </Group>
             </UnstyledButton>
-            <Collapse in={opened[group.id]} pl={'1.25rem'}>
-              <Group>
-                {group.categories.map((category) => {
-                  return (
-                    <TaskMeasurementCategoryButton
-                      key={category.id}
-                      name={category.name}
-                    />
-                  );
-                })}
+            <Collapse in={opened[group.id]} pl={'1.25rem'} w={'100%'}>
+              <Group spacing={0}>
+                {group.categories.map((category) => (
+                  <TaskMeasurementCategoryButton
+                    key={category.id}
+                    name={category.name}
+                  />
+                ))}
               </Group>
             </Collapse>
           </Group>
