@@ -7,9 +7,9 @@ import {
   Navbar,
   UnstyledButton,
   createStyles,
-  NavLink,
 } from '@mantine/core';
-import { IconChevronUp, IconChevronDown, IconHome } from '@tabler/icons-react';
+import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';
+import { TaskMeasurementCategoryButton } from '../TaskMeasurementCategoryButton';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -110,52 +110,20 @@ export const SideBar: FC = () => {
             </UnstyledButton>
             <Collapse in={opened[group.id]} pl={'1.25rem'}>
               <Group>
-                <NavLink
-                  icon={
-                    <IconHome
-                      size="1rem"
-                      stroke={1.5}
-                      color={theme.colors.blue[6]}
+                {group.categories.map((category) => {
+                  return (
+                    <TaskMeasurementCategoryButton
+                      key={category.id}
+                      name={category.name}
                     />
-                  }
-                  label="カテゴリ名"
-                ></NavLink>
-                <NavLink
-                  icon={
-                    <IconHome
-                      size="1rem"
-                      stroke={1.5}
-                      color={theme.colors.blue[6]}
-                    />
-                  }
-                  label="カテゴリ名カテゴリ名カテゴリ名カテゴリ名カテゴリ名カテゴリ名"
-                ></NavLink>
-                <NavLink
-                  icon={
-                    <IconHome
-                      size="1rem"
-                      stroke={1.5}
-                      color={theme.colors.blue[6]}
-                    />
-                  }
-                  label="カテゴリ名"
-                ></NavLink>
+                  );
+                })}
               </Group>
             </Collapse>
           </Group>
         ))}
-        <NavLink
-          icon={
-            <IconHome size="1rem" stroke={1.5} color={theme.colors.blue[6]} />
-          }
-          label="カテゴリ名"
-        ></NavLink>
-        <NavLink
-          icon={
-            <IconHome size="1rem" stroke={1.5} color={theme.colors.blue[6]} />
-          }
-          label="カテゴリ名"
-        ></NavLink>
+        <TaskMeasurementCategoryButton name="カテゴリ名" />
+        <TaskMeasurementCategoryButton name="カテゴリ名" />
       </Navbar.Section>
     </Navbar>
   );
