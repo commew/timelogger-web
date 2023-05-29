@@ -7,9 +7,9 @@ import {
   Navbar,
   UnstyledButton,
   createStyles,
-  NavLink,
 } from '@mantine/core';
-import { IconChevronUp, IconChevronDown, IconHome } from '@tabler/icons-react';
+import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';
+import { TaskMeasurementCategoryButton } from '../TaskMeasurementCategoryButton';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -51,75 +51,25 @@ type CategoryGroup = Readonly<{
 const mockGroups: CategoryGroup[] = [
   {
     id: 1,
-    name: 'グループ名1',
+    name: '仕事',
     categories: [
-      {
-        id: 1,
-        name: 'カテゴリ名1',
-      },
-      {
-        id: 2,
-        name: 'カテゴリ名2',
-      },
-      {
-        id: 3,
-        name: 'カテゴリ名3',
-      },
+      { id: 1, name: '会議' },
+      { id: 2, name: '資料作成' },
     ],
   },
-  {
-    id: 2,
-    name: 'グループ名2',
-    categories: [
-      {
-        id: 4,
-        name: 'カテゴリ名4',
-      },
-      {
-        id: 5,
-        name: 'カテゴリ名5',
-      },
-      {
-        id: 6,
-        name: 'カテゴリ名6',
-      },
-    ],
-  },
+  { id: 2, name: '学習', categories: [{ id: 3, name: 'TOEIC' }] },
   {
     id: 3,
-    name: 'グループ名3',
+    name: '趣味',
     categories: [
-      {
-        id: 7,
-        name: 'カテゴリ名7',
-      },
-      {
-        id: 8,
-        name: 'カテゴリ名8',
-      },
-      {
-        id: 9,
-        name: 'カテゴリ名9',
-      },
+      { id: 4, name: '散歩' },
+      { id: 5, name: '読書' },
     ],
   },
   {
     id: 4,
-    name: 'グループ名4',
-    categories: [
-      {
-        id: 10,
-        name: 'カテゴリ名10',
-      },
-      {
-        id: 11,
-        name: 'カテゴリ名11',
-      },
-      {
-        id: 12,
-        name: 'カテゴリ名12',
-      },
-    ],
+    name: 'グループ未分類',
+    categories: [{ id: 6, name: '移動・外出' }],
   },
 ];
 
@@ -132,7 +82,10 @@ export const SideBar: FC = () => {
     <Navbar height={800} p="md" className={classes.navbar}>
       <Navbar.Section grow>
         {mockGroups.map((group) => (
-          <Group key={group.id}>
+          <Group
+            key={group.id}
+            sx={{ rowGap: theme.spacing.xs, paddingBottom: theme.spacing.xs }}
+          >
             <UnstyledButton
               onClick={() => {
                 setOpened((prevOpened) => ({
@@ -158,54 +111,20 @@ export const SideBar: FC = () => {
                 </Box>
               </Group>
             </UnstyledButton>
-            <Collapse in={opened[group.id]} pl={'1.25rem'}>
-              <Group>
-                <NavLink
-                  icon={
-                    <IconHome
-                      size="1rem"
-                      stroke={1.5}
-                      color={theme.colors.blue[6]}
-                    />
-                  }
-                  label="カテゴリ名"
-                ></NavLink>
-                <NavLink
-                  icon={
-                    <IconHome
-                      size="1rem"
-                      stroke={1.5}
-                      color={theme.colors.blue[6]}
-                    />
-                  }
-                  label="カテゴリ名カテゴリ名カテゴリ名カテゴリ名カテゴリ名カテゴリ名"
-                ></NavLink>
-                <NavLink
-                  icon={
-                    <IconHome
-                      size="1rem"
-                      stroke={1.5}
-                      color={theme.colors.blue[6]}
-                    />
-                  }
-                  label="カテゴリ名"
-                ></NavLink>
+            <Collapse in={opened[group.id]} pl={'1.25rem'} w={'100%'}>
+              <Group spacing={0}>
+                {group.categories.map((category) => (
+                  <TaskMeasurementCategoryButton
+                    key={category.id}
+                    name={category.name}
+                  />
+                ))}
               </Group>
             </Collapse>
           </Group>
         ))}
-        <NavLink
-          icon={
-            <IconHome size="1rem" stroke={1.5} color={theme.colors.blue[6]} />
-          }
-          label="カテゴリ名"
-        ></NavLink>
-        <NavLink
-          icon={
-            <IconHome size="1rem" stroke={1.5} color={theme.colors.blue[6]} />
-          }
-          label="カテゴリ名"
-        ></NavLink>
+        <TaskMeasurementCategoryButton name="カテゴリ名" />
+        <TaskMeasurementCategoryButton name="カテゴリ名" />
       </Navbar.Section>
     </Navbar>
   );
