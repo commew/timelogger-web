@@ -7,7 +7,7 @@ import {
   IconPlayerPlay,
 } from '@tabler/icons-react';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   button: {
     width: '80px',
     height: '34px',

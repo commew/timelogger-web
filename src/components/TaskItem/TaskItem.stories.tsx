@@ -13,6 +13,6 @@ export const Default: Story = {
   args: {
     categoryName: 'カテゴリ名',
     categoryGroupName: 'グループ名',
-    isMeasuring: true
+    isMeasuring: true,
   },
 };
