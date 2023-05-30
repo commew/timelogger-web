@@ -59,7 +59,7 @@ export const TaskItem: FC<Props> = ({
         <Box>
           <Text fz="sm">計測時間</Text>
           <Text color="dark.6" fz={theme.headings.sizes.h1.fontSize} fw={700}>
-            00:00:10
+            00:00:10 {/* TODO: ここは動的に値を変更できるようにする */}
           </Text>
         </Box>
       </Flex>
@@ -77,6 +77,7 @@ export const TaskItem: FC<Props> = ({
             color="indigo.6"
             className={classes.button}
             styles={{ leftIcon: { marginRight: '0.5rem' } }}
+            aria-label="STOP"
           >
             <Text color="gray.0" fz="xs" fw={700}>
               停止
@@ -94,6 +95,7 @@ export const TaskItem: FC<Props> = ({
             color="red.6"
             className={classes.button}
             styles={{ leftIcon: { marginRight: '0.5rem' } }}
+            aria-label="START"
           >
             <Text color="gray.0" fz="xs" fw={700}>
               開始
@@ -111,6 +113,7 @@ export const TaskItem: FC<Props> = ({
           color="gray.4"
           className={classes.button}
           styles={{ leftIcon: { marginRight: '0.5rem' } }}
+          aria-label="COMPLETE"
         >
           <Text color="dark.6" fw={700} fz="xs">
             終了
