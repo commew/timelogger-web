@@ -7,11 +7,19 @@ import {
   IconPlayerPlay,
 } from '@tabler/icons-react';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   button: {
     width: '80px',
     height: '34px',
     padding: '7px 10px',
+  },
+  task_item: {
+    borderLeft: '5px solid #30BCF9',
+    padding: '0.5rem 1rem',
+    maxWidth: '800px',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    columnGap: theme.spacing.xl,
   },
 }));
 
@@ -29,16 +37,7 @@ export const TaskItem: FC<Props> = ({
   const { classes, theme } = useStyles();
 
   return (
-    <Flex
-      align="center"
-      justify="space-between"
-      columnGap="xl"
-      style={{
-        borderLeft: '5px solid #30BCF9',
-        padding: '0.5rem 1rem',
-        maxWidth: '800px',
-      }}
-    >
+    <Flex className={classes.task_item}>
       <Flex
         align="center"
         justify="space-between"
