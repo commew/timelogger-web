@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { TaskItem } from '@/components';
+import { MeasuringTaskItem } from '@/components';
 
-describe('src/components/TaskItem/TaskItem.tsx TestCases', () => {
+describe('src/components/MeasuringTaskItem/MeasuringTaskItem.tsx TestCases', () => {
   it('should display the name', () => {
     const expected = 'カテゴリ名';
 
     render(
-      <TaskItem
+      <MeasuringTaskItem
         categoryName="カテゴリ名"
         categoryGroupName="グループ名"
         isMeasuring={true}

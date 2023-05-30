@@ -1,13 +1,13 @@
 import type { ComponentStoryObj } from '@storybook/react';
-import { TaskItem } from './TaskItem';
+import { MeasuringTaskItem } from './MeasuringTaskItem';
 
 const story = {
-  component: TaskItem,
+  component: MeasuringTaskItem,
 };
 
 export default story;
 
-type Story = ComponentStoryObj<typeof TaskItem>;
+type Story = ComponentStoryObj<typeof MeasuringTaskItem>;
 
 export const Default: Story = {
   args: {

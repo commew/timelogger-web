@@ -5,4 +5,4 @@ export { HeaderMenu } from './HeaderMenu';
 export { HeaderNavigation } from './HeaderNavigation';
 export { SideBar } from './SideBar';
 export { TaskMeasurementCategoryButton } from './TaskMeasurementCategoryButton';
-export { TaskItem } from './TaskItem';
+export { MeasuringTaskItem } from './MeasuringTaskItem';

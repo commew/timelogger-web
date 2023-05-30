@@ -29,7 +29,7 @@ type Props = {
   isMeasuring: boolean;
 };
 
-export const TaskItem: FC<Props> = ({
+export const MeasuringTaskItem: FC<Props> = ({
   categoryName,
   categoryGroupName,
   isMeasuring,
