@@ -6,3 +6,4 @@ export { HeaderNavigation } from './HeaderNavigation';
 export { SideBar } from './SideBar';
 export { TaskMeasurementCategoryButton } from './TaskMeasurementCategoryButton';
 export { MeasuringTaskItem } from './MeasuringTaskItem';
+export { StoppedTaskItem } from './StoppedTaskItem';
