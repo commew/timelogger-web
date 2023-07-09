@@ -24,10 +24,11 @@ export const LoginLayout: FC<Props> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Time Logger（仮）</title>
+        <title>Timmew ログイン</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="noindex , nofollow" />
+        <meta name="description" content="Timmewのログインページです。" />
       </Head>
       <Card shadow="sm" radius="md" withBorder className={classes.layoutLogin}>
         {children}
