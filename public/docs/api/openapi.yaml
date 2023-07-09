@@ -1,6 +1,6 @@
 openapi: 3.1.0
 x-stoplight:
-  id: h0tzwk3uync88
+  id: ybycvfm4zjfgg
 info:
   title: timmew
   version: '1.0'
@@ -211,12 +211,12 @@ paths:
                 properties:
                   groups:
                     x-stoplight:
-                      id: 9iqpaan35qat3
+                      id: bjlzd0bajopmk
                     type: array
                     items:
                       $ref: '#/components/schemas/TaskGroup'
                       x-stoplight:
-                        id: x5wywt1igi2pg
+                        id: 9oqick8nu5cpt
               examples:
                 ExampleSuccess:
                   value:
@@ -589,11 +589,11 @@ paths:
                   tasks:
                     type: array
                     x-stoplight:
-                      id: sqo6mgyxp4lqf
+                      id: afsvjj5i41ka4
                     items:
                       $ref: '#/components/schemas/Task'
                       x-stoplight:
-                        id: 7sb54n7vf51n7
+                        id: xz8whtco6f8de
               examples:
                 ExampleSuccess:
                   value:
@@ -682,11 +682,11 @@ paths:
                   tasks:
                     type: array
                     x-stoplight:
-                      id: 7x23cj7cb22im
+                      id: 9roi7f7u6khd5
                     items:
                       $ref: '#/components/schemas/Task'
                       x-stoplight:
-                        id: 8gkkyh1itcoiz
+                        id: q86hkcmuwzc7y
               examples:
                 ExampleSuccess:
                   value:
@@ -764,7 +764,7 @@ components:
     Account:
       title: Account
       x-stoplight:
-        id: zdqmyvdfetmvo
+        id: 58tnupli8t2d6
       type: object
       description: アカウント
       examples:
@@ -800,7 +800,7 @@ components:
     OpenIdProvider:
       title: OpenIdProvider
       x-stoplight:
-        id: 1ofuv2pxl2mft
+        id: yma1u2s6ytpdm
       type: object
       description: 登録・ログイン時に利用するOpenIdProvider
       examples:
@@ -823,7 +823,7 @@ components:
     ProblemDetails:
       title: ProblemDetails
       x-stoplight:
-        id: m734l2dezcaxw
+        id: ocaz82t4fivae
       type: object
       additionalProperties: false
       description: エラー発生時に返す構造体（RFC7807を参考にしている）
@@ -842,7 +842,7 @@ components:
         detail:
           type: string
           x-stoplight:
-            id: ogplydljky7yx
+            id: wq5t2fuoe6td0
           description: RFC7807を参照。エラーのsを表す文字列。
       required:
         - type
@@ -850,7 +850,7 @@ components:
     ValidationProblemDetails:
       title: ValidationProblemDetails
       x-stoplight:
-        id: 31j9xxlyuaog0
+        id: e7gjf8uvdld4s
       type: object
       additionalProperties: false
       description: バリデーションエラーの発生時に返す構造体（RFC7807を参考にしている）
@@ -883,7 +883,7 @@ components:
     InvalidParam:
       title: InvalidParam
       x-stoplight:
-        id: hocnwkrvj455h
+        id: c6pvneceu7foh
       type: object
       properties:
         name:
@@ -903,7 +903,7 @@ components:
     TaskGroup:
       title: TaskGroup
       x-stoplight:
-        id: woovnu5i1e8pp
+        id: ta6jt4wogd4p7
       type: object
       examples:
         - id: 1
@@ -923,23 +923,27 @@ components:
         id:
           type: number
           x-stoplight:
-            id: 2mn9522zynwyr
+            id: h5vm833s4xwdg
         name:
           type: string
           x-stoplight:
-            id: rs1u9kjoqhz8n
+            id: 9c5gc65pvmp3y
         categories:
           x-stoplight:
-            id: m8552x2mg7v2c
+            id: d87k0buiuxa9p
           type: array
           items:
             $ref: '#/components/schemas/TaskCategory'
             x-stoplight:
-              id: tru4044rlb4sq
+              id: x5bsjdahdrt8h
+      required:
+        - id
+        - name
+        - categories
     TaskCategory:
       title: TaskCategory
       x-stoplight:
-        id: 4och16fl40wyw
+        id: 17bc444rylni3
       type: object
       description: タスクカテゴリ
       examples:
@@ -949,17 +953,18 @@ components:
         id:
           type: integer
           x-stoplight:
-            id: 0p9agopjfd82a
+            id: cos2plwqowtpj
         name:
           type: string
           x-stoplight:
-            id: r7gswuiwuqn7z
+            id: 0cpubl29j21hi
       required:
         - id
+        - name
     Task:
       title: Task
       x-stoplight:
-        id: 0dlk8ocssbwth
+        id: vce577b9z4owp
       type: object
       examples:
         - id: 1
@@ -974,7 +979,7 @@ components:
         status:
           type: string
           x-stoplight:
-            id: fbrfne1nwy96v
+            id: kas2ylbk0wx4p
           enum:
             - pending
             - completed
@@ -983,24 +988,24 @@ components:
         startAt:
           type: string
           x-stoplight:
-            id: gcv5r8hxoaf1o
+            id: kt403bskbxaws
           format: date-time
           description: タスク開始の開始時刻
         endAt:
           type: string
           x-stoplight:
-            id: 83at7gcxo649h
+            id: rh3divmawtxkq
           format: date-time
           description: タスク開始の停止時刻
         duration:
           type: integer
           x-stoplight:
-            id: czb6s8y8640ud
+            id: zriewaxu80bi5
           description: タスクの実行時間（秒）
         taskCategoryId:
           type: integer
           x-stoplight:
-            id: qpc2w8w438i7c
+            id: 57stqbifuw4v3
       required:
         - taskCategoryId
   securitySchemes:
