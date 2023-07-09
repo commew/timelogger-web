@@ -39,7 +39,7 @@ export interface paths {
     patch: operations["patchTaskStopById"];
     parameters: {
       path: {
-        taskId: string;
+        taskId: number;
       };
     };
   };
@@ -51,7 +51,7 @@ export interface paths {
     patch: operations["patchTaskCompleteById"];
     parameters: {
       path: {
-        taskId: string;
+        taskId: number;
       };
     };
   };
@@ -114,6 +114,8 @@ export interface components {
        * @example Account is not authenticated.
        */
       title: string;
+      /** @description RFC7807を参照。エラーのsを表す文字列。 */
+      detail?: string;
     };
     /**
      * ValidationProblemDetails 
@@ -148,9 +150,9 @@ export interface components {
      * @description タスクグループ
      */
     TaskGroup: {
-      id?: number;
-      name?: string;
-      categories?: (components["schemas"]["TaskCategory"])[];
+      id: number;
+      name: string;
+      categories: (components["schemas"]["TaskCategory"])[];
     };
     /**
      * TaskCategory 
@@ -158,7 +160,7 @@ export interface components {
      */
     TaskCategory: {
       id: number;
-      name?: string;
+      name: string;
     };
     /** Task */
     Task: {
@@ -359,7 +361,7 @@ export interface operations {
   postTasks: {
     parameters: {
       header: {
-        /** @description Authorization: Basic の形で送信する */
+        /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
         Authorization: string;
         /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
         "Request-Id"?: string;
@@ -389,6 +391,12 @@ export interface operations {
           "application/json": components["schemas"]["ProblemDetails"];
         };
       };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
       /** @description Unprocessable Entity (WebDAV) */
       422: {
         content: {
@@ -410,13 +418,13 @@ export interface operations {
   patchTaskStopById: {
     parameters: {
       header: {
-        /** @description Authorization: Basic の形で送信する */
+        /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
         Authorization: string;
         /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
         "Request-Id"?: string;
       };
       path: {
-        taskId: string;
+        taskId: number;
       };
     };
     responses: {
@@ -426,8 +434,20 @@ export interface operations {
           "application/json": components["schemas"]["Task"];
         };
       };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
       /** @description Unauthorized */
       401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
         content: {
           "application/json": components["schemas"]["ProblemDetails"];
         };
@@ -447,13 +467,13 @@ export interface operations {
   patchTaskCompleteById: {
     parameters: {
       header: {
-        /** @description Authorization: Basic の形で送信する */
+        /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
         Authorization: string;
         /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
         "Request-Id"?: string;
       };
       path: {
-        taskId: string;
+        taskId: number;
       };
     };
     responses: {
@@ -463,8 +483,20 @@ export interface operations {
           "application/json": components["schemas"]["Task"];
         };
       };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
       /** @description Unauthorized */
       401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
         content: {
           "application/json": components["schemas"]["ProblemDetails"];
         };
@@ -484,7 +516,7 @@ export interface operations {
   getTasksRecording: {
     parameters: {
       header: {
-        /** @description Authorization: Basic の形で送信する */
+        /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
         Authorization: string;
         /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
         "Request-Id"?: string;
@@ -501,6 +533,12 @@ export interface operations {
       };
       /** @description Unauthorized */
       401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
         content: {
           "application/json": components["schemas"]["ProblemDetails"];
         };
@@ -520,7 +558,7 @@ export interface operations {
   getTasksPending: {
     parameters: {
       header: {
-        /** @description Authorization: Basic の形で送信する */
+        /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
         Authorization: string;
         /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
         "Request-Id"?: string;
@@ -537,6 +575,12 @@ export interface operations {
       };
       /** @description Unauthorized */
       401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
         content: {
           "application/json": components["schemas"]["ProblemDetails"];
         };
