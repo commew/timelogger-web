@@ -12,7 +12,7 @@ export const createTask: CreateTask = async (dto) => {
   const { taskCategoryId } = dto;
 
   const requestBody: components['schemas']['Task'] = {
-    taskCategoryId
+    taskCategoryId,
   };
 
   const response = await fetch(getBackendApiUrl('tasks'), {
@@ -27,7 +27,8 @@ export const createTask: CreateTask = async (dto) => {
 
   if (response.status !== httpStatusCode.created) {
     throw new UnexpectedFeatureError(
-      `failed to createTask. status: ${response.status
+      `failed to createTask. status: ${
+        response.status
       }, body: ${await response.text()}`
     );
   }
