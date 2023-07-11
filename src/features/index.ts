@@ -9,4 +9,6 @@ export { isOidcProvider, createBackendApiBasicAuthCredential } from './auth';
 export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
+export { isTask } from './task';
+export type { Task, CreateTask } from './task';
 export { InvalidResponseBodyError, UnexpectedFeatureError } from './errors';
