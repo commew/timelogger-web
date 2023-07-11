@@ -70,7 +70,7 @@ type BackendApiPaths = {
 const backendApiPaths: BackendApiPaths = {
   accounts: '/accounts',
   taskGroups: '/task-groups',
-  tasks: '/tasks'
+  tasks: '/tasks',
 };
 
 type BackendApiPath = keyof BackendApiPaths;
