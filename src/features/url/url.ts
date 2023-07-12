@@ -13,7 +13,7 @@ export const appUrlNameList = [
   'トップ',
   'GitHubAccount検索',
   'ログイン',
-  'タイマー',
+  '計測',
 ] as const;
 
 type AppUrlName = (typeof appUrlNameList)[number];
@@ -40,7 +40,7 @@ export const appUrls: AppUrls = {
   },
   timer: {
     path: '/timer',
-    name: 'タイマー',
+    name: '計測',
   },
 };
 
