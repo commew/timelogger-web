@@ -2,6 +2,7 @@ import type { FC, MouseEventHandler } from 'react';
 import { createStyles, Header, Group, Menu, Button } from '@mantine/core';
 import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
+import { appUrls } from '@/features';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -44,7 +45,7 @@ export const HeaderNavigation: FC<Props> = ({ handleLogout }) => {
         <Group spacing={4} pl={30}>
           <Menu>
             <Menu.Target>
-              <Link href={'/'} className={classes.link}>
+              <Link href={appUrls.timer.path} className={classes.link}>
                 計測
               </Link>
             </Menu.Target>
