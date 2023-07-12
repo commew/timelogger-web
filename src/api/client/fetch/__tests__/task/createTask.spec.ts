@@ -30,9 +30,13 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
     mockServer.close();
   });
 
+  const mockAppToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OSIsInByb3ZpZGVyIjoiZ29vZ2xlIiwiZXhwIjoxNjgzNzMxMzIzLCJqdGkiOiIzNTY3ZGIyNy0zM2RlLTQyMTctOGM5Zi01ODhhYjVkMDdhZGQiLCJpYXQiOjE2ODExMzkzOTZ9.wV-4ftbM7EwPvyzoqWTNKaC1eZko3juJ84Q9C6X_dYs';
+
   it('should be able to create a task', async () => {
     const createdTask = await createTask({
       taskCategoryId: 1,
+      appToken: mockAppToken,
     });
 
     const expected = {
@@ -52,6 +56,7 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
 
     const dto = {
       taskCategoryId: 1,
+      appToken: mockAppToken,
     } as const;
 
     await expect(createTask(dto)).rejects.toThrow(InvalidResponseBodyError);
@@ -64,6 +69,7 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
 
     const dto = {
       taskCategoryId: 1,
+      appToken: mockAppToken,
     } as const;
 
     await expect(createTask(dto)).rejects.toThrow(UnexpectedFeatureError);

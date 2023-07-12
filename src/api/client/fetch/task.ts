@@ -9,7 +9,7 @@ import {
 import type { components } from '@/openapi/schema';
 
 export const createTask: CreateTask = async (dto) => {
-  const { taskCategoryId } = dto;
+  const { taskCategoryId, appToken } = dto;
 
   const requestBody: components['schemas']['Task'] = {
     taskCategoryId,
@@ -18,7 +18,7 @@ export const createTask: CreateTask = async (dto) => {
   const response = await fetch(getBackendApiUrl('tasks'), {
     method: 'POST',
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`,
+      Authorization: `Bearer ${appToken}`,
       'Content-Type': 'application/json',
       Prefer: 'code=201, example=ExampleSuccess',
     },

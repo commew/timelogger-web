@@ -3,6 +3,7 @@ import type { components } from '@/openapi/schema';
 
 type CreateTaskDto = {
   taskCategoryId: number;
+  appToken: string;
 };
 
 export type Task = components['schemas']['Task'];
