@@ -64,11 +64,13 @@ export const appUrl = (): AppUrl => {
 type BackendApiPaths = {
   accounts: keyof Pick<paths, '/accounts'>;
   taskGroups: keyof Pick<paths, '/task-groups'>;
+  tasks: keyof Pick<paths, '/tasks'>;
 };
 
 const backendApiPaths: BackendApiPaths = {
   accounts: '/accounts',
   taskGroups: '/task-groups',
+  tasks: '/tasks',
 };
 
 type BackendApiPath = keyof BackendApiPaths;
