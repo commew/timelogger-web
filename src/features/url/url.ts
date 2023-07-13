@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { type paths } from '@/openapi/schema';
 
-const appUrlIdList = ['top', 'gitHubAccountSearch', 'login'] as const;
+const appUrlIdList = ['top', 'gitHubAccountSearch', 'login', 'timer'] as const;
 
 type AppUrlId = (typeof appUrlIdList)[number];
 
-const appUrlPathList = ['/', '/search', '/login'] as const;
+const appUrlPathList = ['/', '/search', '/login', '/timer'] as const;
 
 type AppUrlPath = (typeof appUrlPathList)[number];
 
@@ -13,6 +13,7 @@ export const appUrlNameList = [
   'トップ',
   'GitHubAccount検索',
   'ログイン',
+  '計測',
 ] as const;
 
 type AppUrlName = (typeof appUrlNameList)[number];
@@ -37,6 +38,10 @@ export const appUrls: AppUrls = {
     path: '/login',
     name: 'ログイン',
   },
+  timer: {
+    path: '/timer',
+    name: '計測',
+  },
 };
 
 type AppUrl = `http://localhost:${string}` | `https://${string}`;
@@ -58,7 +63,7 @@ export const appUrl = (): AppUrl => {
     return process.env.NEXT_PUBLIC_APP_URL;
   }
 
-  return 'http://localhost:3000';
+  return 'http://localhost:5656';
 };
 
 type BackendApiPaths = {
