@@ -6,6 +6,11 @@ type CreateTaskDto = {
   appToken: string;
 };
 
+type StopTaskDto = {
+  taskId: number;
+  appToken: string;
+};
+
 export type Task = components['schemas']['Task'];
 
 const taskSchema = z.object({
@@ -30,3 +35,4 @@ export const isTask = (value: unknown): value is Task => {
 };
 
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
+export type StopTask = (dto: StopTaskDto) => Promise<Task>;
