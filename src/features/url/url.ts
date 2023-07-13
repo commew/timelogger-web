@@ -65,12 +65,14 @@ type BackendApiPaths = {
   accounts: keyof Pick<paths, '/accounts'>;
   taskGroups: keyof Pick<paths, '/task-groups'>;
   tasks: keyof Pick<paths, '/tasks'>;
+  'tasks/{taskId}/stop': keyof Pick<paths, '/tasks/{taskId}/stop'>;
 };
 
 const backendApiPaths: BackendApiPaths = {
   accounts: '/accounts',
   taskGroups: '/task-groups',
   tasks: '/tasks',
+  'tasks/{taskId}/stop': '/tasks/{taskId}/stop',
 };
 
 type BackendApiPath = keyof BackendApiPaths;
