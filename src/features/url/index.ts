@@ -1,1 +1,6 @@
-export { appUrls, appUrl, getBackendApiUrl } from './url';
+export {
+  appUrls,
+  appUrl,
+  getBackendApiUrl,
+  getDynamicBackendApiUrl,
+} from './url';

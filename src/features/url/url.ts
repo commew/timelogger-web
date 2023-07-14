@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { type paths } from '@/openapi/schema';
+import { ExhaustiveError } from '../errors';
 
 const appUrlIdList = ['top', 'gitHubAccountSearch', 'login', 'timer'] as const;
 
@@ -102,4 +103,38 @@ export const getBackendApiUrl = (
   const apiPath: keyof paths = backendApiPaths[path];
 
   return `${apiUrl}${apiPath}`;
+};
+
+type DynamicBackendApiPaths = {
+  stopTask: (
+    path: keyof Pick<paths, '/tasks/{taskId}/stop'>,
+    param: string
+  ) => string;
+};
+
+type DynamicBackendApiPath = keyof DynamicBackendApiPaths;
+
+const dynamicBackendApiPaths: DynamicBackendApiPaths = {
+  stopTask: (path, param) => path.replace('{taskId}', `${param}`),
+};
+
+export const getDynamicBackendApiUrl = (
+  path: DynamicBackendApiPath,
+  param: string
+): string => {
+  const apiUrl = backendApiUrl();
+
+  switch (path) {
+    case 'stopTask': {
+      const apiPath = dynamicBackendApiPaths[path](
+        '/tasks/{taskId}/stop',
+        param
+      );
+
+      return `${apiUrl}${apiPath}`;
+    }
+
+    default:
+      throw new ExhaustiveError(path);
+  }
 };

@@ -1,4 +1,9 @@
-export { appUrls, appUrl, getBackendApiUrl } from './url';
+export {
+  appUrls,
+  appUrl,
+  getBackendApiUrl,
+  getDynamicBackendApiUrl,
+} from './url';
 export { GitHubAccountNotFoundError } from './gitHub';
 export type { GitHubAccount, FetchGitHubAccount } from './gitHub';
 export { httpStatusCode } from './httpStatusCode';
@@ -10,5 +15,9 @@ export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
 export { isTask } from './task';
-export type { Task, CreateTask } from './task';
-export { InvalidResponseBodyError, UnexpectedFeatureError } from './errors';
+export type { Task, CreateTask, StopTask } from './task';
+export {
+  InvalidResponseBodyError,
+  UnexpectedFeatureError,
+  ExhaustiveError,
+} from './errors';
