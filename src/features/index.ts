@@ -16,4 +16,8 @@ export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
 export { isTask } from './task';
 export type { Task, CreateTask, StopTask } from './task';
-export { InvalidResponseBodyError, UnexpectedFeatureError } from './errors';
+export {
+  InvalidResponseBodyError,
+  UnexpectedFeatureError,
+  ExhaustiveError,
+} from './errors';
