@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { type paths } from '@/openapi/schema';
+import { ExhaustiveError } from '../errors';
 
 const appUrlIdList = ['top', 'gitHubAccountSearch', 'login'] as const;
 
@@ -129,6 +130,6 @@ export const getDynamicBackendApiUrl = (
     }
 
     default:
-      throw new Error();
+      throw new ExhaustiveError(path);
   }
 };
