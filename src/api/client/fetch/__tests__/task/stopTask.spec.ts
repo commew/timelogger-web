@@ -5,7 +5,7 @@ import { stopTask } from '@/api/client/fetch/task';
 import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
-  getBackendApiUrl,
+  getDynamicBackendApiUrl,
 } from '@/features';
 import {
   mockStopTask,
@@ -14,10 +14,7 @@ import {
 } from '@/mocks';
 
 const mockHandlers = [
-  rest.patch(
-    getBackendApiUrl('tasks/{taskId}/stop').replace('{taskId}', '1'),
-    mockStopTask
-  ),
+  rest.patch(getDynamicBackendApiUrl('stopTask', '1'), mockStopTask),
 ];
 
 const mockServer = setupServer(...mockHandlers);
@@ -59,7 +56,7 @@ describe('src/api/client/fetch/task.ts stopTask TestCases', () => {
   it('should InvalidResponseBodyError Throw, because unexpected response body', async () => {
     mockServer.use(
       rest.patch(
-        getBackendApiUrl('tasks/{taskId}/stop').replace('{taskId}', '1'),
+        getDynamicBackendApiUrl('stopTask', '1'),
         mockStopTaskUnexpectedResponseBody
       )
     );
@@ -75,7 +72,7 @@ describe('src/api/client/fetch/task.ts stopTask TestCases', () => {
   it('should UnexpectedFeatureError Throw, because http status is not ok', async () => {
     mockServer.use(
       rest.patch(
-        getBackendApiUrl('tasks/{taskId}/stop').replace('{taskId}', '1'),
+        getDynamicBackendApiUrl('stopTask', '1'),
         mockInternalServerError
       )
     );

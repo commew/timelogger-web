@@ -5,6 +5,7 @@ import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   isTask,
+  getDynamicBackendApiUrl,
 } from '@/features';
 import type { components } from '@/openapi/schema';
 
@@ -49,7 +50,7 @@ export const stopTask: StopTask = async (dto) => {
   const { taskId, appToken } = dto;
 
   const response = await fetch(
-    getBackendApiUrl('tasks/{taskId}/stop').replace('{taskId}', `${taskId}`),
+    getDynamicBackendApiUrl('stopTask', `${taskId}`),
     {
       method: 'PATCH',
       headers: {

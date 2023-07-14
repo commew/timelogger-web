@@ -65,14 +65,12 @@ type BackendApiPaths = {
   accounts: keyof Pick<paths, '/accounts'>;
   taskGroups: keyof Pick<paths, '/task-groups'>;
   tasks: keyof Pick<paths, '/tasks'>;
-  'tasks/{taskId}/stop': keyof Pick<paths, '/tasks/{taskId}/stop'>;
 };
 
 const backendApiPaths: BackendApiPaths = {
   accounts: '/accounts',
   taskGroups: '/task-groups',
   tasks: '/tasks',
-  'tasks/{taskId}/stop': '/tasks/{taskId}/stop',
 };
 
 type BackendApiPath = keyof BackendApiPaths;
@@ -99,4 +97,38 @@ export const getBackendApiUrl = (
   const apiPath: keyof paths = backendApiPaths[path];
 
   return `${apiUrl}${apiPath}`;
+};
+
+type DynamicBackendApiPaths = {
+  stopTask: (
+    path: keyof Pick<paths, '/tasks/{taskId}/stop'>,
+    param: string
+  ) => string;
+};
+
+type DynamicBackendApiPath = keyof DynamicBackendApiPaths;
+
+const dynamicBackendApiPaths: DynamicBackendApiPaths = {
+  stopTask: (path, param) => path.replace('{taskId}', `${param}`),
+};
+
+export const getDynamicBackendApiUrl = (
+  path: DynamicBackendApiPath,
+  param: string
+): string => {
+  const apiUrl = backendApiUrl();
+
+  switch (path) {
+    case 'stopTask': {
+      const apiPath = dynamicBackendApiPaths[path](
+        '/tasks/{taskId}/stop',
+        param
+      );
+
+      return `${apiUrl}${apiPath}`;
+    }
+
+    default:
+      throw new Error();
+  }
 };

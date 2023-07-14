@@ -1,4 +1,9 @@
-export { appUrls, appUrl, getBackendApiUrl } from './url';
+export {
+  appUrls,
+  appUrl,
+  getBackendApiUrl,
+  getDynamicBackendApiUrl,
+} from './url';
 export { GitHubAccountNotFoundError } from './gitHub';
 export type { GitHubAccount, FetchGitHubAccount } from './gitHub';
 export { httpStatusCode } from './httpStatusCode';
