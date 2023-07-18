@@ -118,7 +118,7 @@ export const getTasksRecording: GetTasksRecording = async (dto) => {
       );
     }
 
-    if (!recordingTask.status && recordingTask.status !== 'recording') {
+    if (recordingTask.status && recordingTask.status !== 'recording') {
       throw new InvalidResponseBodyError(
         `responseBody is not in the expected format( expected status is 'recording'. body: ${JSON.stringify(
           recordingTask
