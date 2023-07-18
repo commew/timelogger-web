@@ -19,6 +19,9 @@ export type Task = components['schemas']['Task'];
 export type Tasks = {
   tasks?: Task[];
 };
+export type TaskRecording = Omit<Task, 'status'> & {
+  status: 'recording';
+};
 
 const taskSchema = z.object({
   id: z.optional(z.number()),
@@ -35,8 +38,18 @@ const taskSchema = z.object({
   taskCategoryId: z.number(),
 });
 
+const taskRecordingSchema = taskSchema.extend({
+  status: z.literal('recording'),
+});
+
 export const isTask = (value: unknown): value is Task => {
   const result = taskSchema.safeParse(value);
+
+  return result.success;
+};
+
+export const isTaskRecording = (value: unknown): value is TaskRecording => {
+  const result = taskRecordingSchema.safeParse(value);
 
   return result.success;
 };

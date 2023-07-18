@@ -11,6 +11,7 @@ import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   isTask,
+  isTaskRecording,
   getDynamicBackendApiUrl,
 } from '@/features';
 import type { components } from '@/openapi/schema';
@@ -110,15 +111,7 @@ export const getTasksRecording: GetTasksRecording = async (dto) => {
   if (!recordingTasks.tasks) return { tasks: [] };
 
   recordingTasks.tasks.forEach((recordingTask) => {
-    if (!isTask(recordingTask)) {
-      throw new InvalidResponseBodyError(
-        `responseBody is not in the expected format. body: ${JSON.stringify(
-          recordingTask
-        )}`
-      );
-    }
-
-    if (recordingTask.status && recordingTask.status !== 'recording') {
+    if (!isTaskRecording(recordingTask)) {
       throw new InvalidResponseBodyError(
         `responseBody is not in the expected format( expected status is 'recording'. body: ${JSON.stringify(
           recordingTask
