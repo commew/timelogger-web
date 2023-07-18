@@ -43,6 +43,4 @@ export const isTask = (value: unknown): value is Task => {
 
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
-export type GetTasksRecording = (
-  dto: GetTasksRecordingDto
-) => Promise<Tasks | undefined>;
+export type GetTasksRecording = (dto: GetTasksRecordingDto) => Promise<Tasks>;

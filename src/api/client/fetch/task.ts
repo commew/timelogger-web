@@ -107,7 +107,7 @@ export const getTasksRecording: GetTasksRecording = async (dto) => {
 
   const recordingTasks = (await response.json()) as Tasks;
 
-  if (!recordingTasks.tasks) return undefined;
+  if (!recordingTasks.tasks) return { tasks: [] };
 
   recordingTasks.tasks.forEach((recordingTask) => {
     if (!isTask(recordingTask)) {
