@@ -15,7 +15,13 @@ export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
 export { isTask } from './task';
-export type { Task, CreateTask, StopTask } from './task';
+export type {
+  Task,
+  Tasks,
+  CreateTask,
+  StopTask,
+  GetTasksRecording,
+} from './task';
 export {
   InvalidResponseBodyError,
   UnexpectedFeatureError,

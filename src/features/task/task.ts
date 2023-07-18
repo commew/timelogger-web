@@ -11,7 +11,14 @@ type StopTaskDto = {
   appToken: string;
 };
 
+type GetTasksRecordingDto = {
+  appToken: string;
+};
+
 export type Task = components['schemas']['Task'];
+export type Tasks = {
+  tasks?: Task[];
+};
 
 const taskSchema = z.object({
   id: z.optional(z.number()),
@@ -36,3 +43,6 @@ export const isTask = (value: unknown): value is Task => {
 
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
+export type GetTasksRecording = (
+  dto: GetTasksRecordingDto
+) => Promise<Tasks | undefined>;

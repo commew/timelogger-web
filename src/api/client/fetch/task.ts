@@ -1,4 +1,10 @@
-import type { Task, CreateTask, StopTask } from '@/features';
+import type {
+  Task,
+  Tasks,
+  CreateTask,
+  StopTask,
+  GetTasksRecording,
+} from '@/features';
 import {
   getBackendApiUrl,
   httpStatusCode,
@@ -78,4 +84,48 @@ export const stopTask: StopTask = async (dto) => {
   }
 
   return task;
+};
+
+export const getTasksRecording: GetTasksRecording = async (dto) => {
+  const { appToken } = dto;
+
+  const response = await fetch(getBackendApiUrl('getTasksRecording'), {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${appToken}`,
+      Prefer: 'code=200, example=ExampleSuccess',
+    },
+  });
+
+  if (response.status !== httpStatusCode.ok) {
+    throw new UnexpectedFeatureError(
+      `failed to getTasksRecording. status: ${
+        response.status
+      }, body: ${await response.text()}`
+    );
+  }
+
+  const recordingTasks = (await response.json()) as Tasks;
+
+  if (!recordingTasks.tasks) return undefined;
+
+  recordingTasks.tasks.forEach((recordingTask) => {
+    if (!isTask(recordingTask)) {
+      throw new InvalidResponseBodyError(
+        `responseBody is not in the expected format. body: ${JSON.stringify(
+          recordingTask
+        )}`
+      );
+    }
+
+    if (!recordingTask.status && recordingTask.status !== 'recording') {
+      throw new InvalidResponseBodyError(
+        `responseBody is not in the expected format( expected status is 'recording'. body: ${JSON.stringify(
+          recordingTask
+        )} )`
+      );
+    }
+  });
+
+  return recordingTasks;
 };
