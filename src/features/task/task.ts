@@ -11,7 +11,7 @@ type StopTaskDto = {
   appToken: string;
 };
 
-type GetTasksRecordingDto = {
+type FetchTasksRecordingDto = {
   appToken: string;
 };
 
@@ -56,4 +56,4 @@ export const isTaskRecording = (value: unknown): value is TaskRecording => {
 
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
-export type GetTasksRecording = (dto: GetTasksRecordingDto) => Promise<Tasks>;
+export type FetchTasksRecording = (dto: FetchTasksRecordingDto) => Promise<Tasks>;

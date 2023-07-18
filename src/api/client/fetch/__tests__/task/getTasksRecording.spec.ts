@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { getTasksRecording } from '@/api/client/fetch/task';
+import { fetchTasksRecording } from '@/api/client/fetch/task';
 import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
@@ -9,19 +9,19 @@ import {
 } from '@/features';
 import {
   mockInternalServerError,
-  mockGetTaskRecording,
-  mockGetTaskRecordingEmptyResponseBody,
-  mockGetTasksRecordingUnexpectedResponseBodyStatusPending,
-  mockGetTasksRecordingUnexpectedResponseBody,
+  mockFetchTaskRecording,
+  mockFetchTaskRecordingEmptyResponseBody,
+  mockFetchTasksRecordingUnexpectedResponseBodyStatusPending,
+  mockFetchTasksRecordingUnexpectedResponseBody,
 } from '@/mocks';
 
 const mockHandlers = [
-  rest.get(getBackendApiUrl('getTasksRecording'), mockGetTaskRecording),
+  rest.get(getBackendApiUrl('getTasksRecording'), mockFetchTaskRecording),
 ];
 
 const mockServer = setupServer(...mockHandlers);
 
-describe('src/api/client/fetch/task.ts getTasksRecording TestCases', () => {
+describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
   beforeAll(() => {
     mockServer.listen();
   });
@@ -37,8 +37,8 @@ describe('src/api/client/fetch/task.ts getTasksRecording TestCases', () => {
   const mockAppToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OSIsInByb3ZpZGVyIjoiZ29vZ2xlIiwiZXhwIjoxNjgzNzMxMzIzLCJqdGkiOiIzNTY3ZGIyNy0zM2RlLTQyMTctOGM5Zi01ODhhYjVkMDdhZGQiLCJpYXQiOjE2ODExMzkzOTZ9.wV-4ftbM7EwPvyzoqWTNKaC1eZko3juJ84Q9C6X_dYs';
 
-  it('should be able to get some tasks recording.', async () => {
-    const tasksRecording = await getTasksRecording({
+  it('should be able to fetch some tasks recording.', async () => {
+    const tasksRecording = await fetchTasksRecording({
       appToken: mockAppToken,
     });
 
@@ -74,15 +74,15 @@ describe('src/api/client/fetch/task.ts getTasksRecording TestCases', () => {
     expect(tasksRecording).toStrictEqual(expected);
   });
 
-  it('should be able to get 0 tasks recording.', async () => {
+  it('should be able to fetch 0 tasks recording.', async () => {
     mockServer.use(
       rest.get(
         getBackendApiUrl('getTasksRecording'),
-        mockGetTaskRecordingEmptyResponseBody
+        mockFetchTaskRecordingEmptyResponseBody
       )
     );
 
-    const tasksRecording = await getTasksRecording({
+    const tasksRecording = await fetchTasksRecording({
       appToken: mockAppToken,
     });
 
@@ -101,7 +101,7 @@ describe('src/api/client/fetch/task.ts getTasksRecording TestCases', () => {
       appToken: mockAppToken,
     } as const;
 
-    await expect(getTasksRecording(dto)).rejects.toThrow(
+    await expect(fetchTasksRecording(dto)).rejects.toThrow(
       UnexpectedFeatureError
     );
   });
@@ -110,14 +110,14 @@ describe('src/api/client/fetch/task.ts getTasksRecording TestCases', () => {
     mockServer.use(
       rest.get(
         getBackendApiUrl('getTasksRecording'),
-        mockGetTasksRecordingUnexpectedResponseBodyStatusPending
+        mockFetchTasksRecordingUnexpectedResponseBodyStatusPending
       )
     );
 
     const dto = {
       appToken: mockAppToken,
     } as const;
-    await expect(getTasksRecording(dto)).rejects.toThrow(
+    await expect(fetchTasksRecording(dto)).rejects.toThrow(
       InvalidResponseBodyError
     );
   });
@@ -126,14 +126,14 @@ describe('src/api/client/fetch/task.ts getTasksRecording TestCases', () => {
     mockServer.use(
       rest.get(
         getBackendApiUrl('getTasksRecording'),
-        mockGetTasksRecordingUnexpectedResponseBody
+        mockFetchTasksRecordingUnexpectedResponseBody
       )
     );
 
     const dto = {
       appToken: mockAppToken,
     } as const;
-    await expect(getTasksRecording(dto)).rejects.toThrow(
+    await expect(fetchTasksRecording(dto)).rejects.toThrow(
       InvalidResponseBodyError
     );
   });

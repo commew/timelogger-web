@@ -7,7 +7,7 @@ export { mockCreateTaskUnexpectedResponseBody } from './mockCreateTaskUnexpected
 export { mockStopTask } from './mockStopTask';
 export { mockStopTaskUnexpectedResponseBody } from './mockStopTaskUnexpectedResponseBody';
 export { mockAccountUnAuthenticatedError } from './mockAccountUnAuthenticatedError';
-export { mockGetTaskRecording } from './mockGetTasksRecording';
-export { mockGetTaskRecordingEmptyResponseBody } from './mockGetTasksRecordingEmptyResponseBody';
-export { mockGetTasksRecordingUnexpectedResponseBody } from './mockGetTasksRecordingUnexpectedResponseBody';
-export { mockGetTasksRecordingUnexpectedResponseBodyStatusPending } from './mockGetTasksRecordingUnexpectedResponseBodyStatusPending';
+export { mockFetchTaskRecording } from './mockGetTasksRecording';
+export { mockFetchTaskRecordingEmptyResponseBody } from './mockGetTasksRecordingEmptyResponseBody';
+export { mockFetchTasksRecordingUnexpectedResponseBody } from './mockGetTasksRecordingUnexpectedResponseBody';
+export { mockFetchTasksRecordingUnexpectedResponseBodyStatusPending } from './mockGetTasksRecordingUnexpectedResponseBodyStatusPending';

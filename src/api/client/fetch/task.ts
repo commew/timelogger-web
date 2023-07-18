@@ -3,7 +3,7 @@ import type {
   Tasks,
   CreateTask,
   StopTask,
-  GetTasksRecording,
+  FetchTasksRecording,
 } from '@/features';
 import {
   getBackendApiUrl,
@@ -87,7 +87,7 @@ export const stopTask: StopTask = async (dto) => {
   return task;
 };
 
-export const getTasksRecording: GetTasksRecording = async (dto) => {
+export const fetchTasksRecording: FetchTasksRecording = async (dto) => {
   const { appToken } = dto;
 
   const response = await fetch(getBackendApiUrl('getTasksRecording'), {
@@ -100,7 +100,7 @@ export const getTasksRecording: GetTasksRecording = async (dto) => {
 
   if (response.status !== httpStatusCode.ok) {
     throw new UnexpectedFeatureError(
-      `failed to getTasksRecording. status: ${
+      `failed to fetchTasksRecording. status: ${
         response.status
       }, body: ${await response.text()}`
     );

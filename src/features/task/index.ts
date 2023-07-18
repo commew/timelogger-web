@@ -5,5 +5,5 @@ export type {
   Tasks,
   CreateTask,
   StopTask,
-  GetTasksRecording,
+  FetchTasksRecording,
 } from './task';
