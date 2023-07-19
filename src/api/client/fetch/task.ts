@@ -106,17 +106,17 @@ export const fetchTasksRecording: FetchTasksRecording = async (dto) => {
     );
   }
 
-  const recordingTasks = (await response.json()) as Tasks;
+  const tasksRecording = (await response.json()) as Tasks;
 
-  if (!recordingTasks.tasks) return { tasks: [] };
+  if (!tasksRecording.tasks) return { tasks: [] };
 
-  if (!isTasksRecording(recordingTasks)) {
+  if (!isTasksRecording(tasksRecording)) {
     throw new InvalidResponseBodyError(
       `responseBody is not in the expected format( expected status is 'recording'. body: ${JSON.stringify(
-        recordingTasks
+        tasksRecording
       )} )`
     );
   }
 
-  return recordingTasks;
+  return tasksRecording;
 };
