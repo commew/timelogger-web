@@ -42,18 +42,19 @@ const taskRecordingSchema = taskSchema.extend({
   status: z.literal('recording'),
 });
 
+const tasksRecordingSchema = z.object({
+  tasks: z.array(taskRecordingSchema).nonempty(),
+});
+
 export const isTask = (value: unknown): value is Task => {
   const result = taskSchema.safeParse(value);
 
   return result.success;
 };
 
-export const isTaskRecording = (value: unknown): value is TaskRecording => {
-  const result = taskRecordingSchema.safeParse(value);
-
-  return result.success;
+export const isTasksRecording = (value: unknown): value is TaskRecording[] => {
+  return tasksRecordingSchema.safeParse(value).success;
 };
-
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type FetchTasksRecording = (

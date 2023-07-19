@@ -1,4 +1,4 @@
-export { isTask, isTaskRecording } from './task';
+export { isTask, isTasksRecording } from './task';
 export type {
   Task,
   TaskRecording,

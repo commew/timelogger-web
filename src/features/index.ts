@@ -14,7 +14,7 @@ export { isOidcProvider, createBackendApiBasicAuthCredential } from './auth';
 export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
-export { isTask, isTaskRecording } from './task';
+export { isTask, isTasksRecording } from './task';
 export type {
   Task,
   TaskRecording,

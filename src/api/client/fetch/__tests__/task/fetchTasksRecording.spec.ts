@@ -6,6 +6,7 @@ import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   getBackendApiUrl,
+  isTasksRecording,
 } from '@/features';
 import {
   mockInternalServerError,
@@ -14,6 +15,11 @@ import {
   mockFetchTasksRecordingUnexpectedResponseBodyStatusPending,
   mockFetchTasksRecordingUnexpectedResponseBody,
 } from '@/mocks';
+
+type TestTable = {
+  arg: unknown;
+  expected: boolean;
+};
 
 const mockHandlers = [
   rest.get(getBackendApiUrl('getTasksRecording'), mockFetchTaskRecording),
@@ -137,4 +143,21 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
       InvalidResponseBodyError
     );
   });
+
+  it.each`
+    arg                                                                                                                                                                                                                                                                         | expected
+    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]}                                                                                                                                     | ${true}
+    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }, { id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]} | ${true}
+    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }, { id: 1, status: 'pending', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]}   | ${false}
+    ${[]}                                                                                                                                                                                                                                                                       | ${false}
+  `(
+    'should returns $expected when the input is $arg',
+    ({ arg, expected }: TestTable) => {
+      const values = {
+        tasks: arg,
+      };
+
+      expect(isTasksRecording(values)).toBe(expected);
+    }
+  );
 });
