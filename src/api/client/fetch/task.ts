@@ -1,10 +1,17 @@
-import type { Task, CreateTask, StopTask } from '@/features';
+import type {
+  Task,
+  Tasks,
+  CreateTask,
+  StopTask,
+  FetchTasksRecording,
+} from '@/features';
 import {
   getBackendApiUrl,
   httpStatusCode,
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   isTask,
+  isRecordingTasks,
   getDynamicBackendApiUrl,
 } from '@/features';
 import type { components } from '@/openapi/schema';
@@ -78,4 +85,38 @@ export const stopTask: StopTask = async (dto) => {
   }
 
   return task;
+};
+
+export const fetchTasksRecording: FetchTasksRecording = async (dto) => {
+  const { appToken } = dto;
+
+  const response = await fetch(getBackendApiUrl('getTasksRecording'), {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${appToken}`,
+      Prefer: 'code=200, example=ExampleSuccess',
+    },
+  });
+
+  if (response.status !== httpStatusCode.ok) {
+    throw new UnexpectedFeatureError(
+      `failed to fetchTasksRecording. status: ${
+        response.status
+      }, body: ${await response.text()}`
+    );
+  }
+
+  const tasksRecording = (await response.json()) as Tasks;
+
+  if (!tasksRecording.tasks) return { tasks: [] };
+
+  if (!isRecordingTasks(tasksRecording)) {
+    throw new InvalidResponseBodyError(
+      `responseBody is not in the expected format( expected status is 'recording'. body: ${JSON.stringify(
+        tasksRecording
+      )} )`
+    );
+  }
+
+  return tasksRecording;
 };

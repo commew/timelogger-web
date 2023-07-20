@@ -71,12 +71,14 @@ type BackendApiPaths = {
   accounts: keyof Pick<paths, '/accounts'>;
   taskGroups: keyof Pick<paths, '/task-groups'>;
   tasks: keyof Pick<paths, '/tasks'>;
+  getTasksRecording: keyof Pick<paths, '/tasks/recording'>;
 };
 
 const backendApiPaths: BackendApiPaths = {
   accounts: '/accounts',
   taskGroups: '/task-groups',
   tasks: '/tasks',
+  getTasksRecording: '/tasks/recording',
 };
 
 type BackendApiPath = keyof BackendApiPaths;

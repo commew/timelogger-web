@@ -14,8 +14,15 @@ export { isOidcProvider, createBackendApiBasicAuthCredential } from './auth';
 export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
-export { isTask } from './task';
-export type { Task, CreateTask, StopTask } from './task';
+export { isTask, isRecordingTasks } from './task';
+export type {
+  Task,
+  TaskRecording,
+  Tasks,
+  CreateTask,
+  StopTask,
+  FetchTasksRecording,
+} from './task';
 export {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
