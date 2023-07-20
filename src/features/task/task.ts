@@ -52,7 +52,7 @@ export const isTask = (value: unknown): value is Task => {
   return result.success;
 };
 
-export const isTasksRecording = (value: unknown): value is TaskRecording[] => {
+export const isRecordingTasks = (value: unknown): value is TaskRecording[] => {
   return tasksRecordingSchema.safeParse(value).success;
 };
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;

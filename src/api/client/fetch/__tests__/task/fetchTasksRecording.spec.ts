@@ -6,7 +6,7 @@ import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   getBackendApiUrl,
-  isTasksRecording,
+  isRecordingTasks,
 } from '@/features';
 import {
   mockInternalServerError,
@@ -157,7 +157,7 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
         tasks: arg,
       };
 
-      expect(isTasksRecording(values)).toBe(expected);
+      expect(isRecordingTasks(values)).toBe(expected);
     }
   );
 });
