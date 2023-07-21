@@ -21,6 +21,11 @@ export const createTask: CreateTask = async (dto) => {
 
   const requestBody: components['schemas']['Task'] = {
     taskCategoryId,
+    id: 0,
+    status: 'pending',
+    startAt: '',
+    endAt: '',
+    duration: 0,
   };
 
   const response = await fetch(getBackendApiUrl('tasks'), {
