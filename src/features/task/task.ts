@@ -24,17 +24,15 @@ export type TaskRecording = Omit<Task, 'status'> & {
 };
 
 const taskSchema = z.object({
-  id: z.optional(z.number()),
-  status: z.optional(
-    z.union([
-      z.literal('pending'),
-      z.literal('completed'),
-      z.literal('recording'),
-    ])
-  ),
-  startAt: z.optional(z.string()),
-  endAt: z.optional(z.string()),
-  duration: z.optional(z.number()),
+  id: z.number(),
+  status: z.union([
+    z.literal('pending'),
+    z.literal('completed'),
+    z.literal('recording'),
+  ]),
+  startAt: z.string(),
+  endAt: z.string(),
+  duration: z.number(),
   taskCategoryId: z.number(),
 });
 
