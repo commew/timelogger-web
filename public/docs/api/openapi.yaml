@@ -1007,6 +1007,11 @@ components:
           x-stoplight:
             id: 57stqbifuw4v3
       required:
+        - id
+        - status
+        - startAt
+        - endAt
+        - duration
         - taskCategoryId
   securitySchemes:
     Authorization:
