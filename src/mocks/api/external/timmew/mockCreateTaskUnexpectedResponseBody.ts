@@ -13,6 +13,11 @@ export const mockCreateTaskUnexpectedResponseBody: ResponseResolver<
   res(
     ctx.status(httpStatusCode.created),
     ctx.json({
+      id: null,
+      status: null,
+      startAt: null,
+      endAt: null,
+      duration: null,
       taskCategoryId: null,
     })
   );
