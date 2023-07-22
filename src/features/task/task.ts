@@ -3,6 +3,8 @@ import type { components } from '@/openapi/schema';
 
 type CreateTaskDto = {
   taskCategoryId: number;
+  status: 'recording';
+  startAt: string;
   appToken: string;
 };
 

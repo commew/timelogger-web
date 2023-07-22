@@ -371,6 +371,16 @@ export interface operations {
       content: {
         "application/json": {
           taskCategoryId: number;
+          /**
+           * @default recording 
+           * @example recording
+           */
+          status: string;
+          /**
+           * Format: date-time 
+           * @example 2019-08-24T14:15:22Z
+           */
+          startAt: string;
         };
       };
     };

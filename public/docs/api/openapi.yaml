@@ -386,15 +386,28 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - taskCategoryId
               properties:
                 taskCategoryId:
                   type: integer
+                status:
+                  type: string
+                  default: recording
+                  example: recording
+                  pattern: recording
+                startAt:
+                  type: string
+                  format: date-time
+                  example: '2019-08-24T14:15:22Z'
+              required:
+                - taskCategoryId
+                - status
+                - startAt
             examples:
               Example 1:
                 value:
                   taskCategoryId: 1
+                  status: recording
+                  startAt: '2019-08-24T14:15:22Z'
         description: ''
       security:
         - Authorization: []
