@@ -1,11 +1,17 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
-
 import { appUrls } from '@/features';
+import { useTasks } from '@/hooks';
 import { TimerTemplate } from '@/templates';
 
-const TimerPage: NextPage = () => {
-  return <TimerTemplate />;
+type Props = {
+  appToken: string;
+};
+
+const TimerPage: NextPage<Props> = ({ appToken }) => {
+  const { tasksRecording } = useTasks(appToken);
+
+  return <TimerTemplate tasksRecording={tasksRecording} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -21,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: {},
+    props: { appToken: session.appToken },
   };
 };
 
