@@ -36,6 +36,8 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
   it('should be able to create a task', async () => {
     const createdTask = await createTask({
       taskCategoryId: 1,
+      status: 'recording',
+      startAt: '2019-08-24T14:15:22Z',
       appToken: mockAppToken,
     });
 
@@ -43,6 +45,8 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
       id: 1,
       status: 'recording',
       startAt: '2019-08-24T14:15:22Z',
+      endAt: '0000-00-00T00:00:00Z',
+      duration: 0,
       taskCategoryId: 1,
     };
 
@@ -56,6 +60,8 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
 
     const dto = {
       taskCategoryId: 1,
+      status: 'recording',
+      startAt: '2019-08-24T14:15:22Z',
       appToken: mockAppToken,
     } as const;
 
@@ -69,6 +75,8 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
 
     const dto = {
       taskCategoryId: 1,
+      status: 'recording',
+      startAt: '2019-08-24T14:15:22Z',
       appToken: mockAppToken,
     } as const;
 

@@ -164,24 +164,24 @@ export interface components {
     };
     /** Task */
     Task: {
-      id?: number;
+      id: number;
       /**
        * @default recording 
        * @enum {string}
        */
-      status?: "pending" | "completed" | "recording";
+      status: "pending" | "completed" | "recording";
       /**
        * Format: date-time 
        * @description タスク開始の開始時刻
        */
-      startAt?: string;
+      startAt: string;
       /**
        * Format: date-time 
        * @description タスク開始の停止時刻
        */
-      endAt?: string;
+      endAt: string;
       /** @description タスクの実行時間（秒） */
-      duration?: number;
+      duration: number;
       taskCategoryId: number;
     };
   };
@@ -371,6 +371,16 @@ export interface operations {
       content: {
         "application/json": {
           taskCategoryId: number;
+          /**
+           * @default recording 
+           * @example recording
+           */
+          status: string;
+          /**
+           * Format: date-time 
+           * @example 2019-08-24T14:15:22Z
+           */
+          startAt: string;
         };
       };
     };

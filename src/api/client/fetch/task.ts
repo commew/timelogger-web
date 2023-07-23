@@ -14,13 +14,19 @@ import {
   isRecordingTasks,
   getDynamicBackendApiUrl,
 } from '@/features';
-import type { components } from '@/openapi/schema';
+import { type operations } from '@/openapi/schema';
 
 export const createTask: CreateTask = async (dto) => {
-  const { taskCategoryId, appToken } = dto;
+  const { taskCategoryId, status, startAt, appToken } = dto;
 
-  const requestBody: components['schemas']['Task'] = {
-    taskCategoryId,
+  const requestBody: operations['postTasks']['requestBody'] = {
+    content: {
+      'application/json': {
+        taskCategoryId,
+        status,
+        startAt,
+      },
+    },
   };
 
   const response = await fetch(getBackendApiUrl('tasks'), {
@@ -30,7 +36,7 @@ export const createTask: CreateTask = async (dto) => {
       'Content-Type': 'application/json',
       Prefer: 'code=201, example=ExampleSuccess',
     },
-    body: JSON.stringify(requestBody),
+    body: JSON.stringify(requestBody.content['application/json']),
   });
 
   if (response.status !== httpStatusCode.created) {
