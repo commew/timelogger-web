@@ -59,4 +59,4 @@ export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type FetchTasksRecording = (
   dto: FetchTasksRecordingDto
-) => Promise<Tasks>;
+) => Promise<TaskRecording[]>;
