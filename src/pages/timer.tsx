@@ -1,14 +1,11 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+
 import { appUrls } from '@/features';
-import { DefaultLayout } from '@/layouts';
+import { TimerTemplate } from '@/templates';
 
 const TimerPage: NextPage = () => {
-  return (
-    <DefaultLayout>
-      <div>TODO このページにタスクの計測等の機能を載せる</div>
-    </DefaultLayout>
-  );
+  return <TimerTemplate />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
