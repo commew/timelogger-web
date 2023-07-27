@@ -8,6 +8,7 @@ import {
   getBackendApiUrl,
   isRecordingTasks,
 } from '@/features';
+import type { TaskRecording } from '@/features';
 import {
   mockInternalServerError,
   mockFetchTaskRecording,
@@ -48,34 +49,32 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
       appToken: mockAppToken,
     });
 
-    const expected = {
-      tasks: [
-        {
-          id: 1,
-          status: 'recording',
-          startAt: '2019-08-24T14:15:22Z',
-          endAt: '2019-08-24T18:15:22Z',
-          duration: 14400,
-          taskCategoryId: 1,
-        },
-        {
-          id: 2,
-          status: 'recording',
-          startAt: '2019-08-24T14:15:22Z',
-          endAt: '2019-08-24T18:15:22Z',
-          duration: 14400,
-          taskCategoryId: 1,
-        },
-        {
-          id: 3,
-          status: 'recording',
-          startAt: '2019-08-24T14:15:22Z',
-          endAt: '2019-08-24T18:15:22Z',
-          duration: 14400,
-          taskCategoryId: 1,
-        },
-      ],
-    };
+    const expected = [
+      {
+        id: 1,
+        status: 'recording',
+        startAt: '2019-08-24T14:15:22Z',
+        endAt: '2019-08-24T18:15:22Z',
+        duration: 14400,
+        taskCategoryId: 1,
+      },
+      {
+        id: 2,
+        status: 'recording',
+        startAt: '2019-08-24T14:15:22Z',
+        endAt: '2019-08-24T18:15:22Z',
+        duration: 14400,
+        taskCategoryId: 1,
+      },
+      {
+        id: 3,
+        status: 'recording',
+        startAt: '2019-08-24T14:15:22Z',
+        endAt: '2019-08-24T18:15:22Z',
+        duration: 14400,
+        taskCategoryId: 1,
+      },
+    ];
 
     expect(tasksRecording).toStrictEqual(expected);
   });
@@ -92,9 +91,7 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
       appToken: mockAppToken,
     });
 
-    const expected = {
-      tasks: [],
-    };
+    const expected: TaskRecording[] = [];
     expect(tasksRecording).toStrictEqual(expected);
   });
 
@@ -149,13 +146,11 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
     ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]}                                                                                                                                     | ${true}
     ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }, { id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]} | ${true}
     ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }, { id: 1, status: 'pending', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]}   | ${false}
-    ${[]}                                                                                                                                                                                                                                                                       | ${false}
+    ${[]}                                                                                                                                                                                                                                                                       | ${true}
   `(
     'should returns $expected when the input is $arg',
     ({ arg, expected }: TestTable) => {
-      const values = {
-        tasks: arg,
-      };
+      const values = arg;
 
       expect(isRecordingTasks(values)).toBe(expected);
     }

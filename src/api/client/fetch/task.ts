@@ -112,9 +112,11 @@ export const fetchTasksRecording: FetchTasksRecording = async (dto) => {
     );
   }
 
-  const tasksRecording = (await response.json()) as Tasks;
+  const fetchedTasks = (await response.json()) as Tasks;
 
-  if (!tasksRecording.tasks) return { tasks: [] };
+  if (!fetchedTasks.tasks) return [];
+
+  const tasksRecording = fetchedTasks.tasks;
 
   if (!isRecordingTasks(tasksRecording)) {
     throw new InvalidResponseBodyError(
