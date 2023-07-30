@@ -37,11 +37,38 @@ export const Default: Story = {
         taskCategoryId: 1,
       },
     ],
+    tasksPending: [
+      {
+        id: 1,
+        status: 'pending',
+        startAt: '2019-08-24T14:15:22Z',
+        endAt: '2019-08-24T18:15:22Z',
+        duration: 14400,
+        taskCategoryId: 1,
+      },
+      {
+        id: 2,
+        status: 'pending',
+        startAt: '2019-08-24T14:15:22Z',
+        endAt: '2019-08-24T18:15:22Z',
+        duration: 14400,
+        taskCategoryId: 1,
+      },
+      {
+        id: 3,
+        status: 'pending',
+        startAt: '2019-08-24T14:15:22Z',
+        endAt: '2019-08-24T18:15:22Z',
+        duration: 14400,
+        taskCategoryId: 1,
+      },
+    ],
   },
 };
 
-export const NoTasksRecording: Story = {
+export const NoTasks: Story = {
   args: {
     tasksRecording: [],
+    tasksPending: [],
   },
 };
