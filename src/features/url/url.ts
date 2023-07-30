@@ -112,12 +112,17 @@ type DynamicBackendApiPaths = {
     path: keyof Pick<paths, '/tasks/{taskId}/stop'>,
     param: string
   ) => string;
+  completeTask: (
+    path: keyof Pick<paths, '/tasks/{taskId}/complete'>,
+    param: string
+  ) => string;
 };
 
 type DynamicBackendApiPath = keyof DynamicBackendApiPaths;
 
 const dynamicBackendApiPaths: DynamicBackendApiPaths = {
   stopTask: (path, param) => path.replace('{taskId}', `${param}`),
+  completeTask: (path, param) => path.replace('{taskId}', `${param}`),
 };
 
 export const getDynamicBackendApiUrl = (
@@ -130,6 +135,14 @@ export const getDynamicBackendApiUrl = (
     case 'stopTask': {
       const apiPath = dynamicBackendApiPaths[path](
         '/tasks/{taskId}/stop',
+        param
+      );
+
+      return `${apiUrl}${apiPath}`;
+    }
+    case 'completeTask': {
+      const apiPath = dynamicBackendApiPaths[path](
+        '/tasks/{taskId}/complete',
         param
       );
 

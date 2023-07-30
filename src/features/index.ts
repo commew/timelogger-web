@@ -21,6 +21,7 @@ export type {
   Tasks,
   CreateTask,
   StopTask,
+  CompleteTask,
   FetchTasksRecording,
 } from './task';
 export {

@@ -3,6 +3,7 @@ import type {
   Tasks,
   CreateTask,
   StopTask,
+  CompleteTask,
   FetchTasksRecording,
 } from '@/features';
 import {
@@ -76,6 +77,40 @@ export const stopTask: StopTask = async (dto) => {
   if (response.status !== httpStatusCode.ok) {
     throw new UnexpectedFeatureError(
       `failed to createTask. status: ${
+        response.status
+      }, body: ${await response.text()}`
+    );
+  }
+
+  const task = (await response.json()) as Task;
+  if (!isTask(task)) {
+    throw new InvalidResponseBodyError(
+      `responseBody is not in the expected format. body: ${JSON.stringify(
+        task
+      )}`
+    );
+  }
+
+  return task;
+};
+
+export const completeTask: CompleteTask = async (dto) => {
+  const { taskId, appToken } = dto;
+
+  const response = await fetch(
+    getDynamicBackendApiUrl('completeTask', `${taskId}`),
+    {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${appToken}`,
+        Prefer: 'code=200, example=ExampleSuccess',
+      },
+    }
+  );
+
+  if (response.status !== httpStatusCode.ok) {
+    throw new UnexpectedFeatureError(
+      `failed to completeTask. status: ${
         response.status
       }, body: ${await response.text()}`
     );
