@@ -11,3 +11,5 @@ export { mockFetchTaskRecording } from './mockFetchTasksRecording';
 export { mockFetchTaskRecordingEmptyResponseBody } from './mockFetchTasksRecordingEmptyResponseBody';
 export { mockFetchTasksRecordingUnexpectedResponseBody } from './mockFetchTasksRecordingUnexpectedResponseBody';
 export { mockFetchTasksRecordingUnexpectedResponseBodyStatusPending } from './mockFetchTasksRecordingUnexpectedResponseBodyStatusPending';
+export { mockCompleteTask } from './mockCompleteTask';
+export { mockCompleteTaskUnexpectedResponseBody } from './mockCompleteTaskUnexpectedResponseBody';
