@@ -1,20 +1,20 @@
 import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { fetchTasksPending } from '@/api/client/fetch/task';
+import { fetchPendingTasks } from '@/api/client/fetch/task';
 import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   getBackendApiUrl,
   isPendingTasks,
 } from '@/features';
-import type { TaskPending } from '@/features';
+import type { PendingTask } from '@/features';
 import {
   mockInternalServerError,
-  mockFetchTasksPending,
-  mockFetchTasksPendingEmptyResponseBody,
-  mockFetchTasksPendingUnexpectedResponseBody,
-  mockFetchTasksPendingUnexpectedResponseBodyStatusRecording,
+  mockFetchPendingTasks,
+  mockFetchPendingTasksEmptyResponseBody,
+  mockFetchPendingTasksUnexpectedResponseBody,
+  mockFetchPendingTasksUnexpectedResponseBodyStatusRecording,
 } from '@/mocks';
 
 type TestTable = {
@@ -23,12 +23,12 @@ type TestTable = {
 };
 
 const mockHandlers = [
-  rest.get(getBackendApiUrl('getTasksPending'), mockFetchTasksPending),
+  rest.get(getBackendApiUrl('getTasksPending'), mockFetchPendingTasks),
 ];
 
 const mockServer = setupServer(...mockHandlers);
 
-describe('src/api/client/fetch/task.ts fetchTasksPending TestCases', () => {
+describe('src/api/client/fetch/task.ts fetchPendingTasks TestCases', () => {
   beforeAll(() => {
     mockServer.listen();
   });
@@ -45,7 +45,7 @@ describe('src/api/client/fetch/task.ts fetchTasksPending TestCases', () => {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OSIsInByb3ZpZGVyIjoiZ29vZ2xlIiwiZXhwIjoxNjgzNzMxMzIzLCJqdGkiOiIzNTY3ZGIyNy0zM2RlLTQyMTctOGM5Zi01ODhhYjVkMDdhZGQiLCJpYXQiOjE2ODExMzkzOTZ9.wV-4ftbM7EwPvyzoqWTNKaC1eZko3juJ84Q9C6X_dYs';
 
   it('should be able to fetch some tasks pending.', async () => {
-    const tasksPending = await fetchTasksPending({
+    const pendingTasks = await fetchPendingTasks({
       appToken: mockAppToken,
     });
 
@@ -76,23 +76,23 @@ describe('src/api/client/fetch/task.ts fetchTasksPending TestCases', () => {
       },
     ];
 
-    expect(tasksPending).toStrictEqual(expected);
+    expect(pendingTasks).toStrictEqual(expected);
   });
 
   it('should be able to fetch 0 tasks pending.', async () => {
     mockServer.use(
       rest.get(
         getBackendApiUrl('getTasksPending'),
-        mockFetchTasksPendingEmptyResponseBody
+        mockFetchPendingTasksEmptyResponseBody
       )
     );
 
-    const tasksPending = await fetchTasksPending({
+    const pendingTasks = await fetchPendingTasks({
       appToken: mockAppToken,
     });
 
-    const expected: TaskPending[] = [];
-    expect(tasksPending).toStrictEqual(expected);
+    const expected: PendingTask[] = [];
+    expect(pendingTasks).toStrictEqual(expected);
   });
 
   it('should UnexpectedFeatureError Throw, because http status is not ok', async () => {
@@ -104,7 +104,7 @@ describe('src/api/client/fetch/task.ts fetchTasksPending TestCases', () => {
       appToken: mockAppToken,
     } as const;
 
-    await expect(fetchTasksPending(dto)).rejects.toThrow(
+    await expect(fetchPendingTasks(dto)).rejects.toThrow(
       UnexpectedFeatureError
     );
   });
@@ -113,14 +113,14 @@ describe('src/api/client/fetch/task.ts fetchTasksPending TestCases', () => {
     mockServer.use(
       rest.get(
         getBackendApiUrl('getTasksPending'),
-        mockFetchTasksPendingUnexpectedResponseBodyStatusRecording
+        mockFetchPendingTasksUnexpectedResponseBodyStatusRecording
       )
     );
 
     const dto = {
       appToken: mockAppToken,
     } as const;
-    await expect(fetchTasksPending(dto)).rejects.toThrow(
+    await expect(fetchPendingTasks(dto)).rejects.toThrow(
       InvalidResponseBodyError
     );
   });
@@ -129,14 +129,14 @@ describe('src/api/client/fetch/task.ts fetchTasksPending TestCases', () => {
     mockServer.use(
       rest.get(
         getBackendApiUrl('getTasksPending'),
-        mockFetchTasksPendingUnexpectedResponseBody
+        mockFetchPendingTasksUnexpectedResponseBody
       )
     );
 
     const dto = {
       appToken: mockAppToken,
     } as const;
-    await expect(fetchTasksPending(dto)).rejects.toThrow(
+    await expect(fetchPendingTasks(dto)).rejects.toThrow(
       InvalidResponseBodyError
     );
   });

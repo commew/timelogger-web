@@ -2,11 +2,11 @@ export { isTask, isRecordingTasks, isPendingTasks } from './task';
 export type {
   Task,
   TaskRecording,
-  TaskPending,
+  PendingTask,
   Tasks,
   CreateTask,
   StopTask,
   CompleteTask,
   FetchTasksRecording,
-  FetchTasksPending,
+  FetchPendingTasks,
 } from './task';

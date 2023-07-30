@@ -6,7 +6,7 @@ import {
 
 import { httpStatusCode } from '@/features';
 
-export const mockFetchTasksPendingUnexpectedResponseBodyStatusRecording: ResponseResolver<
+export const mockFetchPendingTasksUnexpectedResponseBodyStatusRecording: ResponseResolver<
   MockedRequest,
   typeof restContext
 > = (req, res, ctx) =>

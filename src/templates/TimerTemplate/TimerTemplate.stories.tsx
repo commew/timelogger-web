@@ -37,7 +37,7 @@ export const Default: Story = {
         taskCategoryId: 1,
       },
     ],
-    tasksPending: [
+    pendingTasks: [
       {
         id: 1,
         status: 'pending',
@@ -69,6 +69,6 @@ export const Default: Story = {
 export const NoTasks: Story = {
   args: {
     tasksRecording: [],
-    tasksPending: [],
+    pendingTasks: [],
   },
 };

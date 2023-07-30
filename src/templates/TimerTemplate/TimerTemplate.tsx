@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Box, Stack, Title, createStyles } from '@mantine/core';
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
 import { MeasuringTaskItem, StoppedTaskItem } from '@/components';
-import type { TaskPending, TaskRecording } from '@/features';
+import type { PendingTask, TaskRecording } from '@/features';
 import { DefaultLayout } from '@/layouts';
 
 const useStyles = createStyles((theme) => ({
@@ -22,10 +22,10 @@ const useStyles = createStyles((theme) => ({
 
 type Props = {
   tasksRecording: TaskRecording[];
-  tasksPending: TaskPending[];
+  pendingTasks: PendingTask[];
 };
 
-export const TimerTemplate: FC<Props> = ({ tasksRecording, tasksPending }) => {
+export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
   const { classes, theme } = useStyles();
 
   return (
@@ -65,8 +65,8 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, tasksPending }) => {
         停止中
       </Title>
       <Stack mt={'1rem'}>
-        {tasksPending.length > 0 ? (
-          tasksPending.map((taskPending, index) => {
+        {pendingTasks.length > 0 ? (
+          pendingTasks.map((pendingTask, index) => {
             return (
               <StoppedTaskItem
                 key={index}

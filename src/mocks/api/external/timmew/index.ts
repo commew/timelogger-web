@@ -13,7 +13,7 @@ export { mockFetchTasksRecordingUnexpectedResponseBody } from './mockFetchTasksR
 export { mockFetchTasksRecordingUnexpectedResponseBodyStatusPending } from './mockFetchTasksRecordingUnexpectedResponseBodyStatusPending';
 export { mockCompleteTask } from './mockCompleteTask';
 export { mockCompleteTaskUnexpectedResponseBody } from './mockCompleteTaskUnexpectedResponseBody';
-export { mockFetchTasksPending } from './mockFetchTasksPending';
-export { mockFetchTasksPendingEmptyResponseBody } from './mockFetchTasksPendingEmptyResponseBody';
-export { mockFetchTasksPendingUnexpectedResponseBody } from './mockFetchTasksPendingUnexpectedResponseBody';
-export { mockFetchTasksPendingUnexpectedResponseBodyStatusRecording } from './mockFetchTasksPendingUnexpectedResponseBodyStatusRecording';
+export { mockFetchPendingTasks } from './mockFetchPendingTasks';
+export { mockFetchPendingTasksEmptyResponseBody } from './mockFetchPendingTasksEmptyResponseBody';
+export { mockFetchPendingTasksUnexpectedResponseBody } from './mockFetchPendingTasksUnexpectedResponseBody';
+export { mockFetchPendingTasksUnexpectedResponseBodyStatusRecording } from './mockFetchPendingTasksUnexpectedResponseBodyStatusRecording';
