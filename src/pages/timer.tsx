@@ -1,6 +1,9 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
-import { fetchTasksPending, fetchTasksRecording } from '@/api/client/fetch/task';
+import {
+  fetchTasksPending,
+  fetchTasksRecording,
+} from '@/api/client/fetch/task';
 import type { TaskPending, TaskRecording } from '@/features';
 import { appUrls } from '@/features';
 
@@ -12,7 +15,12 @@ type Props = {
 };
 
 const TimerPage: NextPage<Props> = ({ tasksRecording, tasksPending }) => {
-  return <TimerTemplate tasksRecording={tasksRecording} tasksPending={tasksPending} />;
+  return (
+    <TimerTemplate
+      tasksRecording={tasksRecording}
+      tasksPending={tasksPending}
+    />
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
