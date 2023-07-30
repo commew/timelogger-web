@@ -5,6 +5,7 @@ import type {
   StopTask,
   CompleteTask,
   FetchTasksRecording,
+  FetchPendingTasks,
 } from '@/features';
 import {
   getBackendApiUrl,
@@ -13,6 +14,7 @@ import {
   UnexpectedFeatureError,
   isTask,
   isRecordingTasks,
+  isPendingTasks,
   getDynamicBackendApiUrl,
 } from '@/features';
 import { type operations } from '@/openapi/schema';
@@ -162,4 +164,40 @@ export const fetchTasksRecording: FetchTasksRecording = async (dto) => {
   }
 
   return tasksRecording;
+};
+
+export const fetchPendingTasks: FetchPendingTasks = async (dto) => {
+  const { appToken } = dto;
+
+  const response = await fetch(getBackendApiUrl('getTasksPending'), {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${appToken}`,
+      Prefer: 'code=200, example=ExampleSuccess',
+    },
+  });
+
+  if (response.status !== httpStatusCode.ok) {
+    throw new UnexpectedFeatureError(
+      `failed to fetchPendingTasks. status: ${
+        response.status
+      }, body: ${await response.text()}`
+    );
+  }
+
+  const fetchedTasks = (await response.json()) as Tasks;
+
+  if (!fetchedTasks.tasks) return [];
+
+  const pendingTasks = fetchedTasks.tasks;
+
+  if (!isPendingTasks(pendingTasks)) {
+    throw new InvalidResponseBodyError(
+      `responseBody is not in the expected format( expected status is 'pending'. body: ${JSON.stringify(
+        pendingTasks
+      )} )`
+    );
+  }
+
+  return pendingTasks;
 };

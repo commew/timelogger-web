@@ -1,17 +1,26 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
-import { fetchTasksRecording } from '@/api/client/fetch/task';
-import type { TaskRecording } from '@/features';
+import {
+  fetchPendingTasks,
+  fetchTasksRecording,
+} from '@/api/client/fetch/task';
+import type { PendingTask, TaskRecording } from '@/features';
 import { appUrls } from '@/features';
 
 import { TimerTemplate } from '@/templates';
 
 type Props = {
   tasksRecording: TaskRecording[];
+  pendingTasks: PendingTask[];
 };
 
-const TimerPage: NextPage<Props> = ({ tasksRecording }) => {
-  return <TimerTemplate tasksRecording={tasksRecording} />;
+const TimerPage: NextPage<Props> = ({ tasksRecording, pendingTasks }) => {
+  return (
+    <TimerTemplate
+      tasksRecording={tasksRecording}
+      pendingTasks={pendingTasks}
+    />
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -29,8 +38,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const fetchTasksRecordingDto = { appToken: session.appToken };
   const tasksRecording = await fetchTasksRecording(fetchTasksRecordingDto);
 
+  const fetchPendingTasksDto = { appToken: session.appToken };
+  const pendingTasks = await fetchPendingTasks(fetchPendingTasksDto);
+
   return {
-    props: { tasksRecording },
+    props: { tasksRecording, pendingTasks },
   };
 };
 

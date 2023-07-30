@@ -22,12 +22,19 @@ type FetchTasksRecordingDto = {
   appToken: string;
 };
 
+type FetchPendingTasksDto = {
+  appToken: string;
+};
+
 export type Task = components['schemas']['Task'];
 export type Tasks = {
   tasks?: Task[];
 };
 export type TaskRecording = Omit<Task, 'status'> & {
   status: 'recording';
+};
+export type PendingTask = Omit<Task, 'status'> & {
+  status: 'pending';
 };
 
 const taskSchema = z.object({
@@ -49,6 +56,12 @@ const taskRecordingSchema = taskSchema.extend({
 
 const tasksRecordingSchema = z.array(taskRecordingSchema);
 
+const pendingTaskSchema = taskSchema.extend({
+  status: z.literal('pending'),
+});
+
+const pendingTasksSchema = z.array(pendingTaskSchema);
+
 export const isTask = (value: unknown): value is Task => {
   const result = taskSchema.safeParse(value);
 
@@ -58,9 +71,15 @@ export const isTask = (value: unknown): value is Task => {
 export const isRecordingTasks = (value: unknown): value is TaskRecording[] => {
   return tasksRecordingSchema.safeParse(value).success;
 };
+export const isPendingTasks = (value: unknown): value is PendingTask[] => {
+  return pendingTasksSchema.safeParse(value).success;
+};
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type CompleteTask = (dto: CompleteTaskDto) => Promise<Task>;
 export type FetchTasksRecording = (
   dto: FetchTasksRecordingDto
 ) => Promise<TaskRecording[]>;
+export type FetchPendingTasks = (
+  dto: FetchPendingTasksDto
+) => Promise<PendingTask[]>;

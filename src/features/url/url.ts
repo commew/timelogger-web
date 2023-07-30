@@ -72,6 +72,7 @@ type BackendApiPaths = {
   taskGroups: keyof Pick<paths, '/task-groups'>;
   tasks: keyof Pick<paths, '/tasks'>;
   getTasksRecording: keyof Pick<paths, '/tasks/recording'>;
+  getTasksPending: keyof Pick<paths, '/tasks/pending'>;
 };
 
 const backendApiPaths: BackendApiPaths = {
@@ -79,6 +80,7 @@ const backendApiPaths: BackendApiPaths = {
   taskGroups: '/task-groups',
   tasks: '/tasks',
   getTasksRecording: '/tasks/recording',
+  getTasksPending: '/tasks/pending',
 };
 
 type BackendApiPath = keyof BackendApiPaths;
