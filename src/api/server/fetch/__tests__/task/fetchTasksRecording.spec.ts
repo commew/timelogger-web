@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { fetchTasksRecording } from '@/api/client/fetch/task';
+import { fetchTasksRecording } from '@/api/server/fetch/task';
 import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
