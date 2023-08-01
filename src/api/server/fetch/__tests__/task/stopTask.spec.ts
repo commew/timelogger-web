@@ -1,23 +1,25 @@
 import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { createTask } from '@/api/client/fetch/task';
+import { stopTask } from '@/api/server/fetch/task';
 import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
-  getBackendApiUrl,
+  getDynamicBackendApiUrl,
 } from '@/features';
 import {
-  mockCreateTask,
-  mockCreateTaskUnexpectedResponseBody,
+  mockStopTask,
+  mockStopTaskUnexpectedResponseBody,
   mockInternalServerError,
 } from '@/mocks';
 
-const mockHandlers = [rest.post(getBackendApiUrl('tasks'), mockCreateTask)];
+const mockHandlers = [
+  rest.patch(getDynamicBackendApiUrl('stopTask', '1'), mockStopTask),
+];
 
 const mockServer = setupServer(...mockHandlers);
 
-describe('src/api/client/fetch/task.ts createTask TestCases', () => {
+describe('src/api/client/fetch/task.ts stopTask TestCases', () => {
   beforeAll(() => {
     mockServer.listen();
   });
@@ -33,20 +35,18 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
   const mockAppToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OSIsInByb3ZpZGVyIjoiZ29vZ2xlIiwiZXhwIjoxNjgzNzMxMzIzLCJqdGkiOiIzNTY3ZGIyNy0zM2RlLTQyMTctOGM5Zi01ODhhYjVkMDdhZGQiLCJpYXQiOjE2ODExMzkzOTZ9.wV-4ftbM7EwPvyzoqWTNKaC1eZko3juJ84Q9C6X_dYs';
 
-  it('should be able to create a task', async () => {
-    const createdTask = await createTask({
-      taskCategoryId: 1,
-      status: 'recording',
-      startAt: '2019-08-24T14:15:22Z',
+  it('should be able to stop a task', async () => {
+    const createdTask = await stopTask({
+      taskId: 1,
       appToken: mockAppToken,
     });
 
     const expected = {
       id: 1,
-      status: 'recording',
+      status: 'pending',
       startAt: '2019-08-24T14:15:22Z',
-      endAt: '0000-00-00T00:00:00Z',
-      duration: 0,
+      endAt: '2019-08-24T16:15:22Z',
+      duration: 7200,
       taskCategoryId: 1,
     };
 
@@ -55,31 +55,33 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
 
   it('should InvalidResponseBodyError Throw, because unexpected response body', async () => {
     mockServer.use(
-      rest.post(getBackendApiUrl('tasks'), mockCreateTaskUnexpectedResponseBody)
+      rest.patch(
+        getDynamicBackendApiUrl('stopTask', '1'),
+        mockStopTaskUnexpectedResponseBody
+      )
     );
 
     const dto = {
-      taskCategoryId: 1,
-      status: 'recording',
-      startAt: '2019-08-24T14:15:22Z',
+      taskId: 1,
       appToken: mockAppToken,
     } as const;
 
-    await expect(createTask(dto)).rejects.toThrow(InvalidResponseBodyError);
+    await expect(stopTask(dto)).rejects.toThrow(InvalidResponseBodyError);
   });
 
-  it('should UnexpectedFeatureError Throw, because http status is not created', async () => {
+  it('should UnexpectedFeatureError Throw, because http status is not ok', async () => {
     mockServer.use(
-      rest.post(getBackendApiUrl('tasks'), mockInternalServerError)
+      rest.patch(
+        getDynamicBackendApiUrl('stopTask', '1'),
+        mockInternalServerError
+      )
     );
 
     const dto = {
-      taskCategoryId: 1,
-      status: 'recording',
-      startAt: '2019-08-24T14:15:22Z',
+      taskId: 1,
       appToken: mockAppToken,
     } as const;
 
-    await expect(createTask(dto)).rejects.toThrow(UnexpectedFeatureError);
+    await expect(stopTask(dto)).rejects.toThrow(UnexpectedFeatureError);
   });
 });

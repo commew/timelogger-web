@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 import {
   fetchPendingTasks,
   fetchTasksRecording,
-} from '@/api/client/fetch/task';
+} from '@/api/server/fetch/task';
 import type { PendingTask, TaskRecording } from '@/features';
 import { appUrls } from '@/features';
 
