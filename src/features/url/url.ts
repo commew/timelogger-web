@@ -69,10 +69,12 @@ export const appUrl = (): AppUrl => {
 
 type AppApiPaths = {
   tasks: '/api/tasks/create';
+  stopTask: '/api/tasks/stop';
 };
 
 const appApiPaths: AppApiPaths = {
   tasks: '/api/tasks/create',
+  stopTask: '/api/tasks/stop',
 };
 
 type AppApiPathName = keyof AppApiPaths;
@@ -84,38 +86,9 @@ export const getAppApiUrl = (
   const apiUrl = appUrl();
 
   switch (path) {
-    case 'tasks': {
-      const apiPath: AppApiPath = appApiPaths[path];
-
-      return `${apiUrl}${apiPath}`;
-    }
-
-    default:
-      throw new ExhaustiveError(path);
-  }
-};
-
-type AppApiDynamicPaths = {
-  stopTask: (path: '/api/tasks/{taskId}/stop', param: string) => string;
-};
-type AppApiDynamicPathName = keyof AppApiDynamicPaths;
-
-const appApiDynamicPaths: AppApiDynamicPaths = {
-  stopTask: (path, param) => path.replace('{taskId}', `${param}`),
-};
-
-export const getDynamicAppApiUrl = (
-  path: AppApiDynamicPathName,
-  param: string
-): string => {
-  const apiUrl = appUrl();
-
-  switch (path) {
+    case 'tasks':
     case 'stopTask': {
-      const apiPath = appApiDynamicPaths[path](
-        '/api/tasks/{taskId}/stop',
-        param
-      );
+      const apiPath: AppApiPath = appApiPaths[path];
 
       return `${apiUrl}${apiPath}`;
     }
