@@ -67,6 +67,34 @@ export const appUrl = (): AppUrl => {
   return 'http://localhost:5656';
 };
 
+type AppApiPaths = {
+  tasks: '/api/tasks/create';
+};
+
+const appApiPaths: AppApiPaths = {
+  tasks: '/api/tasks/create',
+};
+
+type AppApiPathName = keyof AppApiPaths;
+type AppApiPath = (typeof appApiPaths)[keyof typeof appApiPaths];
+
+export const getAppApiUrl = (
+  path: AppApiPathName
+): `${AppUrl}${AppApiPath}` => {
+  const apiUrl = appUrl();
+
+  switch (path) {
+    case 'tasks': {
+      const apiPath: AppApiPath = appApiPaths[path];
+
+      return `${apiUrl}${apiPath}`;
+    }
+
+    default:
+      throw new ExhaustiveError(path);
+  }
+};
+
 type BackendApiPaths = {
   accounts: keyof Pick<paths, '/accounts'>;
   taskGroups: keyof Pick<paths, '/task-groups'>;
