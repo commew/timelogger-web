@@ -95,6 +95,36 @@ export const getAppApiUrl = (
   }
 };
 
+type AppApiDynamicPaths = {
+  stopTask: (path: '/api/tasks/{taskId}/stop', param: string) => string;
+};
+type AppApiDynamicPathName = keyof AppApiDynamicPaths;
+
+const appApiDynamicPaths: AppApiDynamicPaths = {
+  stopTask: (path, param) => path.replace('{taskId}', `${param}`),
+};
+
+export const getDynamicAppApiUrl = (
+  path: AppApiDynamicPathName,
+  param: string
+): string => {
+  const apiUrl = appUrl();
+
+  switch (path) {
+    case 'stopTask': {
+      const apiPath = appApiDynamicPaths[path](
+        '/api/tasks/{taskId}/stop',
+        param
+      );
+
+      return `${apiUrl}${apiPath}`;
+    }
+
+    default:
+      throw new ExhaustiveError(path);
+  }
+};
+
 type BackendApiPaths = {
   accounts: keyof Pick<paths, '/accounts'>;
   taskGroups: keyof Pick<paths, '/task-groups'>;
