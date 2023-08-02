@@ -1,6 +1,5 @@
 import {
   getAppApiUrl,
-  getDynamicAppApiUrl,
   httpStatusCode,
   InvalidResponseBodyError,
   isTask,
@@ -53,11 +52,20 @@ export const createTask: CreateTask = async (dto) => {
 export const stopTask: StopTask = async (dto) => {
   const { taskId } = dto;
 
-  const response = await fetch(getDynamicAppApiUrl('stopTask', `${taskId}`), {
+  const requestBody = {
+    content: {
+      'application/json': {
+        taskId,
+      },
+    },
+  };
+
+  const response = await fetch(getAppApiUrl('stopTask'), {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(requestBody.content['application/json']),
   });
 
   if (response.status !== httpStatusCode.ok) {

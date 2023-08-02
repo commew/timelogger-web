@@ -6,8 +6,8 @@ import type { Task } from '@/features';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 interface NextApiRequestWithStopTaskDto extends NextApiRequest {
-  query: {
-    taskId?: string;
+  body: {
+    taskId: number;
   };
 }
 
@@ -21,7 +21,6 @@ const handler: NextApiHandler = async (
   res: NextApiResponse<Task | ErrorData>
 ) => {
   const session = await getServerSession(req, res, authOptions);
-  const taskId = req.query.taskId;
 
   if (!session) {
     res.status(httpStatusCode.unauthorized).json({
@@ -32,17 +31,8 @@ const handler: NextApiHandler = async (
     return;
   }
 
-  if (taskId == null || isNaN(Number(taskId))) {
-    res.status(httpStatusCode.badRequest).json({
-      type: 'INVALID_TASK_ID',
-      title: 'Invalid task id in Query Parameter.',
-    });
-
-    return;
-  }
-
   try {
-    const stopTaskDto = { appToken: session.appToken, taskId: Number(taskId) };
+    const stopTaskDto = { appToken: session.appToken, ...req.body };
     const stoppedTask = await stopTask(stopTaskDto);
 
     res.status(httpStatusCode.ok).json(stoppedTask);
