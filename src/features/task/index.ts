@@ -1,4 +1,4 @@
-export { isTask, isRecordingTasks, isPendingTasks } from './task';
+export { isTask, isRecordingTasks, isPendingTasks, isNextApiRequestBodyOfCreateTaskDto } from './task';
 export type {
   Task,
   TaskRecording,

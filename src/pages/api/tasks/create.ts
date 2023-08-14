@@ -3,15 +3,9 @@ import { getServerSession } from 'next-auth';
 import { createTask } from '@/api/server/fetch/task';
 import { httpStatusCode } from '@/features';
 import type { Task } from '@/features';
+import { isNextApiRequestBodyOfCreateTaskDto } from '@/features/task/task';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-interface NextApiRequestWithCreateTaskDto extends NextApiRequest {
-  body: {
-    taskCategoryId: number;
-    status: 'recording';
-    startAt: string;
-  };
-}
 
 type ErrorData = {
   type: string;
@@ -19,7 +13,7 @@ type ErrorData = {
 };
 
 const handler: NextApiHandler = async (
-  req: NextApiRequestWithCreateTaskDto,
+  req: NextApiRequest,
   res: NextApiResponse<Task | ErrorData>
 ) => {
   const session = await getServerSession(req, res, authOptions);
@@ -34,6 +28,15 @@ const handler: NextApiHandler = async (
   }
 
   try {
+    if (!isNextApiRequestBodyOfCreateTaskDto(req.body)) {
+      res.status(httpStatusCode.badRequest).json({
+        type: 'BAD_REQUEST',
+        title: 'Invalid request body.',
+      });
+
+      return;
+    }
+
     const createTaskDto = { appToken: session.appToken, ...req.body };
     const createdTask = await createTask(createTaskDto);
 
