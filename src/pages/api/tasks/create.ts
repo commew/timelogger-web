@@ -6,10 +6,6 @@ import type { Task } from '@/features';
 import { isNextApiRequestBodyOfCreateTaskDto } from '@/features/task/task';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-export const config = {
-  runtime: 'edge',
-}
-
 type ErrorData = {
   type: string;
   title: string;
