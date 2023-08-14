@@ -1,7 +1,9 @@
 export {
-  isTask, isRecordingTasks, isPendingTasks,
+  isTask,
+  isRecordingTasks,
+  isPendingTasks,
   isNextApiRequestBodyOfCreateTaskDto,
-  isNextApiRequestBodyOfStopTaskDto
+  isNextApiRequestBodyOfStopTaskDto,
 } from './task';
 export type {
   Task,

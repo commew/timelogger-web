@@ -12,7 +12,7 @@ type NextApiRequestBodyOfCreateTaskDto = {
   taskCategoryId: number;
   status: 'recording';
   startAt: string;
-}
+};
 
 type StopTaskDto = {
   taskId: number;
@@ -94,12 +94,16 @@ export const isRecordingTasks = (value: unknown): value is TaskRecording[] => {
 export const isPendingTasks = (value: unknown): value is PendingTask[] => {
   return pendingTasksSchema.safeParse(value).success;
 };
-export const isNextApiRequestBodyOfCreateTaskDto = (value: unknown): value is NextApiRequestBodyOfCreateTaskDto => {
+export const isNextApiRequestBodyOfCreateTaskDto = (
+  value: unknown
+): value is NextApiRequestBodyOfCreateTaskDto => {
   return nextApiRequestBodyOfCreateTaskDtoSchema.safeParse(value).success;
-}
-export const isNextApiRequestBodyOfStopTaskDto = (value: unknown): value is NextApiRequestBodyOfStopTaskDto => {
+};
+export const isNextApiRequestBodyOfStopTaskDto = (
+  value: unknown
+): value is NextApiRequestBodyOfStopTaskDto => {
   return nextApiRequestBodyOfStopTaskDtoSchema.safeParse(value).success;
-}
+};
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type CompleteTask = (dto: CompleteTaskDto) => Promise<Task>;
