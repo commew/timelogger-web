@@ -1,15 +1,9 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { stopTask } from '@/api/server/fetch/task';
-import { httpStatusCode } from '@/features';
+import { httpStatusCode, isNextApiRequestBodyOfStopTaskDto } from '@/features';
 import type { Task } from '@/features';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-
-interface NextApiRequestWithStopTaskDto extends NextApiRequest {
-  body: {
-    taskId: number;
-  };
-}
 
 type ErrorData = {
   type: string;
@@ -17,7 +11,7 @@ type ErrorData = {
 };
 
 const handler: NextApiHandler = async (
-  req: NextApiRequestWithStopTaskDto,
+  req: NextApiRequest,
   res: NextApiResponse<Task | ErrorData>
 ) => {
   const session = await getServerSession(req, res, authOptions);
@@ -32,6 +26,15 @@ const handler: NextApiHandler = async (
   }
 
   try {
+    if (!isNextApiRequestBodyOfStopTaskDto(req.body)) {
+      res.status(httpStatusCode.badRequest).json({
+        type: 'BAD_REQUEST',
+        title: 'Invalid request body.',
+      });
+
+      return;
+    }
+
     const stopTaskDto = { appToken: session.appToken, ...req.body };
     const stoppedTask = await stopTask(stopTaskDto);
 
