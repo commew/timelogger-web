@@ -5,10 +5,14 @@ import {
   isTask,
   UnexpectedFeatureError,
 } from '@/features';
-import type { CreateTask, StopTask, Task } from '@/features';
+import type {
+  CreateTaskFromClient,
+  StopTaskFromClient,
+  Task,
+} from '@/features';
 import { type operations } from '@/openapi/schema';
 
-export const createTask: CreateTask = async (dto) => {
+export const createTask: CreateTaskFromClient = async (dto) => {
   const { taskCategoryId, status, startAt } = dto;
 
   const requestBody: operations['postTasks']['requestBody'] = {
@@ -49,7 +53,7 @@ export const createTask: CreateTask = async (dto) => {
   return task;
 };
 
-export const stopTask: StopTask = async (dto) => {
+export const stopTask: StopTaskFromClient = async (dto) => {
   const { taskId } = dto;
 
   const requestBody = {
