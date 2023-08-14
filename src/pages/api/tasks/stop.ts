@@ -5,10 +5,6 @@ import { httpStatusCode, isNextApiRequestBodyOfStopTaskDto } from '@/features';
 import type { Task } from '@/features';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-export const config = {
-  runtime: 'edge',
-}
-
 type ErrorData = {
   type: string;
   title: string;
