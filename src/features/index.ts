@@ -15,7 +15,7 @@ export { isOidcProvider, createBackendApiBasicAuthCredential } from './auth';
 export type { OidcProvider } from './auth';
 export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
-export { isTask, isRecordingTasks, isPendingTasks } from './task';
+export { isTask, isRecordingTasks, isPendingTasks, isNextApiRequestBodyOfCreateTaskDto } from './task';
 export type {
   Task,
   TaskRecording,
