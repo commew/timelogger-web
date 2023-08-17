@@ -31,6 +31,10 @@ type CompleteTaskDto = {
   appToken: string;
 };
 
+type NextApiRequestBodyOfCompleteTaskDto = {
+  taskId: number;
+};
+
 type FetchTasksRecordingDto = {
   appToken: string;
 };
@@ -85,6 +89,10 @@ const nextApiRequestBodyOfStopTaskDtoSchema = z.object({
   taskId: z.number(),
 });
 
+const nextApiRequestBodyOfCompleteTaskDtoSchema = z.object({
+  taskId: z.number(),
+});
+
 export const isTask = (value: unknown): value is Task => {
   const result = taskSchema.safeParse(value);
 
@@ -106,6 +114,11 @@ export const isNextApiRequestBodyOfStopTaskDto = (
   value: unknown
 ): value is NextApiRequestBodyOfStopTaskDto => {
   return nextApiRequestBodyOfStopTaskDtoSchema.safeParse(value).success;
+};
+export const isNextApiRequestBodyOfCompleteTaskDto = (
+  value: unknown
+): value is NextApiRequestBodyOfCompleteTaskDto => {
+  return nextApiRequestBodyOfCompleteTaskDtoSchema.safeParse(value).success;
 };
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type CreateTaskFromClient = (
