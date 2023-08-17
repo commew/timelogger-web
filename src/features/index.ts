@@ -21,6 +21,7 @@ export {
   isPendingTasks,
   isNextApiRequestBodyOfCreateTaskDto,
   isNextApiRequestBodyOfStopTaskDto,
+  isNextApiRequestBodyOfCompleteTaskDto,
 } from './task';
 export type {
   Task,
@@ -32,6 +33,7 @@ export type {
   StopTask,
   StopTaskFromClient,
   CompleteTask,
+  CompleteTaskFromClient,
   FetchTasksRecording,
   FetchPendingTasks,
 } from './task';

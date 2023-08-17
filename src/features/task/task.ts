@@ -16,6 +16,7 @@ type NextApiRequestBodyOfCreateTaskDto = {
 
 type CreateTaskDtoFromClient = Omit<CreateTaskDto, 'appToken'>;
 type StopTaskDtoFromClient = Omit<StopTaskDto, 'appToken'>;
+type CompleteTaskDtoFromClient = Omit<CompleteTaskDto, 'appToken'>;
 
 type StopTaskDto = {
   taskId: number;
@@ -29,6 +30,10 @@ type NextApiRequestBodyOfStopTaskDto = {
 type CompleteTaskDto = {
   taskId: number;
   appToken: string;
+};
+
+type NextApiRequestBodyOfCompleteTaskDto = {
+  taskId: number;
 };
 
 type FetchTasksRecordingDto = {
@@ -85,6 +90,10 @@ const nextApiRequestBodyOfStopTaskDtoSchema = z.object({
   taskId: z.number(),
 });
 
+const nextApiRequestBodyOfCompleteTaskDtoSchema = z.object({
+  taskId: z.number(),
+});
+
 export const isTask = (value: unknown): value is Task => {
   const result = taskSchema.safeParse(value);
 
@@ -107,6 +116,11 @@ export const isNextApiRequestBodyOfStopTaskDto = (
 ): value is NextApiRequestBodyOfStopTaskDto => {
   return nextApiRequestBodyOfStopTaskDtoSchema.safeParse(value).success;
 };
+export const isNextApiRequestBodyOfCompleteTaskDto = (
+  value: unknown
+): value is NextApiRequestBodyOfCompleteTaskDto => {
+  return nextApiRequestBodyOfCompleteTaskDtoSchema.safeParse(value).success;
+};
 export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
 export type CreateTaskFromClient = (
   dto: CreateTaskDtoFromClient
@@ -114,6 +128,9 @@ export type CreateTaskFromClient = (
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type StopTaskFromClient = (dto: StopTaskDtoFromClient) => Promise<Task>;
 export type CompleteTask = (dto: CompleteTaskDto) => Promise<Task>;
+export type CompleteTaskFromClient = (
+  dto: CompleteTaskDtoFromClient
+) => Promise<Task>;
 export type FetchTasksRecording = (
   dto: FetchTasksRecordingDto
 ) => Promise<TaskRecording[]>;

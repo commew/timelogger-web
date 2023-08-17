@@ -70,11 +70,13 @@ export const appUrl = (): AppUrl => {
 type AppApiPaths = {
   tasks: '/api/tasks/create';
   stopTask: '/api/tasks/stop';
+  completeTask: '/api/tasks/complete';
 };
 
 const appApiPaths: AppApiPaths = {
   tasks: '/api/tasks/create',
   stopTask: '/api/tasks/stop',
+  completeTask: '/api/tasks/complete',
 };
 
 type AppApiPathName = keyof AppApiPaths;
@@ -87,7 +89,8 @@ export const getAppApiUrl = (
 
   switch (path) {
     case 'tasks':
-    case 'stopTask': {
+    case 'stopTask':
+    case 'completeTask': {
       const apiPath: AppApiPath = appApiPaths[path];
 
       return `${apiUrl}${apiPath}`;
