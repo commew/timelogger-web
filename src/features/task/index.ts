@@ -16,6 +16,7 @@ export type {
   StopTask,
   StopTaskFromClient,
   CompleteTask,
+  CompleteTaskFromClient,
   FetchTasksRecording,
   FetchPendingTasks,
 } from './task';
