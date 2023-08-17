@@ -16,6 +16,7 @@ type NextApiRequestBodyOfCreateTaskDto = {
 
 type CreateTaskDtoFromClient = Omit<CreateTaskDto, 'appToken'>;
 type StopTaskDtoFromClient = Omit<StopTaskDto, 'appToken'>;
+type CompleteTaskDtoFromClient = Omit<CompleteTaskDto, 'appToken'>;
 
 type StopTaskDto = {
   taskId: number;
@@ -127,6 +128,9 @@ export type CreateTaskFromClient = (
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type StopTaskFromClient = (dto: StopTaskDtoFromClient) => Promise<Task>;
 export type CompleteTask = (dto: CompleteTaskDto) => Promise<Task>;
+export type CompleteTaskFromClient = (
+  dto: CompleteTaskDtoFromClient
+) => Promise<Task>;
 export type FetchTasksRecording = (
   dto: FetchTasksRecordingDto
 ) => Promise<TaskRecording[]>;
