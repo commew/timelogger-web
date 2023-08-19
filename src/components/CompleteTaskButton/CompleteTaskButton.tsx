@@ -21,7 +21,7 @@ export const CompleteTaskButton: FC<Props> = ({ taskId }) => {
 
   const handleError = useErrorHandler();
 
-  const clickHandler = (taksId: number) => async () => {
+  const clickHandler = async (taksId: number) => {
     try {
       const completeTaskDto = { taskId: taksId };
       const response = await completeTask(completeTaskDto);
@@ -40,7 +40,9 @@ export const CompleteTaskButton: FC<Props> = ({ taskId }) => {
       className={classes.button}
       styles={{ leftIcon: { marginRight: '0.5rem' } }}
       aria-label="COMPLETE"
-      onClick={clickHandler(taskId)}
+      onClick={async () => {
+        await clickHandler(taskId);
+      }}
     >
       <Text color="dark.6" fw={700} fz="xs">
         終了
