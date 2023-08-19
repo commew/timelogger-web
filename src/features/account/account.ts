@@ -19,7 +19,6 @@ export type Account = components['schemas']['Account'] & {
 
 const accountSchema = z.object({
   id: z.number(),
-  name: z.string(),
   openIdProviders: z.array(oidcProviderSchema),
 });
 

@@ -25,7 +25,6 @@ paths:
                 ExampleSuccess:
                   value:
                     id: 1
-                    name: NekoKoneko
                     openIdProviders:
                       - sub: '10769150350006150715113082367'
                         provider: google
@@ -90,7 +89,6 @@ paths:
                 ExampleSuccess:
                   value:
                     id: 1
-                    name: NekoKoneko
                     openIdProviders:
                       - sub: '10769150350006150715113082367'
                         provider: google
@@ -784,12 +782,10 @@ components:
       description: アカウント
       examples:
         - id: 1
-          name: NekoKoneko
           openIdProviders:
             - sub: '10769150350006150715113082367'
               provider: google
         - id: 2
-          name: MyCat
           openIdProviders:
             - sub: '999999999999999999999999999'
               provider: google
@@ -800,9 +796,6 @@ components:
           type: number
           minimum: 1
           description: アカウントの識別子
-        name:
-          type: string
-          description: アカウント名
         openIdProviders:
           type: array
           items:
@@ -810,7 +803,6 @@ components:
       additionalProperties: false
       required:
         - id
-        - name
         - openIdProviders
     OpenIdProvider:
       title: OpenIdProvider
