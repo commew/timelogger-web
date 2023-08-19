@@ -82,8 +82,6 @@ export interface components {
     Account: {
       /** @description アカウントの識別子 */
       id: number;
-      /** @description アカウント名 */
-      name: string;
       openIdProviders: (components["schemas"]["OpenIdProvider"])[];
     };
     /**
