@@ -1,11 +1,7 @@
 import type { FC } from 'react';
 import { Box, Button, createStyles, Flex, Group, Text } from '@mantine/core';
-import {
-  IconPlayerPause,
-  IconHome,
-  IconSquare,
-  IconPlayerPlay,
-} from '@tabler/icons-react';
+import { IconPlayerPause, IconHome, IconPlayerPlay } from '@tabler/icons-react';
+import { CompleteTaskButton } from '../CompleteTaskButton/CompleteTaskButton';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -102,23 +98,7 @@ export const MeasuringTaskItem: FC<Props> = ({
             </Text>
           </Button>
         )}
-        <Button
-          leftIcon={
-            <IconSquare
-              size="1rem"
-              color={theme.colors.dark[6]}
-              stroke={2.75}
-            />
-          }
-          color="gray.4"
-          className={classes.button}
-          styles={{ leftIcon: { marginRight: '0.5rem' } }}
-          aria-label="COMPLETE"
-        >
-          <Text color="dark.6" fw={700} fz="xs">
-            終了
-          </Text>
-        </Button>
+        <CompleteTaskButton taskId={1} />
       </Group>
     </Flex>
   );
