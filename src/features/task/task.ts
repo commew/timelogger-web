@@ -2,6 +2,7 @@ import { z } from 'zod';
 import type { components } from '@/openapi/schema';
 
 type CreateTaskDto = {
+  taskGroupId: number;
   taskCategoryId: number;
   status: 'recording';
   startAt: string;
@@ -9,6 +10,7 @@ type CreateTaskDto = {
 };
 
 type NextApiRequestBodyOfCreateTaskDto = {
+  taskGroupId: number;
   taskCategoryId: number;
   status: 'recording';
   startAt: string;
@@ -65,6 +67,7 @@ const taskSchema = z.object({
   startAt: z.string(),
   endAt: z.string(),
   duration: z.number(),
+  taskGroupId: z.number(),
   taskCategoryId: z.number(),
 });
 
@@ -81,6 +84,7 @@ const pendingTaskSchema = taskSchema.extend({
 const pendingTasksSchema = z.array(pendingTaskSchema);
 
 const nextApiRequestBodyOfCreateTaskDtoSchema = z.object({
+  taskGroupId: z.number(),
   taskCategoryId: z.number(),
   status: z.literal('recording'),
   startAt: z.string(),
