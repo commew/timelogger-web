@@ -18,6 +18,7 @@ export const Default: Story = {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
       {
@@ -26,6 +27,7 @@ export const Default: Story = {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
       {
@@ -34,6 +36,7 @@ export const Default: Story = {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
     ],
@@ -44,6 +47,7 @@ export const Default: Story = {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
       {
@@ -52,6 +56,7 @@ export const Default: Story = {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
       {
@@ -60,6 +65,7 @@ export const Default: Story = {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
     ],
