@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Box, Stack, Title, createStyles } from '@mantine/core';
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
-import { MeasuringTaskItem, StoppedTaskItem } from '@/components';
+import { TaskItem } from '@/components';
 import type { PendingTask, TaskRecording } from '@/features';
 import { DefaultLayout } from '@/layouts';
 
@@ -42,12 +42,12 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
         {tasksRecording.length > 0 ? (
           tasksRecording.map((taskRecording, index) => {
             return (
-              <MeasuringTaskItem
+              <TaskItem
                 key={index}
                 // TODO: カテゴリー名とカテゴリーグループ名を取得する処理を実装する
                 categoryName={'Category'}
                 categoryGroupName={'Category Group'}
-                isMeasuring={true}
+                status={taskRecording.status}
               />
             );
           })
@@ -68,12 +68,12 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
         {pendingTasks.length > 0 ? (
           pendingTasks.map((pendingTask, index) => {
             return (
-              <StoppedTaskItem
+              <TaskItem
                 key={index}
                 // TODO: カテゴリー名とカテゴリーグループ名を取得する処理を実装する
                 categoryName={'Category'}
                 categoryGroupName={'Category Group'}
-                isMeasuring={false}
+                status={pendingTask.status}
               />
             );
           })
