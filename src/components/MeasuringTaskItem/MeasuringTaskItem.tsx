@@ -1,7 +1,11 @@
 import type { FC } from 'react';
-import { Box, Button, createStyles, Flex, Group, Text } from '@mantine/core';
-import { IconPlayerPause, IconHome, IconPlayerPlay } from '@tabler/icons-react';
-import { CompleteTaskButton } from '../CompleteTaskButton/CompleteTaskButton';
+import { Box, createStyles, Flex, Group, Text } from '@mantine/core';
+import { IconHome } from '@tabler/icons-react';
+import {
+  StopTaskButton,
+  StartTaskButton,
+  CompleteTaskButton,
+} from '@/components';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -62,41 +66,9 @@ export const MeasuringTaskItem: FC<Props> = ({
 
       <Group style={{ alignSelf: 'flex-end' }}>
         {isMeasuring ? (
-          <Button
-            leftIcon={
-              <IconPlayerPause
-                size="1.25rem"
-                color={theme.colors.gray[0]}
-                stroke={2.75}
-              />
-            }
-            color="indigo.6"
-            className={classes.button}
-            styles={{ leftIcon: { marginRight: '0.5rem' } }}
-            aria-label="STOP"
-          >
-            <Text color="gray.0" fz="xs" fw={700}>
-              停止
-            </Text>
-          </Button>
+          <StopTaskButton taskId={1} />
         ) : (
-          <Button
-            leftIcon={
-              <IconPlayerPlay
-                size="1.25rem"
-                color={theme.colors.gray[0]}
-                stroke={2.75}
-              />
-            }
-            color="red.6"
-            className={classes.button}
-            styles={{ leftIcon: { marginRight: '0.5rem' } }}
-            aria-label="START"
-          >
-            <Text color="gray.0" fz="xs" fw={700}>
-              開始
-            </Text>
-          </Button>
+          <StartTaskButton taskId={1} />
         )}
         <CompleteTaskButton taskId={1} />
       </Group>
