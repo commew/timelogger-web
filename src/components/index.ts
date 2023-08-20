@@ -7,6 +7,7 @@ export { SideBar } from './SideBar';
 export { TaskMeasurementCategoryButton } from './TaskMeasurementCategoryButton';
 export { MeasuringTaskItem } from './MeasuringTaskItem';
 export { StoppedTaskItem } from './StoppedTaskItem';
+export { TaskItem } from './TaskItem';
 export { CompleteTaskButton } from './CompleteTaskButton';
 export { StopTaskButton } from './StopTaskButton';
 export { StartTaskButton } from './StartTaskButton';
