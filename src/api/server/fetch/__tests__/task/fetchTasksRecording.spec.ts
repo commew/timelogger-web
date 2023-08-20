@@ -56,6 +56,7 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
       {
@@ -64,6 +65,7 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
       {
@@ -72,6 +74,7 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
         startAt: '2019-08-24T14:15:22Z',
         endAt: '2019-08-24T18:15:22Z',
         duration: 14400,
+        taskGroupId: 1,
         taskCategoryId: 1,
       },
     ];
@@ -142,11 +145,11 @@ describe('src/api/client/fetch/task.ts fetchTasksRecording TestCases', () => {
   });
 
   it.each`
-    arg                                                                                                                                                                                                                                                                         | expected
-    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]}                                                                                                                                     | ${true}
-    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }, { id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]} | ${true}
-    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }, { id: 1, status: 'pending', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskCategoryId: 1 }]}   | ${false}
-    ${[]}                                                                                                                                                                                                                                                                       | ${true}
+    arg                                                                                                                                                                                                                                                                                                         | expected
+    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskGroupId: 1, taskCategoryId: 1 }]}                                                                                                                                                     | ${true}
+    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskGroupId: 1, taskCategoryId: 1 }, { id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskGroupId: 1, taskCategoryId: 1 }]} | ${true}
+    ${[{ id: 1, status: 'recording', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskGroupId: 1, taskCategoryId: 1 }, { id: 1, status: 'pending', startAt: '2019-08-24T14:15:22Z', endAt: '2019-08-24T18:15:22Z', duration: 14400, taskGroupId: 1, taskCategoryId: 1 }]}   | ${false}
+    ${[]}                                                                                                                                                                                                                                                                                                       | ${true}
   `(
     'should returns $expected when the input is $arg',
     ({ arg, expected }: TestTable) => {
