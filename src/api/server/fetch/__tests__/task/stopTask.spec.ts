@@ -47,6 +47,7 @@ describe('src/api/client/fetch/task.ts stopTask TestCases', () => {
       startAt: '2019-08-24T14:15:22Z',
       endAt: '2019-08-24T16:15:22Z',
       duration: 7200,
+      taskGroupId: 1,
       taskCategoryId: 1,
     };
 

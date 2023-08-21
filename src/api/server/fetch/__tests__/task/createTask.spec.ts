@@ -35,6 +35,7 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
 
   it('should be able to create a task', async () => {
     const createdTask = await createTask({
+      taskGroupId: 1,
       taskCategoryId: 1,
       status: 'recording',
       startAt: '2019-08-24T14:15:22Z',
@@ -47,6 +48,7 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
       startAt: '2019-08-24T14:15:22Z',
       endAt: '0000-00-00T00:00:00Z',
       duration: 0,
+      taskGroupId: 1,
       taskCategoryId: 1,
     };
 
@@ -59,6 +61,7 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
     );
 
     const dto = {
+      taskGroupId: 1,
       taskCategoryId: 1,
       status: 'recording',
       startAt: '2019-08-24T14:15:22Z',
@@ -74,6 +77,7 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
     );
 
     const dto = {
+      taskGroupId: 1,
       taskCategoryId: 1,
       status: 'recording',
       startAt: '2019-08-24T14:15:22Z',

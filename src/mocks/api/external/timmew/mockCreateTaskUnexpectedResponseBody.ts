@@ -18,6 +18,7 @@ export const mockCreateTaskUnexpectedResponseBody: ResponseResolver<
       startAt: null,
       endAt: null,
       duration: null,
+      taskGroupId: null,
       taskCategoryId: null,
     })
   );

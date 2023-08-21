@@ -20,11 +20,12 @@ import {
 import { type operations } from '@/openapi/schema';
 
 export const createTask: CreateTask = async (dto) => {
-  const { taskCategoryId, status, startAt, appToken } = dto;
+  const { taskGroupId, taskCategoryId, status, startAt, appToken } = dto;
 
   const requestBody: operations['postTasks']['requestBody'] = {
     content: {
       'application/json': {
+        taskGroupId,
         taskCategoryId,
         status,
         startAt,

@@ -180,6 +180,9 @@ export interface components {
       endAt: string;
       /** @description タスクの実行時間（秒） */
       duration: number;
+      /** @description TaskGroup のID */
+      taskGroupId: number;
+      /** @description TaskCategory のID */
       taskCategoryId: number;
     };
   };
@@ -368,6 +371,7 @@ export interface operations {
     requestBody?: {
       content: {
         "application/json": {
+          taskGroupId: number;
           taskCategoryId: number;
           /**
            * @default recording 
