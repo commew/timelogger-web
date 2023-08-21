@@ -6,6 +6,7 @@ import {
   StartTaskButton,
   CompleteTaskButton,
 } from '@/components';
+import { ExhaustiveError } from '@/features';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -36,6 +37,19 @@ export const TaskItem: FC<Props> = ({
 }) => {
   const { classes, theme } = useStyles();
 
+  const renderChangeStatusButton = () => {
+    switch (status) {
+      case 'recording':
+        return <StopTaskButton taskId={1} />;
+      case 'pending':
+        return <StartTaskButton taskId={1} />;
+      case 'completed':
+        return;
+      default:
+        throw new ExhaustiveError(status);
+    }
+  };
+
   return (
     <Flex className={classes.task_item}>
       <Flex
@@ -65,13 +79,7 @@ export const TaskItem: FC<Props> = ({
       </Flex>
 
       <Group style={{ alignSelf: 'flex-end' }}>
-        {status === 'recording' ? (
-          <StopTaskButton taskId={1} />
-        ) : status === 'pending' ? (
-          <StartTaskButton taskId={1} />
-        ) : (
-          ''
-        )}
+        {renderChangeStatusButton()}
         <CompleteTaskButton taskId={1} />
       </Group>
     </Flex>
