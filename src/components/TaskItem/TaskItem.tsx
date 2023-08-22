@@ -1,7 +1,12 @@
 import type { FC } from 'react';
-import { Box, Button, createStyles, Flex, Group, Text } from '@mantine/core';
-import { IconPlayerPause, IconHome, IconPlayerPlay } from '@tabler/icons-react';
-import { CompleteTaskButton } from '../CompleteTaskButton/CompleteTaskButton';
+import { Box, createStyles, Flex, Group, Text } from '@mantine/core';
+import { IconHome } from '@tabler/icons-react';
+import {
+  StopTaskButton,
+  StartTaskButton,
+  CompleteTaskButton,
+} from '@/components';
+import { ExhaustiveError } from '@/features';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -22,15 +27,28 @@ const useStyles = createStyles((theme) => ({
 type Props = {
   categoryName: string;
   categoryGroupName: string;
-  isMeasuring: boolean;
+  status: 'recording' | 'pending' | 'completed';
 };
 
-export const MeasuringTaskItem: FC<Props> = ({
+export const TaskItem: FC<Props> = ({
   categoryName,
   categoryGroupName,
-  isMeasuring,
+  status,
 }) => {
   const { classes, theme } = useStyles();
+
+  const renderChangeStatusButton = () => {
+    switch (status) {
+      case 'recording':
+        return <StopTaskButton taskId={1} />;
+      case 'pending':
+        return <StartTaskButton taskId={1} />;
+      case 'completed':
+        return;
+      default:
+        throw new ExhaustiveError(status);
+    }
+  };
 
   return (
     <Flex className={classes.task_item}>
@@ -61,43 +79,7 @@ export const MeasuringTaskItem: FC<Props> = ({
       </Flex>
 
       <Group style={{ alignSelf: 'flex-end' }}>
-        {isMeasuring ? (
-          <Button
-            leftIcon={
-              <IconPlayerPause
-                size="1.25rem"
-                color={theme.colors.gray[0]}
-                stroke={2.75}
-              />
-            }
-            color="indigo.6"
-            className={classes.button}
-            styles={{ leftIcon: { marginRight: '0.5rem' } }}
-            aria-label="STOP"
-          >
-            <Text color="gray.0" fz="xs" fw={700}>
-              停止
-            </Text>
-          </Button>
-        ) : (
-          <Button
-            leftIcon={
-              <IconPlayerPlay
-                size="1.25rem"
-                color={theme.colors.gray[0]}
-                stroke={2.75}
-              />
-            }
-            color="red.6"
-            className={classes.button}
-            styles={{ leftIcon: { marginRight: '0.5rem' } }}
-            aria-label="START"
-          >
-            <Text color="gray.0" fz="xs" fw={700}>
-              開始
-            </Text>
-          </Button>
-        )}
+        {renderChangeStatusButton()}
         <CompleteTaskButton taskId={1} />
       </Group>
     </Flex>
