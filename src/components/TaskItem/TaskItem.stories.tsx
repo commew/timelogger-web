@@ -13,6 +13,7 @@ export const Default: Story = {
   args: {
     categoryName: 'カテゴリ名',
     categoryGroupName: 'グループ名',
+    duration: 14400,
     status: 'recording',
   },
 };
@@ -21,6 +22,7 @@ export const Pending: Story = {
   args: {
     categoryName: 'カテゴリ名',
     categoryGroupName: 'グループ名',
+    duration: 14400,
     status: 'pending',
   },
 };
