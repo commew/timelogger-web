@@ -7,6 +7,7 @@ import {
   CompleteTaskButton,
 } from '@/components';
 import { ExhaustiveError } from '@/features';
+import { useTaskTimer } from '@/hooks';
 
 const useStyles = createStyles((theme) => ({
   button: {
@@ -27,15 +28,19 @@ const useStyles = createStyles((theme) => ({
 type Props = {
   categoryName: string;
   categoryGroupName: string;
+  duration: number;
   status: 'recording' | 'pending' | 'completed';
 };
 
 export const TaskItem: FC<Props> = ({
   categoryName,
   categoryGroupName,
+  duration,
   status,
 }) => {
   const { classes, theme } = useStyles();
+
+  const time = useTaskTimer(duration, status);
 
   const renderChangeStatusButton = () => {
     switch (status) {
@@ -73,7 +78,7 @@ export const TaskItem: FC<Props> = ({
         <Box>
           <Text fz="sm">計測時間</Text>
           <Text color="dark.6" fz={theme.headings.sizes.h1.fontSize} fw={700}>
-            00:00:10 {/* TODO: ここは動的に値を変更できるようにする */}
+            {time}
           </Text>
         </Box>
       </Flex>

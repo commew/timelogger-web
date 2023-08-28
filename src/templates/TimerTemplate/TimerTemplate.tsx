@@ -47,6 +47,7 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
                 // TODO: カテゴリー名とカテゴリーグループ名を取得する処理を実装する
                 categoryName={'Category'}
                 categoryGroupName={'Category Group'}
+                duration={taskRecording.duration}
                 status={taskRecording.status}
               />
             );
@@ -73,6 +74,7 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
                 // TODO: カテゴリー名とカテゴリーグループ名を取得する処理を実装する
                 categoryName={'Category'}
                 categoryGroupName={'Category Group'}
+                duration={pendingTask.duration}
                 status={pendingTask.status}
               />
             );
