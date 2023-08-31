@@ -151,7 +151,7 @@ describe('src/api/server/fetch/taskGroup.ts fetchTaskGroups TestCases', () => {
     ${[{ id: 1, name: '仕事', categories: [{ id: 1, name: 'テスト' }, { id: 2, name: '設計' }] }]} | ${true}
     ${[{ id: 1, name: '仕事' }]}                                                                   | ${false}
     ${[{ id: 1, name: '仕事', categories: [{}] }]}                                                 | ${false}
-    ${[{ id: 1, name: '仕事', categories: [] }]}                                                   | ${true}
+    ${[{ id: 1, name: '仕事', categories: [] }]}                                                   | ${false}
     ${[]}                                                                                          | ${true}
   `(
     'should returns $expected when the input is $arg',

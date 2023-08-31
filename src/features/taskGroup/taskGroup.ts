@@ -18,7 +18,7 @@ const taskCategorySchema = z.object({
 const taskGroupSchema = z.object({
   id: z.number(),
   name: z.string(),
-  categories: z.array(taskCategorySchema),
+  categories: z.array(taskCategorySchema).nonempty(),
 });
 
 const taskGroupsSchema = z.array(taskGroupSchema);
