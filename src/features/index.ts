@@ -37,7 +37,11 @@ export type {
   FetchTasksRecording,
   FetchPendingTasks,
 } from './task';
-export { isTaskGroups } from './taskGroup';
+export {
+  isTaskGroups,
+  findTaskGroupById,
+  findTaskCategoryById,
+} from './taskGroup';
 export type { TaskGroup } from './taskGroup';
 export {
   InvalidResponseBodyError,
