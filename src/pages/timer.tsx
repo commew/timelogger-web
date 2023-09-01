@@ -4,21 +4,28 @@ import {
   fetchPendingTasks,
   fetchTasksRecording,
 } from '@/api/server/fetch/task';
-import type { PendingTask, TaskRecording } from '@/features';
+import type { PendingTask, TaskGroup, TaskRecording } from '@/features';
 import { appUrls } from '@/features';
 
 import { TimerTemplate } from '@/templates';
+import { fetchTaskGroups } from '../api/server/fetch/taskGroup';
 
 type Props = {
   tasksRecording: TaskRecording[];
   pendingTasks: PendingTask[];
+  taskGroups: TaskGroup[];
 };
 
-const TimerPage: NextPage<Props> = ({ tasksRecording, pendingTasks }) => {
+const TimerPage: NextPage<Props> = ({
+  tasksRecording,
+  pendingTasks,
+  taskGroups,
+}) => {
   return (
     <TimerTemplate
       tasksRecording={tasksRecording}
       pendingTasks={pendingTasks}
+      taskGroups={taskGroups}
     />
   );
 };
@@ -41,8 +48,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const fetchPendingTasksDto = { appToken: session.appToken };
   const pendingTasks = await fetchPendingTasks(fetchPendingTasksDto);
 
+  const fetchTaskGroupsDto = { appToken: session.appToken };
+  const taskGroups = await fetchTaskGroups(fetchTaskGroupsDto);
+
   return {
-    props: { tasksRecording, pendingTasks },
+    props: { tasksRecording, pendingTasks, taskGroups },
   };
 };
 
