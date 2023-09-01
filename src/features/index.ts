@@ -37,6 +37,8 @@ export type {
   FetchTasksRecording,
   FetchPendingTasks,
 } from './task';
+export { isTaskGroups } from './taskGroup';
+export type { TaskGroup } from './taskGroup';
 export {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
