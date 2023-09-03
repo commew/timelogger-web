@@ -41,6 +41,8 @@ export {
   isTaskGroups,
   findTaskGroupById,
   findTaskCategoryById,
+  TaskCategoryNotFoundError,
+  TaskGroupNotFoundError,
 } from './taskGroup';
 export type { TaskGroup } from './taskGroup';
 export {
