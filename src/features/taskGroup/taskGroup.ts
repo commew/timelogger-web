@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TaskCategoryNotFoundError, TaskGroupNotFoundError } from '@/features';
 import type { components } from '@/openapi/schema';
 
 type TaskCategory = components['schemas']['TaskCategory'];
@@ -33,10 +34,14 @@ export type FetchTaskGroups = (dto: FetchTaskGroupsDto) => Promise<TaskGroup[]>;
 export const findTaskGroupById = (
   taskGroups: TaskGroup[],
   taskGroupId: number
-): TaskGroup | undefined => {
+): TaskGroup => {
   const taskGroup = taskGroups.find((taskGroup) => {
     return taskGroupId === taskGroup.id;
   });
+
+  if (!taskGroup) {
+    throw new TaskGroupNotFoundError();
+  }
 
   return taskGroup;
 };
@@ -44,12 +49,16 @@ export const findTaskGroupById = (
 export const findTaskCategoryById = (
   taskGroups: TaskGroup[],
   taskCategoryId: number
-): TaskCategory | undefined => {
+): TaskCategory => {
   const taskCategory = taskGroups
     .flatMap((taskGroup) => taskGroup.categories)
     .find((taskCategory) => {
       return taskCategoryId === taskCategory.id;
     });
+
+  if (!taskCategory) {
+    throw new TaskCategoryNotFoundError();
+  }
 
   return taskCategory;
 };

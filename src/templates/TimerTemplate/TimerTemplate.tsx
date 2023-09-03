@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Box, Stack, Title, createStyles } from '@mantine/core';
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
+import { useErrorHandler } from 'react-error-boundary';
 import { TaskItem } from '@/components';
 import {
   findTaskCategoryById,
@@ -37,17 +38,26 @@ export const TimerTemplate: FC<Props> = ({
   taskGroups,
 }) => {
   const { classes, theme } = useStyles();
+  const handleError = useErrorHandler();
 
-  const getTaskGroupName = (taskGroupId: number): string => {
-    const taskGroup = findTaskCategoryById(taskGroups, taskGroupId);
+  const getTaskGroupName = (taskGroupId: number) => {
+    try {
+      const taskGroup = findTaskCategoryById(taskGroups, taskGroupId);
 
-    return taskGroup ? taskGroup.name : 'No Task Group';
+      return taskGroup.name;
+    } catch (error) {
+      handleError(error);
+    }
   };
 
-  const getTaskCategoryName = (taskCategoryId: number): string => {
-    const taskCategory = findTaskCategoryById(taskGroups, taskCategoryId);
+  const getTaskCategoryName = (taskCategoryId: number) => {
+    try {
+      const taskCategory = findTaskCategoryById(taskGroups, taskCategoryId);
 
-    return taskCategory ? taskCategory.name : 'No Task Category';
+      return taskCategory.name;
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (
@@ -66,8 +76,12 @@ export const TimerTemplate: FC<Props> = ({
             return (
               <TaskItem
                 key={index}
-                categoryName={getTaskCategoryName(taskRecording.taskCategoryId)}
-                categoryGroupName={getTaskGroupName(taskRecording.taskGroupId)}
+                categoryName={
+                  getTaskCategoryName(taskRecording.taskCategoryId) ?? ''
+                }
+                categoryGroupName={
+                  getTaskGroupName(taskRecording.taskGroupId) ?? ''
+                }
                 duration={taskRecording.duration}
                 status={taskRecording.status}
               />
@@ -92,8 +106,12 @@ export const TimerTemplate: FC<Props> = ({
             return (
               <TaskItem
                 key={index}
-                categoryName={getTaskCategoryName(pendingTask.taskCategoryId)}
-                categoryGroupName={getTaskGroupName(pendingTask.taskGroupId)}
+                categoryName={
+                  getTaskCategoryName(pendingTask.taskCategoryId) ?? ''
+                }
+                categoryGroupName={
+                  getTaskGroupName(pendingTask.taskGroupId) ?? ''
+                }
                 duration={pendingTask.duration}
                 status={pendingTask.status}
               />
