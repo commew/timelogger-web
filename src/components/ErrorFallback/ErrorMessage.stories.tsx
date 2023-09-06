@@ -1,5 +1,9 @@
 import type { ComponentStoryObj } from '@storybook/react';
-import { GitHubAccountNotFoundError } from '@/features';
+import {
+  GitHubAccountNotFoundError,
+  TaskCategoryNotFoundError,
+  TaskGroupNotFoundError,
+} from '@/features';
 import { ErrorMessage } from './ErrorMessage';
 
 const story = {
@@ -19,5 +23,17 @@ export const Default: Story = {
 export const ShowGitHubAccountNotFoundError: Story = {
   args: {
     error: new GitHubAccountNotFoundError(),
+  },
+};
+
+export const ShowTaskCategoryNotFoundError: Story = {
+  args: {
+    error: new TaskCategoryNotFoundError(),
+  },
+};
+
+export const ShowTaskGroupNotFoundError: Story = {
+  args: {
+    error: new TaskGroupNotFoundError(),
   },
 };

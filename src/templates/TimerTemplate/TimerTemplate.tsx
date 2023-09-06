@@ -1,8 +1,14 @@
 import type { FC } from 'react';
 import { Box, Stack, Title, createStyles } from '@mantine/core';
 import { IconPlayerPause, IconPlayerPlay } from '@tabler/icons-react';
+import { useErrorHandler } from 'react-error-boundary';
 import { TaskItem } from '@/components';
-import type { PendingTask, TaskRecording } from '@/features';
+import {
+  findTaskCategoryById,
+  type PendingTask,
+  type TaskGroup,
+  type TaskRecording,
+} from '@/features';
 import { DefaultLayout } from '@/layouts';
 
 const useStyles = createStyles((theme) => ({
@@ -23,10 +29,36 @@ const useStyles = createStyles((theme) => ({
 type Props = {
   tasksRecording: TaskRecording[];
   pendingTasks: PendingTask[];
+  taskGroups: TaskGroup[];
 };
 
-export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
+export const TimerTemplate: FC<Props> = ({
+  tasksRecording,
+  pendingTasks,
+  taskGroups,
+}) => {
   const { classes, theme } = useStyles();
+  const handleError = useErrorHandler();
+
+  const getTaskGroupName = (taskGroupId: number) => {
+    try {
+      const taskGroup = findTaskCategoryById(taskGroups, taskGroupId);
+
+      return taskGroup.name;
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const getTaskCategoryName = (taskCategoryId: number) => {
+    try {
+      const taskCategory = findTaskCategoryById(taskGroups, taskCategoryId);
+
+      return taskCategory.name;
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   return (
     <DefaultLayout>
@@ -44,9 +76,12 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
             return (
               <TaskItem
                 key={index}
-                // TODO: カテゴリー名とカテゴリーグループ名を取得する処理を実装する
-                categoryName={'Category'}
-                categoryGroupName={'Category Group'}
+                categoryName={
+                  getTaskCategoryName(taskRecording.taskCategoryId) ?? ''
+                }
+                categoryGroupName={
+                  getTaskGroupName(taskRecording.taskGroupId) ?? ''
+                }
                 duration={taskRecording.duration}
                 status={taskRecording.status}
               />
@@ -71,9 +106,12 @@ export const TimerTemplate: FC<Props> = ({ tasksRecording, pendingTasks }) => {
             return (
               <TaskItem
                 key={index}
-                // TODO: カテゴリー名とカテゴリーグループ名を取得する処理を実装する
-                categoryName={'Category'}
-                categoryGroupName={'Category Group'}
+                categoryName={
+                  getTaskCategoryName(pendingTask.taskCategoryId) ?? ''
+                }
+                categoryGroupName={
+                  getTaskGroupName(pendingTask.taskGroupId) ?? ''
+                }
                 duration={pendingTask.duration}
                 status={pendingTask.status}
               />
