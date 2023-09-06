@@ -593,6 +593,93 @@ paths:
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
       security:
         - Authorization: []
+  '/tasks/{taskId}/start':
+    parameters:
+      - schema:
+          type: integer
+        name: taskId
+        in: path
+        required: true
+    patch:
+      summary: タスクの記録を再開する
+      operationId: patchTaskStartById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              examples:
+                ExampleSuccess:
+                  value:
+                    id: 1
+                    status: recording
+                    startAt: '2019-08-24T14:15:22Z'
+                    endAt: '2019-08-24T18:15:22Z'
+                    duration: 14400
+                    taskGroupId: 1
+                    taskCategoryId: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInvalidRequest:
+                  value:
+                    type: INVALID_STATUS_TRANSITION
+                    title: Invalid status transition.
+                    detail: Status is already recording.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnAuthenticated:
+                  value:
+                    type: UNAUTHENTICATED
+                    title: Please set appToken in Authorization Header.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleUnauthorized:
+                  value:
+                    type: UNAUTHORIZED
+                    title: Account is not authorized.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              examples:
+                ExampleInternalServerError:
+                  value:
+                    type: INTERNAL_SERVER_ERROR
+                    title: Internal Server Error.
+      description: 停止状態のタスクの記録を再開するAPI
+      security:
+        - Authorization: []
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer + 半角スペース + JWT形式のトークンで指定する。
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Request-Id
+          description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
   /tasks/recording:
     get:
       summary: 記録中のタスク一覧を取得する
