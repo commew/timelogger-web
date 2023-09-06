@@ -696,6 +696,8 @@ paths:
                 value:
                   startAt: '2019-08-24T14:15:22Z'
         description: ''
+      tags:
+        - tasks
   /tasks/recording:
     get:
       summary: 記録中のタスク一覧を取得する
