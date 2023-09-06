@@ -549,6 +549,14 @@ export interface operations {
         taskId: number;
       };
     };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /** Format: date-time */
+          startAt: string;
+        };
+      };
+    };
     responses: {
       /** @description OK */
       200: {

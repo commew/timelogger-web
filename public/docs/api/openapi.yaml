@@ -680,6 +680,22 @@ paths:
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startAt:
+                  type: string
+                  format: date-time
+              required:
+                - startAt
+            examples:
+              Example 1:
+                value:
+                  startAt: '2019-08-24T14:15:22Z'
+        description: ''
   /tasks/recording:
     get:
       summary: 記録中のタスク一覧を取得する
