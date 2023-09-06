@@ -55,6 +55,18 @@ export interface paths {
       };
     };
   };
+  "/tasks/{taskId}/start": {
+    /**
+     * タスクの記録を再開する 
+     * @description 停止状態のタスクの記録を再開するAPI
+     */
+    patch: operations["patchTaskStartById"];
+    parameters: {
+      path: {
+        taskId: number;
+      };
+    };
+  };
   "/tasks/recording": {
     /**
      * 記録中のタスク一覧を取得する 
@@ -477,6 +489,55 @@ export interface operations {
    * @description タスクの記録を終了するAPI
    */
   patchTaskCompleteById: {
+    parameters: {
+      header: {
+        /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
+        Authorization: string;
+        /** @description ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する */
+        "Request-Id"?: string;
+      };
+      path: {
+        taskId: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Task"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["ProblemDetails"];
+        };
+      };
+    };
+  };
+  /**
+   * タスクの記録を再開する 
+   * @description 停止状態のタスクの記録を再開するAPI
+   */
+  patchTaskStartById: {
     parameters: {
       header: {
         /** @description Bearer + 半角スペース + JWT形式のトークンで指定する。 */
