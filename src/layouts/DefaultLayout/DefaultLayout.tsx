@@ -4,10 +4,12 @@ import Head from 'next/head';
 import { signOut } from 'next-auth/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HeaderMenu, TitleText, HeaderNavigation, SideBar } from '@/components';
+import type { TaskGroup } from '@/features';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
   children: ReactNode;
+  taskGroups: TaskGroup[];
 };
 
 const onError = (error: Error, info: { componentStack: string }) => {
@@ -35,7 +37,7 @@ const handleLogout = async (event: MouseEvent<HTMLButtonElement>) => {
 };
 
 // eslint-disable-next-line max-lines-per-function
-export const DefaultLayout: FC<Props> = ({ children }) => {
+export const DefaultLayout: FC<Props> = ({ children, taskGroups }) => {
   const { classes } = useStyles();
 
   return (
@@ -50,7 +52,7 @@ export const DefaultLayout: FC<Props> = ({ children }) => {
       <HeaderNavigation handleLogout={handleLogout}></HeaderNavigation>
       <Container size="xl">
         <div className={classes.layoutWrapper}>
-          <SideBar></SideBar>
+          <SideBar taskGroups={taskGroups} />
           <div className={classes.mainContent}>
             <TitleText title={title} />
             <HeaderMenu />
