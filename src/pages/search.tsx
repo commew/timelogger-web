@@ -1,10 +1,16 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import { fetchTaskGroups } from '@/api/server/fetch/taskGroup';
 import { appUrls } from '@/features';
+import type { TaskGroup } from '@/features';
 import { GitHubAccountSearchTemplate } from '@/templates';
 
-const SearchPage: NextPage = () => {
-  return <GitHubAccountSearchTemplate />;
+type Props = {
+  taskGroups: TaskGroup[];
+};
+
+const SearchPage: NextPage<Props> = ({ taskGroups }) => {
+  return <GitHubAccountSearchTemplate taskGroups={taskGroups} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -18,9 +24,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
+  const fetchTaskGroupsDto = { appToken: session.appToken };
+  const taskGroups = await fetchTaskGroups(fetchTaskGroupsDto);
 
   return {
-    props: {},
+    props: { taskGroups },
   };
 };
 
