@@ -9,6 +9,57 @@ export default story;
 
 type Story = ComponentStoryObj<typeof TimerTemplate>;
 
+const taskGroups = [
+  {
+    id: 1,
+    name: '仕事',
+    categories: [
+      {
+        id: 1,
+        name: '会議',
+      },
+      {
+        id: 2,
+        name: '資料作成',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: '学習',
+    categories: [
+      {
+        id: 3,
+        name: 'TOEIC',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: '趣味',
+    categories: [
+      {
+        id: 4,
+        name: '散歩',
+      },
+      {
+        id: 5,
+        name: '読書',
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'グループ未分類',
+    categories: [
+      {
+        id: 6,
+        name: '移動・外出',
+      },
+    ],
+  },
+];
+
 export const Default: Story = {
   args: {
     tasksRecording: [
@@ -69,56 +120,7 @@ export const Default: Story = {
         taskCategoryId: 1,
       },
     ],
-    taskGroups: [
-      {
-        id: 1,
-        name: '仕事',
-        categories: [
-          {
-            id: 1,
-            name: '会議',
-          },
-          {
-            id: 2,
-            name: '資料作成',
-          },
-        ],
-      },
-      {
-        id: 2,
-        name: '学習',
-        categories: [
-          {
-            id: 3,
-            name: 'TOEIC',
-          },
-        ],
-      },
-      {
-        id: 3,
-        name: '趣味',
-        categories: [
-          {
-            id: 4,
-            name: '散歩',
-          },
-          {
-            id: 5,
-            name: '読書',
-          },
-        ],
-      },
-      {
-        id: 4,
-        name: 'グループ未分類',
-        categories: [
-          {
-            id: 6,
-            name: '移動・外出',
-          },
-        ],
-      },
-    ],
+    taskGroups,
   },
 };
 
@@ -126,5 +128,6 @@ export const NoTasks: Story = {
   args: {
     tasksRecording: [],
     pendingTasks: [],
+    taskGroups,
   },
 };
