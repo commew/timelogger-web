@@ -9,6 +9,7 @@ import {
   createStyles,
 } from '@mantine/core';
 import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';
+import type { TaskGroup } from '@/features';
 import { TaskMeasurementCategoryButton } from '../TaskMeasurementCategoryButton';
 
 const useStyles = createStyles((theme) => ({
@@ -36,44 +37,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-type Category = Readonly<{
-  id: number;
-  name: string;
-}>;
+type Props = {
+  taskGroups: TaskGroup[];
+};
 
-type CategoryGroup = Readonly<{
-  id: number;
-  name: string;
-  categories: Category[];
-}>;
-
-// ここがAPIのレスポンス結果に置き変わるイメージ。
-const mockGroups: CategoryGroup[] = [
-  {
-    id: 1,
-    name: '仕事',
-    categories: [
-      { id: 1, name: '会議' },
-      { id: 2, name: '資料作成' },
-    ],
-  },
-  { id: 2, name: '学習', categories: [{ id: 3, name: 'TOEIC' }] },
-  {
-    id: 3,
-    name: '趣味',
-    categories: [
-      { id: 4, name: '散歩' },
-      { id: 5, name: '読書' },
-    ],
-  },
-  {
-    id: 4,
-    name: 'グループ未分類',
-    categories: [{ id: 6, name: '移動・外出' }],
-  },
-];
-
-export const SideBar: FC = () => {
+export const SideBar: FC<Props> = ({ taskGroups }) => {
   const { classes, theme } = useStyles();
   const [opened, setOpened] = useState<Record<string, boolean>>({});
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronDown : IconChevronUp;
@@ -81,7 +49,7 @@ export const SideBar: FC = () => {
   return (
     <Navbar height={800} p="md" className={classes.navbar}>
       <Navbar.Section grow>
-        {mockGroups.map((group) => (
+        {taskGroups.map((group) => (
           <Group
             key={group.id}
             sx={{ rowGap: theme.spacing.xs, paddingBottom: theme.spacing.xs }}
@@ -123,8 +91,6 @@ export const SideBar: FC = () => {
             </Collapse>
           </Group>
         ))}
-        <TaskMeasurementCategoryButton name="カテゴリ名" />
-        <TaskMeasurementCategoryButton name="カテゴリ名" />
       </Navbar.Section>
     </Navbar>
   );
