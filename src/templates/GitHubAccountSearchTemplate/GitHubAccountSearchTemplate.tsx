@@ -1,10 +1,15 @@
 import type { FC } from 'react';
 import { GitHubAccountSearch } from '@/components';
+import type { TaskGroup } from '@/features';
 import { DefaultLayout } from '@/layouts';
 
-export const GitHubAccountSearchTemplate: FC = () => {
+type Props = {
+  taskGroups: TaskGroup[];
+};
+
+export const GitHubAccountSearchTemplate: FC<Props> = ({ taskGroups }) => {
   return (
-    <DefaultLayout>
+    <DefaultLayout taskGroups={taskGroups}>
       <GitHubAccountSearch />
     </DefaultLayout>
   );

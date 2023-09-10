@@ -61,7 +61,7 @@ export const TimerTemplate: FC<Props> = ({
   };
 
   return (
-    <DefaultLayout>
+    <DefaultLayout taskGroups={taskGroups}>
       <Title order={2} className={classes.measuringHead} mt={'2rem'}>
         <IconPlayerPlay
           size="1.25rem"
