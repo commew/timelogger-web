@@ -1,16 +1,8 @@
 import type { FC } from 'react';
 import { Alert } from '@mantine/core';
-import {
-  GitHubAccountNotFoundError,
-  TaskCategoryNotFoundError,
-  TaskGroupNotFoundError,
-} from '@/features';
+import { TaskCategoryNotFoundError, TaskGroupNotFoundError } from '@/features';
 
 const createDisplayErrorMessage = (error: Error) => {
-  if (error instanceof GitHubAccountNotFoundError) {
-    return 'GitHubアカウントは見つかりませんでした。';
-  }
-
   if (error instanceof TaskGroupNotFoundError) {
     return 'タスクグループが見つかりませんでした。';
   }
