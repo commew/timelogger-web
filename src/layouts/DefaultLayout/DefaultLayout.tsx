@@ -3,7 +3,7 @@ import { Container, createStyles } from '@mantine/core';
 import Head from 'next/head';
 import { signOut } from 'next-auth/react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { HeaderMenu, TitleText, HeaderNavigation, SideBar } from '@/components';
+import { TitleText, HeaderNavigation, SideBar } from '@/components';
 import type { TaskGroup } from '@/features';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
@@ -55,7 +55,6 @@ export const DefaultLayout: FC<Props> = ({ children, taskGroups }) => {
           <SideBar taskGroups={taskGroups} />
           <div className={classes.mainContent}>
             <TitleText title={title} />
-            <HeaderMenu />
             <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>
               {children}
             </ErrorBoundary>
