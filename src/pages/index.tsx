@@ -12,7 +12,10 @@ type Props = {
 const IndexPage: NextPage<Props> = ({ taskGroups }) => {
   return (
     <DefaultLayout taskGroups={taskGroups}>
-      <a href="https://github.com/commew/timelogger-web/issues/91">TODO 91のissue</a>でこのページは削除されLPの内容が表示されるようになります。
+      <a href="https://github.com/commew/timelogger-web/issues/91">
+        TODO 91のissue
+      </a>
+      でこのページは削除されLPの内容が表示されるようになります。
     </DefaultLayout>
   );
 };
