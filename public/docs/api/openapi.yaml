@@ -395,22 +395,16 @@ paths:
                   default: recording
                   example: recording
                   pattern: recording
-                startAt:
-                  type: string
-                  format: date-time
-                  example: '2019-08-24T14:15:22Z'
               required:
                 - taskGroupId
                 - taskCategoryId
                 - status
-                - startAt
             examples:
               Example 1:
                 value:
                   taskGroupId: 1
                   taskCategoryId: 1
                   status: recording
-                  startAt: '2019-08-24T14:15:22Z'
         description: ''
       security:
         - Authorization: []
@@ -680,22 +674,6 @@ paths:
           in: header
           name: Request-Id
           description: ユニークなID、リクエスト側からこれを指定した場合はレスポンス時にそのまま返ってくる、指定されない場合はAPI側で生成する
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                startAt:
-                  type: string
-                  format: date-time
-              required:
-                - startAt
-            examples:
-              Example 1:
-                value:
-                  startAt: '2019-08-24T14:15:22Z'
-        description: ''
       tags:
         - tasks
   /tasks/recording:
