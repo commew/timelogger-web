@@ -390,11 +390,6 @@ export interface operations {
            * @example recording
            */
           status: string;
-          /**
-           * Format: date-time 
-           * @example 2019-08-24T14:15:22Z
-           */
-          startAt: string;
         };
       };
     };
@@ -547,14 +542,6 @@ export interface operations {
       };
       path: {
         taskId: number;
-      };
-    };
-    requestBody?: {
-      content: {
-        "application/json": {
-          /** Format: date-time */
-          startAt: string;
-        };
       };
     };
     responses: {
