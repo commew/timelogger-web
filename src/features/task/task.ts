@@ -5,7 +5,6 @@ type CreateTaskDto = {
   taskGroupId: number;
   taskCategoryId: number;
   status: 'recording';
-  startAt: string;
   appToken: string;
 };
 
@@ -13,7 +12,6 @@ type NextApiRequestBodyOfCreateTaskDto = {
   taskGroupId: number;
   taskCategoryId: number;
   status: 'recording';
-  startAt: string;
 };
 
 type CreateTaskDtoFromClient = Omit<CreateTaskDto, 'appToken'>;
@@ -87,7 +85,6 @@ const nextApiRequestBodyOfCreateTaskDtoSchema = z.object({
   taskGroupId: z.number(),
   taskCategoryId: z.number(),
   status: z.literal('recording'),
-  startAt: z.string(),
 });
 
 const nextApiRequestBodyOfStopTaskDtoSchema = z.object({
