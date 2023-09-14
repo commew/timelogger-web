@@ -38,7 +38,6 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
       taskGroupId: 1,
       taskCategoryId: 1,
       status: 'recording',
-      startAt: '2019-08-24T14:15:22Z',
       appToken: mockAppToken,
     });
 
@@ -64,7 +63,6 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
       taskGroupId: 1,
       taskCategoryId: 1,
       status: 'recording',
-      startAt: '2019-08-24T14:15:22Z',
       appToken: mockAppToken,
     } as const;
 
@@ -80,7 +78,6 @@ describe('src/api/client/fetch/task.ts createTask TestCases', () => {
       taskGroupId: 1,
       taskCategoryId: 1,
       status: 'recording',
-      startAt: '2019-08-24T14:15:22Z',
       appToken: mockAppToken,
     } as const;
 
