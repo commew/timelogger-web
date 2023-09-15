@@ -6,6 +6,7 @@ import type {
   CompleteTask,
   FetchTasksRecording,
   FetchPendingTasks,
+  StartTask,
 } from '@/features';
 import {
   getBackendApiUrl,
@@ -43,6 +44,40 @@ export const createTask: CreateTask = async (dto) => {
   });
 
   if (response.status !== httpStatusCode.created) {
+    throw new UnexpectedFeatureError(
+      `failed to createTask. status: ${
+        response.status
+      }, body: ${await response.text()}`
+    );
+  }
+
+  const task = (await response.json()) as Task;
+  if (!isTask(task)) {
+    throw new InvalidResponseBodyError(
+      `responseBody is not in the expected format. body: ${JSON.stringify(
+        task
+      )}`
+    );
+  }
+
+  return task;
+};
+
+export const startTask: StartTask = async (dto) => {
+  const { taskId, appToken } = dto;
+
+  const response = await fetch(
+    getDynamicBackendApiUrl('startTask', `${taskId}`),
+    {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${appToken}`,
+        Prefer: 'code=200, example=ExampleSuccess',
+      },
+    }
+  );
+
+  if (response.status !== httpStatusCode.ok) {
     throw new UnexpectedFeatureError(
       `failed to createTask. status: ${
         response.status
