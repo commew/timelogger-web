@@ -30,6 +30,7 @@ export type {
   CreateTask,
   CreateTaskFromClient,
   StartTask,
+  StartTaskFromClient,
   StopTask,
   StopTaskFromClient,
   CompleteTask,
