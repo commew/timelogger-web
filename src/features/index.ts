@@ -18,6 +18,7 @@ export {
   isRecordingTasks,
   isPendingTasks,
   isNextApiRequestBodyOfCreateTaskDto,
+  isNextApiRequestBodyOfStartTaskDto,
   isNextApiRequestBodyOfStopTaskDto,
   isNextApiRequestBodyOfCompleteTaskDto,
 } from './task';
@@ -28,6 +29,7 @@ export type {
   Tasks,
   CreateTask,
   CreateTaskFromClient,
+  StartTask,
   StopTask,
   StopTaskFromClient,
   CompleteTask,
