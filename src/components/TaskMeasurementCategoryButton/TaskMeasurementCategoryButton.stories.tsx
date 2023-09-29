@@ -12,5 +12,7 @@ type Story = ComponentStoryObj<typeof TaskMeasurementCategoryButton>;
 export const Default: Story = {
   args: {
     name: 'カテゴリ名',
+    groupId: 1,
+    categoryId: 1,
   },
 };

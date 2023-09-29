@@ -84,6 +84,8 @@ export const SideBar: FC<Props> = ({ taskGroups }) => {
                 {group.categories.map((category) => (
                   <TaskMeasurementCategoryButton
                     key={category.id}
+                    groupId={group.id}
+                    categoryId={category.id}
                     name={category.name}
                   />
                 ))}

@@ -3,6 +3,7 @@ import { createStyles, Box } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
 import Image from 'next/image';
+import { createTask } from '@/api/client/fetch/task';
 import hoveredImageSrc from './hover.webp';
 
 const useStyles = createStyles((theme) => ({
@@ -26,15 +27,35 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type Props = {
+  groupId: number;
+  categoryId: number;
   name: string;
 };
 
-export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
+export const TaskMeasurementCategoryButton: FC<Props> = ({
+  groupId,
+  categoryId,
+  name,
+}) => {
   const { classes, theme } = useStyles();
   const { hovered, ref } = useHover();
 
+  const handleCreateTask = async () => {
+    const createdTask = await createTask({
+      taskGroupId: groupId,
+      taskCategoryId: categoryId,
+      status: 'recording',
+    });
+    console.log(createdTask); // TODO Issue 126で UI に反映する
+  };
+
   return (
-    <Box className={classes.button} ref={ref}>
+    <Box
+      className={classes.button}
+      ref={ref}
+      role="button"
+      onClick={handleCreateTask}
+    >
       <Box
         sx={{
           display: 'grid',
@@ -48,7 +69,6 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({ name }) => {
       </Box>
       {hovered ? (
         <Image
-          role="button"
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={hoveredImageSrc}
           alt={'タスクの計測を開始'}
