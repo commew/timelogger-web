@@ -141,10 +141,10 @@ export const isNextApiRequestBodyOfCompleteTaskDto = (
 ): value is NextApiRequestBodyOfCompleteTaskDto => {
   return nextApiRequestBodyOfCompleteTaskDtoSchema.safeParse(value).success;
 };
-export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
+export type CreateTask = (dto: CreateTaskDto) => Promise<TaskRecording>;
 export type CreateTaskFromClient = (
   dto: CreateTaskDtoFromClient
-) => Promise<Task>;
+) => Promise<TaskRecording>;
 export type StartTask = (dto: StartTaskDto) => Promise<Task>;
 export type StartTaskFromClient = (
   dto: StartTaskDtoFromClient
