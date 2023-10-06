@@ -93,7 +93,7 @@ export const SideBar: FC<Props> = ({
                     groupId={group.id}
                     categoryId={category.id}
                     name={category.name}
-                    tasksRecroding={tasksRecording}
+                    tasksRecording={tasksRecording}
                     setTasksRecording={setTasksRecording}
                   />
                 ))}
