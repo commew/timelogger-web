@@ -9,7 +9,7 @@ import {
   createStyles,
 } from '@mantine/core';
 import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';
-import type { TaskGroup } from '@/features';
+import type { TaskGroup, TaskRecording } from '@/features';
 import { TaskMeasurementCategoryButton } from '../TaskMeasurementCategoryButton';
 
 const useStyles = createStyles((theme) => ({
@@ -39,9 +39,15 @@ const useStyles = createStyles((theme) => ({
 
 type Props = {
   taskGroups: TaskGroup[];
+  tasksRecording: TaskRecording[];
+  setTasksRecording: (tasksRecording: TaskRecording[]) => void;
 };
 
-export const SideBar: FC<Props> = ({ taskGroups }) => {
+export const SideBar: FC<Props> = ({
+  taskGroups,
+  tasksRecording,
+  setTasksRecording,
+}) => {
   const { classes, theme } = useStyles();
   const [opened, setOpened] = useState<Record<string, boolean>>({});
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronDown : IconChevronUp;
@@ -87,6 +93,8 @@ export const SideBar: FC<Props> = ({ taskGroups }) => {
                     groupId={group.id}
                     categoryId={category.id}
                     name={category.name}
+                    tasksRecroding={tasksRecording}
+                    setTasksRecording={setTasksRecording}
                   />
                 ))}
               </Group>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import {
@@ -21,9 +22,13 @@ const TimerPage: NextPage<Props> = ({
   pendingTasks,
   taskGroups,
 }) => {
+  const [initialTasksRecording, setInitialTasksRecording] =
+    useState<TaskRecording[]>(tasksRecording);
+
   return (
     <TimerTemplate
-      tasksRecording={tasksRecording}
+      tasksRecording={initialTasksRecording}
+      setTasksRecording={setInitialTasksRecording}
       pendingTasks={pendingTasks}
       taskGroups={taskGroups}
     />
