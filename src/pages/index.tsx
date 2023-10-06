@@ -11,7 +11,12 @@ type Props = {
 
 const IndexPage: NextPage<Props> = ({ taskGroups }) => {
   return (
-    <DefaultLayout taskGroups={taskGroups}>
+    <DefaultLayout
+      taskGroups={taskGroups}
+      // FIXME 今回の変更でVercelデプロイ時にエラーが出るため、一旦空配列を渡す（本来は不要なので対策を講じる必要がある）
+      tasksRecording={[]}
+      setTasksRecording={() => []}
+    >
       <a href="https://github.com/commew/timelogger-web/issues/91">
         TODO 91のissue
       </a>

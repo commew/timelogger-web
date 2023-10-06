@@ -4,12 +4,14 @@ import Head from 'next/head';
 import { signOut } from 'next-auth/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { TitleText, HeaderNavigation, SideBar } from '@/components';
-import type { TaskGroup } from '@/features';
+import type { TaskGroup, TaskRecording } from '@/features';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
   children: ReactNode;
   taskGroups: TaskGroup[];
+  tasksRecording: TaskRecording[];
+  setTasksRecording: (tasksRecording: TaskRecording[]) => void;
 };
 
 const onError = (error: Error, info: { componentStack: string }) => {
@@ -37,7 +39,12 @@ const handleLogout = async (event: MouseEvent<HTMLButtonElement>) => {
 };
 
 // eslint-disable-next-line max-lines-per-function
-export const DefaultLayout: FC<Props> = ({ children, taskGroups }) => {
+export const DefaultLayout: FC<Props> = ({
+  children,
+  taskGroups,
+  tasksRecording,
+  setTasksRecording,
+}) => {
   const { classes } = useStyles();
 
   return (
@@ -52,7 +59,11 @@ export const DefaultLayout: FC<Props> = ({ children, taskGroups }) => {
       <HeaderNavigation handleLogout={handleLogout}></HeaderNavigation>
       <Container size="xl">
         <div className={classes.layoutWrapper}>
-          <SideBar taskGroups={taskGroups} />
+          <SideBar
+            taskGroups={taskGroups}
+            tasksRecording={tasksRecording}
+            setTasksRecording={setTasksRecording}
+          />
           <div className={classes.mainContent}>
             <TitleText title={title} />
             <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>

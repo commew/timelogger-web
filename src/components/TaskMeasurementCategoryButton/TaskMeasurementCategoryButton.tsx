@@ -4,6 +4,7 @@ import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
 import Image from 'next/image';
 import { createTask } from '@/api/client/fetch/task';
+import type { TaskRecording } from '@/features';
 import hoveredImageSrc from './hover.webp';
 
 const useStyles = createStyles((theme) => ({
@@ -30,12 +31,16 @@ type Props = {
   groupId: number;
   categoryId: number;
   name: string;
+  tasksRecording: TaskRecording[];
+  setTasksRecording: (tasksRecording: TaskRecording[]) => void;
 };
 
 export const TaskMeasurementCategoryButton: FC<Props> = ({
   groupId,
   categoryId,
   name,
+  tasksRecording,
+  setTasksRecording,
 }) => {
   const { classes, theme } = useStyles();
   const { hovered, ref } = useHover();
@@ -46,7 +51,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({
       taskCategoryId: categoryId,
       status: 'recording',
     });
-    console.log(createdTask); // TODO Issue 126で UI に反映する
+    setTasksRecording([...tasksRecording, createdTask]);
   };
 
   return (

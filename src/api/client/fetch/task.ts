@@ -2,6 +2,7 @@ import {
   getAppApiUrl,
   httpStatusCode,
   InvalidResponseBodyError,
+  isRecordingTask,
   isTask,
   UnexpectedFeatureError,
 } from '@/features';
@@ -11,6 +12,7 @@ import type {
   StartTaskFromClient,
   StopTaskFromClient,
   Task,
+  TaskRecording,
 } from '@/features';
 import { type operations } from '@/openapi/schema';
 
@@ -43,8 +45,8 @@ export const createTask: CreateTaskFromClient = async (dto) => {
     );
   }
 
-  const task = (await response.json()) as Task;
-  if (!isTask(task)) {
+  const task = (await response.json()) as TaskRecording;
+  if (!isRecordingTask(task)) {
     throw new InvalidResponseBodyError(
       `responseBody is not in the expected format. body: ${JSON.stringify(
         task

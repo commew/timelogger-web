@@ -115,6 +115,12 @@ export const isTask = (value: unknown): value is Task => {
   return result.success;
 };
 
+export const isRecordingTask = (value: unknown): value is TaskRecording => {
+  const result = taskRecordingSchema.safeParse(value);
+
+  return result.success;
+};
+
 export const isRecordingTasks = (value: unknown): value is TaskRecording[] => {
   return tasksRecordingSchema.safeParse(value).success;
 };
@@ -141,10 +147,10 @@ export const isNextApiRequestBodyOfCompleteTaskDto = (
 ): value is NextApiRequestBodyOfCompleteTaskDto => {
   return nextApiRequestBodyOfCompleteTaskDtoSchema.safeParse(value).success;
 };
-export type CreateTask = (dto: CreateTaskDto) => Promise<Task>;
+export type CreateTask = (dto: CreateTaskDto) => Promise<TaskRecording>;
 export type CreateTaskFromClient = (
   dto: CreateTaskDtoFromClient
-) => Promise<Task>;
+) => Promise<TaskRecording>;
 export type StartTask = (dto: StartTaskDto) => Promise<Task>;
 export type StartTaskFromClient = (
   dto: StartTaskDtoFromClient
