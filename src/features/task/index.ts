@@ -1,5 +1,6 @@
 export {
   isTask,
+  isRecordingTask,
   isRecordingTasks,
   isPendingTasks,
   isNextApiRequestBodyOfStartTaskDto,

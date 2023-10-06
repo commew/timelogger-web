@@ -15,6 +15,7 @@ export { isAccount } from './account';
 export type { Account, CreateAccount, FindAccount } from './account';
 export {
   isTask,
+  isRecordingTask,
   isRecordingTasks,
   isPendingTasks,
   isNextApiRequestBodyOfCreateTaskDto,

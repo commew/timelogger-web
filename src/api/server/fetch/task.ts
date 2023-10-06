@@ -7,6 +7,7 @@ import type {
   FetchTasksRecording,
   FetchPendingTasks,
   StartTask,
+  TaskRecording,
 } from '@/features';
 import {
   getBackendApiUrl,
@@ -14,6 +15,7 @@ import {
   InvalidResponseBodyError,
   UnexpectedFeatureError,
   isTask,
+  isRecordingTask,
   isRecordingTasks,
   isPendingTasks,
   getDynamicBackendApiUrl,
@@ -51,8 +53,8 @@ export const createTask: CreateTask = async (dto) => {
     );
   }
 
-  const task = (await response.json()) as Task;
-  if (!isTask(task)) {
+  const task = (await response.json()) as TaskRecording;
+  if (!isRecordingTask(task)) {
     throw new InvalidResponseBodyError(
       `responseBody is not in the expected format. body: ${JSON.stringify(
         task

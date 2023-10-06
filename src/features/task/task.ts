@@ -115,6 +115,12 @@ export const isTask = (value: unknown): value is Task => {
   return result.success;
 };
 
+export const isRecordingTask = (value: unknown): value is TaskRecording => {
+  const result = taskRecordingSchema.safeParse(value);
+
+  return result.success;
+};
+
 export const isRecordingTasks = (value: unknown): value is TaskRecording[] => {
   return tasksRecordingSchema.safeParse(value).success;
 };
