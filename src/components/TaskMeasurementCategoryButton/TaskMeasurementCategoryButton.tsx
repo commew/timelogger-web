@@ -31,7 +31,7 @@ type Props = {
   groupId: number;
   categoryId: number;
   name: string;
-  tasksRecroding: TaskRecording[];
+  tasksRecording: TaskRecording[];
   setTasksRecording: (tasksRecording: TaskRecording[]) => void;
 };
 
@@ -39,7 +39,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({
   groupId,
   categoryId,
   name,
-  tasksRecroding,
+  tasksRecording,
   setTasksRecording,
 }) => {
   const { classes, theme } = useStyles();
@@ -51,7 +51,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({
       taskCategoryId: categoryId,
       status: 'recording',
     });
-    setTasksRecording([...tasksRecroding, createdTask]);
+    setTasksRecording([...tasksRecording, createdTask]);
   };
 
   return (
