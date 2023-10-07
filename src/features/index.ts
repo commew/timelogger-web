@@ -38,6 +38,8 @@ export type {
   CompleteTaskFromClient,
   FetchTasksRecording,
   FetchPendingTasks,
+  HandleCreateTask,
+  UseTask,
 } from './task';
 export {
   isTaskGroups,

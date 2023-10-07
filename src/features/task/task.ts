@@ -167,3 +167,8 @@ export type FetchTasksRecording = (
 export type FetchPendingTasks = (
   dto: FetchPendingTasksDto
 ) => Promise<PendingTask[]>;
+export type HandleCreateTask = (dto: CreateTaskDtoFromClient) => Promise<void>;
+export type UseTask = (recordingTasks: TaskRecording[]) => {
+  initialRecordingTasks: TaskRecording[];
+  handleCreateTask: HandleCreateTask;
+};
