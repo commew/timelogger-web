@@ -3,8 +3,7 @@ import { createStyles, Box } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import { IconHome } from '@tabler/icons-react';
 import Image from 'next/image';
-import { createTask } from '@/api/client/fetch/task';
-import type { TaskRecording } from '@/features';
+import type { HandleCreateTask } from '@/features';
 import hoveredImageSrc from './hover.webp';
 
 const useStyles = createStyles((theme) => ({
@@ -31,27 +30,24 @@ type Props = {
   groupId: number;
   categoryId: number;
   name: string;
-  tasksRecording: TaskRecording[];
-  setTasksRecording: (tasksRecording: TaskRecording[]) => void;
+  handleCreateTask: HandleCreateTask;
 };
 
 export const TaskMeasurementCategoryButton: FC<Props> = ({
   groupId,
   categoryId,
   name,
-  tasksRecording,
-  setTasksRecording,
+  handleCreateTask,
 }) => {
   const { classes, theme } = useStyles();
   const { hovered, ref } = useHover();
 
-  const handleCreateTask = async () => {
-    const createdTask = await createTask({
+  const handleClick = async () => {
+    await handleCreateTask({
       taskGroupId: groupId,
       taskCategoryId: categoryId,
       status: 'recording',
     });
-    setTasksRecording([...tasksRecording, createdTask]);
   };
 
   return (
@@ -59,7 +55,7 @@ export const TaskMeasurementCategoryButton: FC<Props> = ({
       className={classes.button}
       ref={ref}
       role="button"
-      onClick={handleCreateTask}
+      onClick={handleClick}
     >
       <Box
         sx={{
