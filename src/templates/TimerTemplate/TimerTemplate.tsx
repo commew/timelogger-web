@@ -10,6 +10,7 @@ import {
   type PendingTask,
   type TaskGroup,
   type TaskRecording,
+  type HandleStopTask,
 } from '@/features';
 import { DefaultLayout } from '@/layouts';
 
@@ -32,6 +33,7 @@ type Props = {
   tasksRecording: TaskRecording[];
   handleCreateTask: HandleCreateTask;
   handleStartTask: HandleStartTask;
+  handleStopTask: HandleStopTask;
   pendingTasks: PendingTask[];
   taskGroups: TaskGroup[];
 };
@@ -40,6 +42,7 @@ export const TimerTemplate: FC<Props> = ({
   tasksRecording,
   handleCreateTask,
   handleStartTask,
+  handleStopTask,
   pendingTasks,
   taskGroups,
 }) => {
@@ -91,6 +94,7 @@ export const TimerTemplate: FC<Props> = ({
                 duration={taskRecording.duration}
                 status={taskRecording.status}
                 handleStartTask={handleStartTask}
+                handleStopTask={handleStopTask}
               />
             );
           })
@@ -122,6 +126,7 @@ export const TimerTemplate: FC<Props> = ({
                 duration={pendingTask.duration}
                 status={pendingTask.status}
                 handleStartTask={handleStartTask}
+                handleStopTask={handleStopTask}
               />
             );
           })

@@ -7,7 +7,7 @@ import {
   CompleteTaskButton,
 } from '@/components';
 import { ExhaustiveError } from '@/features';
-import type { HandleStartTask } from '@/features';
+import type { HandleStartTask, HandleStopTask } from '@/features';
 import { useTaskTimer } from '@/hooks';
 
 const useStyles = createStyles((theme) => ({
@@ -32,6 +32,7 @@ type Props = {
   duration: number;
   status: 'recording' | 'pending' | 'completed';
   handleStartTask: HandleStartTask;
+  handleStopTask: HandleStopTask;
 };
 
 export const TaskItem: FC<Props> = ({
@@ -40,6 +41,7 @@ export const TaskItem: FC<Props> = ({
   duration,
   status,
   handleStartTask,
+  handleStopTask,
 }) => {
   const { classes, theme } = useStyles();
 
@@ -48,7 +50,7 @@ export const TaskItem: FC<Props> = ({
   const renderChangeStatusButton = () => {
     switch (status) {
       case 'recording':
-        return <StopTaskButton taskId={1} />;
+        return <StopTaskButton taskId={1} handleStopTask={handleStopTask} />;
       case 'pending':
         return <StartTaskButton taskId={1} handleStartTask={handleStartTask} />;
       case 'completed':
