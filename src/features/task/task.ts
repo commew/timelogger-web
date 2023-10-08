@@ -92,6 +92,10 @@ const pendingTaskSchema = taskSchema.extend({
   status: z.literal('pending'),
 });
 
+const completedTaskSchema = taskSchema.extend({
+  status: z.literal('completed'),
+});
+
 const pendingTasksSchema = z.array(pendingTaskSchema);
 
 const nextApiRequestBodyOfCreateTaskDtoSchema = z.object({
@@ -127,8 +131,18 @@ export const isRecordingTask = (value: unknown): value is TaskRecording => {
 export const isRecordingTasks = (value: unknown): value is TaskRecording[] => {
   return tasksRecordingSchema.safeParse(value).success;
 };
+export const isPendingTask = (value: unknown): value is PendingTask => {
+  const result = pendingTaskSchema.safeParse(value);
+
+  return result.success;
+};
 export const isPendingTasks = (value: unknown): value is PendingTask[] => {
   return pendingTasksSchema.safeParse(value).success;
+};
+export const isCompletedTask = (value: unknown): value is CompletedTask => {
+  const result = completedTaskSchema.safeParse(value);
+
+  return result.success;
 };
 export const isNextApiRequestBodyOfCreateTaskDto = (
   value: unknown
