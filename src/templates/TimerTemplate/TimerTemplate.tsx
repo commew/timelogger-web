@@ -5,6 +5,7 @@ import { useErrorHandler } from 'react-error-boundary';
 import { TaskItem } from '@/components';
 import {
   findTaskCategoryById,
+  type HandleStartTask,
   type HandleCreateTask,
   type PendingTask,
   type TaskGroup,
@@ -30,6 +31,7 @@ const useStyles = createStyles((theme) => ({
 type Props = {
   tasksRecording: TaskRecording[];
   handleCreateTask: HandleCreateTask;
+  handleStartTask: HandleStartTask;
   pendingTasks: PendingTask[];
   taskGroups: TaskGroup[];
 };
@@ -37,6 +39,7 @@ type Props = {
 export const TimerTemplate: FC<Props> = ({
   tasksRecording,
   handleCreateTask,
+  handleStartTask,
   pendingTasks,
   taskGroups,
 }) => {
@@ -87,6 +90,7 @@ export const TimerTemplate: FC<Props> = ({
                 }
                 duration={taskRecording.duration}
                 status={taskRecording.status}
+                handleStartTask={handleStartTask}
               />
             );
           })
@@ -117,6 +121,7 @@ export const TimerTemplate: FC<Props> = ({
                 }
                 duration={pendingTask.duration}
                 status={pendingTask.status}
+                handleStartTask={handleStartTask}
               />
             );
           })

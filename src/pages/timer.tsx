@@ -22,13 +22,19 @@ const TimerPage: NextPage<Props> = ({
   pendingTasks,
   taskGroups,
 }) => {
-  const { initialRecordingTasks, handleCreateTask } = useTask(tasksRecording);
+  const {
+    initialRecordingTasks,
+    initialPendingTasks,
+    handleCreateTask,
+    handleStartTask,
+  } = useTask(tasksRecording, pendingTasks);
 
   return (
     <TimerTemplate
       tasksRecording={initialRecordingTasks}
+      pendingTasks={initialPendingTasks}
       handleCreateTask={handleCreateTask}
-      pendingTasks={pendingTasks}
+      handleStartTask={handleStartTask}
       taskGroups={taskGroups}
     />
   );
