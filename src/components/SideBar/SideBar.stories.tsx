@@ -3,6 +3,9 @@ import { SideBar } from './SideBar';
 
 const story = {
   component: SideBar,
+  argTypes: {
+    handleCreateTask: { action: 'handleCreateTask' },
+  },
 };
 
 export default story;

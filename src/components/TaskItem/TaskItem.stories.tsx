@@ -3,6 +3,11 @@ import { TaskItem } from './TaskItem';
 
 const story = {
   component: TaskItem,
+  argTypes: {
+    handleCompleteTask: { action: 'handleCompleteTask' },
+    handleStartTask: { action: 'handleStartTask' },
+    handleStopTask: { action: 'handleStopTask' },
+  },
 };
 
 export default story;

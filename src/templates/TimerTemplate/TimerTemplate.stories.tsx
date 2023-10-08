@@ -3,6 +3,12 @@ import { TimerTemplate } from '@/templates';
 
 const story = {
   component: TimerTemplate,
+  argTypes: {
+    handleCreateTask: { action: 'handleCreateTask' },
+    handleCompleteTask: { action: 'handleCompleteTask' },
+    handleStartTask: { action: 'handleStartTask' },
+    handleStopTask: { action: 'handleStopTask' },
+  },
 };
 
 export default story;
