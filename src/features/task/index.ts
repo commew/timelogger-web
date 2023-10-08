@@ -25,5 +25,6 @@ export type {
   FetchPendingTasks,
   HandleCreateTask,
   HandleStartTask,
+  HandleStopTask,
   UseTask,
 } from './task';
