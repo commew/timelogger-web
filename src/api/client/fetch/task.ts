@@ -2,16 +2,18 @@ import {
   getAppApiUrl,
   httpStatusCode,
   InvalidResponseBodyError,
+  isCompletedTask,
+  isPendingTask,
   isRecordingTask,
-  isTask,
   UnexpectedFeatureError,
 } from '@/features';
 import type {
+  CompletedTask,
   CompleteTaskFromClient,
   CreateTaskFromClient,
+  PendingTask,
   StartTaskFromClient,
   StopTaskFromClient,
-  Task,
   TaskRecording,
 } from '@/features';
 import { type operations } from '@/openapi/schema';
@@ -84,8 +86,8 @@ export const startTask: StartTaskFromClient = async (dto) => {
     );
   }
 
-  const task = (await response.json()) as Task;
-  if (!isTask(task)) {
+  const task = (await response.json()) as TaskRecording;
+  if (!isRecordingTask(task)) {
     throw new InvalidResponseBodyError(
       `responseBody is not in the expected format. body: ${JSON.stringify(
         task
@@ -123,8 +125,8 @@ export const stopTask: StopTaskFromClient = async (dto) => {
     );
   }
 
-  const task = (await response.json()) as Task;
-  if (!isTask(task)) {
+  const task = (await response.json()) as PendingTask;
+  if (!isPendingTask(task)) {
     throw new InvalidResponseBodyError(
       `responseBody is not in the expected format. body: ${JSON.stringify(
         task
@@ -162,8 +164,8 @@ export const completeTask: CompleteTaskFromClient = async (dto) => {
     );
   }
 
-  const task = (await response.json()) as Task;
-  if (!isTask(task)) {
+  const task = (await response.json()) as CompletedTask;
+  if (!isCompletedTask(task)) {
     throw new InvalidResponseBodyError(
       `responseBody is not in the expected format. body: ${JSON.stringify(
         task
