@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-import { createTask, startTask, stopTask } from '@/api/client/fetch/task';
+import {
+  completeTask,
+  createTask,
+  startTask,
+  stopTask,
+} from '@/api/client/fetch/task';
 import type {
   TaskRecording,
   HandleCreateTask,
@@ -8,6 +13,7 @@ import type {
   PendingTask,
   HandleStartTask,
   HandleStopTask,
+  HandleCompleteTask,
 } from '@/features';
 
 export const useTask: UseTask = (
@@ -55,11 +61,27 @@ export const useTask: UseTask = (
     setPendingTasks([...initialPendingTasks, stoppedTask]);
   };
 
+  const handleCompleteTask: HandleCompleteTask = async (dto) => {
+    const { taskId } = dto;
+
+    const completedTask = await completeTask({
+      taskId,
+    });
+
+    setPendingTasks(
+      initialPendingTasks.filter((task) => task.id !== completedTask.id)
+    );
+    setRecordingTasks(
+      initialRecordingTasks.filter((task) => task.id !== taskId)
+    );
+  };
+
   return {
     initialRecordingTasks,
     initialPendingTasks,
     handleCreateTask,
     handleStartTask,
     handleStopTask,
+    handleCompleteTask,
   };
 };
