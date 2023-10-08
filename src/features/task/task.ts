@@ -151,10 +151,10 @@ export type CreateTask = (dto: CreateTaskDto) => Promise<TaskRecording>;
 export type CreateTaskFromClient = (
   dto: CreateTaskDtoFromClient
 ) => Promise<TaskRecording>;
-export type StartTask = (dto: StartTaskDto) => Promise<Task>;
+export type StartTask = (dto: StartTaskDto) => Promise<TaskRecording>;
 export type StartTaskFromClient = (
   dto: StartTaskDtoFromClient
-) => Promise<Task>;
+) => Promise<TaskRecording>;
 export type StopTask = (dto: StopTaskDto) => Promise<Task>;
 export type StopTaskFromClient = (dto: StopTaskDtoFromClient) => Promise<Task>;
 export type CompleteTask = (dto: CompleteTaskDto) => Promise<Task>;
@@ -168,7 +168,13 @@ export type FetchPendingTasks = (
   dto: FetchPendingTasksDto
 ) => Promise<PendingTask[]>;
 export type HandleCreateTask = (dto: CreateTaskDtoFromClient) => Promise<void>;
-export type UseTask = (recordingTasks: TaskRecording[]) => {
+export type HandleStartTask = (dto: StartTaskDtoFromClient) => Promise<void>;
+export type UseTask = (
+  recordingTasks: TaskRecording[],
+  pendingTasks: PendingTask[]
+) => {
   initialRecordingTasks: TaskRecording[];
+  initialPendingTasks: PendingTask[];
   handleCreateTask: HandleCreateTask;
+  handleStartTask: HandleStartTask;
 };

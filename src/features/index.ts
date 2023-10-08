@@ -39,6 +39,7 @@ export type {
   FetchTasksRecording,
   FetchPendingTasks,
   HandleCreateTask,
+  HandleStartTask,
   UseTask,
 } from './task';
 export {
