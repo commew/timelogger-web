@@ -7,6 +7,7 @@ import {
   findTaskCategoryById,
   type HandleStartTask,
   type HandleCreateTask,
+  type HandleCompleteTask,
   type PendingTask,
   type TaskGroup,
   type TaskRecording,
@@ -34,6 +35,7 @@ type Props = {
   handleCreateTask: HandleCreateTask;
   handleStartTask: HandleStartTask;
   handleStopTask: HandleStopTask;
+  handleCompleteTask: HandleCompleteTask;
   pendingTasks: PendingTask[];
   taskGroups: TaskGroup[];
 };
@@ -43,6 +45,7 @@ export const TimerTemplate: FC<Props> = ({
   handleCreateTask,
   handleStartTask,
   handleStopTask,
+  handleCompleteTask,
   pendingTasks,
   taskGroups,
 }) => {
@@ -95,6 +98,7 @@ export const TimerTemplate: FC<Props> = ({
                 status={taskRecording.status}
                 handleStartTask={handleStartTask}
                 handleStopTask={handleStopTask}
+                handleCompleteTask={handleCompleteTask}
               />
             );
           })
@@ -127,6 +131,7 @@ export const TimerTemplate: FC<Props> = ({
                 status={pendingTask.status}
                 handleStartTask={handleStartTask}
                 handleStopTask={handleStopTask}
+                handleCompleteTask={handleCompleteTask}
               />
             );
           })

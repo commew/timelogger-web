@@ -28,6 +28,7 @@ const TimerPage: NextPage<Props> = ({
     handleCreateTask,
     handleStartTask,
     handleStopTask,
+    handleCompleteTask,
   } = useTask(tasksRecording, pendingTasks);
 
   return (
@@ -37,6 +38,7 @@ const TimerPage: NextPage<Props> = ({
       handleCreateTask={handleCreateTask}
       handleStartTask={handleStartTask}
       handleStopTask={handleStopTask}
+      handleCompleteTask={handleCompleteTask}
       taskGroups={taskGroups}
     />
   );
