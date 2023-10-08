@@ -64,6 +64,9 @@ export type TaskRecording = Omit<Task, 'status'> & {
 export type PendingTask = Omit<Task, 'status'> & {
   status: 'pending';
 };
+export type CompletedTask = Omit<Task, 'status'> & {
+  status: 'completed';
+};
 
 const taskSchema = z.object({
   id: z.number(),
@@ -159,10 +162,10 @@ export type StopTask = (dto: StopTaskDto) => Promise<PendingTask>;
 export type StopTaskFromClient = (
   dto: StopTaskDtoFromClient
 ) => Promise<PendingTask>;
-export type CompleteTask = (dto: CompleteTaskDto) => Promise<Task>;
+export type CompleteTask = (dto: CompleteTaskDto) => Promise<CompletedTask>;
 export type CompleteTaskFromClient = (
   dto: CompleteTaskDtoFromClient
-) => Promise<Task>;
+) => Promise<CompletedTask>;
 export type FetchTasksRecording = (
   dto: FetchTasksRecordingDto
 ) => Promise<TaskRecording[]>;
@@ -172,6 +175,9 @@ export type FetchPendingTasks = (
 export type HandleCreateTask = (dto: CreateTaskDtoFromClient) => Promise<void>;
 export type HandleStartTask = (dto: StartTaskDtoFromClient) => Promise<void>;
 export type HandleStopTask = (dto: StopTaskDtoFromClient) => Promise<void>;
+export type HandleCompleteTask = (
+  dto: CompleteTaskDtoFromClient
+) => Promise<void>;
 export type UseTask = (
   recordingTasks: TaskRecording[],
   pendingTasks: PendingTask[]
@@ -181,4 +187,5 @@ export type UseTask = (
   handleCreateTask: HandleCreateTask;
   handleStartTask: HandleStartTask;
   handleStopTask: HandleStopTask;
+  handleCompleteTask: HandleCompleteTask;
 };

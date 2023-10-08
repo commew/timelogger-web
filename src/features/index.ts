@@ -27,6 +27,7 @@ export type {
   Task,
   TaskRecording,
   PendingTask,
+  CompletedTask,
   Tasks,
   CreateTask,
   CreateTaskFromClient,
@@ -41,6 +42,7 @@ export type {
   HandleCreateTask,
   HandleStartTask,
   HandleStopTask,
+  HandleCompleteTask,
   UseTask,
 } from './task';
 export {
