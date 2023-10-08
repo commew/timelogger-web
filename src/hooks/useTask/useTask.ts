@@ -45,7 +45,7 @@ export const useTask: UseTask = (
     });
 
     setRecordingTasks([...recordingTasks, startedTask]);
-    setPendingTasks(pendingTasks.filter((task) => task.id !== taskId));
+    setPendingTasks(pendingTasks.filter((task) => task.id !== startedTask.id));
   };
 
   const handleStopTask: HandleStopTask = async (dto) => {
@@ -56,7 +56,7 @@ export const useTask: UseTask = (
     });
 
     setRecordingTasks(
-      initialRecordingTasks.filter((task) => task.id !== taskId)
+      initialRecordingTasks.filter((task) => task.id !== stoppedTask.id)
     );
     setPendingTasks([...initialPendingTasks, stoppedTask]);
   };
@@ -72,7 +72,7 @@ export const useTask: UseTask = (
       initialPendingTasks.filter((task) => task.id !== completedTask.id)
     );
     setRecordingTasks(
-      initialRecordingTasks.filter((task) => task.id !== taskId)
+      initialRecordingTasks.filter((task) => task.id !== completedTask.id)
     );
   };
 
