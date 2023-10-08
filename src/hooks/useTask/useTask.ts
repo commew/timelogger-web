@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import { createTask, startTask } from '@/api/client/fetch/task';
+import { createTask, startTask, stopTask } from '@/api/client/fetch/task';
 import type {
   TaskRecording,
   HandleCreateTask,
   UseTask,
   PendingTask,
   HandleStartTask,
+  HandleStopTask,
 } from '@/features';
 
 export const useTask: UseTask = (
@@ -41,10 +42,24 @@ export const useTask: UseTask = (
     setPendingTasks(pendingTasks.filter((task) => task.id !== taskId));
   };
 
+  const handleStopTask: HandleStopTask = async (dto) => {
+    const { taskId } = dto;
+
+    const stoppedTask = await stopTask({
+      taskId,
+    });
+
+    setRecordingTasks(
+      initialRecordingTasks.filter((task) => task.id !== taskId)
+    );
+    setPendingTasks([...initialPendingTasks, stoppedTask]);
+  };
+
   return {
     initialRecordingTasks,
     initialPendingTasks,
     handleCreateTask,
     handleStartTask,
+    handleStopTask,
   };
 };
