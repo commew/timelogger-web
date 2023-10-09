@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Button, createStyles, Text } from '@mantine/core';
 import { IconSquare } from '@tabler/icons-react';
 import { useErrorHandler } from 'react-error-boundary';
-import { completeTask } from '@/api/client/fetch/task';
+import type { HandleCompleteTask } from '@/features';
 
 const useStyles = createStyles(() => ({
   button: {
@@ -14,9 +14,13 @@ const useStyles = createStyles(() => ({
 
 type Props = {
   taskId: number;
+  handleCompleteTask: HandleCompleteTask;
 };
 
-export const CompleteTaskButton: FC<Props> = ({ taskId }) => {
+export const CompleteTaskButton: FC<Props> = ({
+  taskId,
+  handleCompleteTask,
+}) => {
   const { classes, theme } = useStyles();
 
   const handleError = useErrorHandler();
@@ -24,8 +28,7 @@ export const CompleteTaskButton: FC<Props> = ({ taskId }) => {
   const clickHandler = async (taksId: number) => {
     try {
       const completeTaskDto = { taskId: taksId };
-      const response = await completeTask(completeTaskDto);
-      console.log(response); // TODO: レスポンスデータを元にレンダリングを変更する
+      await handleCompleteTask(completeTaskDto);
     } catch (error) {
       handleError(error);
     }

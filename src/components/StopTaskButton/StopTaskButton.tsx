@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Button, createStyles, Text } from '@mantine/core';
 import { IconPlayerPause } from '@tabler/icons-react';
 import { useErrorHandler } from 'react-error-boundary';
-import { stopTask } from '@/api/client/fetch/task';
+import type { HandleStopTask } from '@/features';
 
 const useStyles = createStyles(() => ({
   button: {
@@ -14,9 +14,10 @@ const useStyles = createStyles(() => ({
 
 type Props = {
   taskId: number;
+  handleStopTask: HandleStopTask;
 };
 
-export const StopTaskButton: FC<Props> = ({ taskId }) => {
+export const StopTaskButton: FC<Props> = ({ taskId, handleStopTask }) => {
   const { classes, theme } = useStyles();
 
   const handleError = useErrorHandler();
@@ -24,8 +25,7 @@ export const StopTaskButton: FC<Props> = ({ taskId }) => {
   const clickHandler = async (taksId: number) => {
     try {
       const stopTaskDto = { taskId: taksId };
-      const response = await stopTask(stopTaskDto);
-      console.log(response); // TODO: レスポンスデータを元にレンダリングを変更する
+      await handleStopTask(stopTaskDto);
     } catch (error) {
       handleError(error);
     }

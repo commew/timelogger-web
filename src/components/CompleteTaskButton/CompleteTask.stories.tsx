@@ -3,6 +3,9 @@ import { CompleteTaskButton } from './CompleteTaskButton';
 
 const story = {
   component: CompleteTaskButton,
+  argTypes: {
+    handleCompleteTask: { action: 'handleCompleteTask' },
+  },
 };
 
 export default story;

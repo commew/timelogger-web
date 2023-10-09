@@ -5,9 +5,13 @@ import { useErrorHandler } from 'react-error-boundary';
 import { TaskItem } from '@/components';
 import {
   findTaskCategoryById,
+  type HandleStartTask,
+  type HandleCreateTask,
+  type HandleCompleteTask,
   type PendingTask,
   type TaskGroup,
   type TaskRecording,
+  type HandleStopTask,
 } from '@/features';
 import { DefaultLayout } from '@/layouts';
 
@@ -28,14 +32,20 @@ const useStyles = createStyles((theme) => ({
 
 type Props = {
   tasksRecording: TaskRecording[];
-  setTasksRecording: (tasksRecording: TaskRecording[]) => void;
+  handleCreateTask: HandleCreateTask;
+  handleStartTask: HandleStartTask;
+  handleStopTask: HandleStopTask;
+  handleCompleteTask: HandleCompleteTask;
   pendingTasks: PendingTask[];
   taskGroups: TaskGroup[];
 };
 
 export const TimerTemplate: FC<Props> = ({
   tasksRecording,
-  setTasksRecording,
+  handleCreateTask,
+  handleStartTask,
+  handleStopTask,
+  handleCompleteTask,
   pendingTasks,
   taskGroups,
 }) => {
@@ -63,11 +73,7 @@ export const TimerTemplate: FC<Props> = ({
   };
 
   return (
-    <DefaultLayout
-      taskGroups={taskGroups}
-      tasksRecording={tasksRecording}
-      setTasksRecording={setTasksRecording}
-    >
+    <DefaultLayout taskGroups={taskGroups} handleCreateTask={handleCreateTask}>
       <Title order={2} className={classes.measuringHead} mt={'2rem'}>
         <IconPlayerPlay
           size="1.25rem"
@@ -90,6 +96,9 @@ export const TimerTemplate: FC<Props> = ({
                 }
                 duration={taskRecording.duration}
                 status={taskRecording.status}
+                handleStartTask={handleStartTask}
+                handleStopTask={handleStopTask}
+                handleCompleteTask={handleCompleteTask}
               />
             );
           })
@@ -120,6 +129,9 @@ export const TimerTemplate: FC<Props> = ({
                 }
                 duration={pendingTask.duration}
                 status={pendingTask.status}
+                handleStartTask={handleStartTask}
+                handleStopTask={handleStopTask}
+                handleCompleteTask={handleCompleteTask}
               />
             );
           })

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { NextPage, GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import {
@@ -8,6 +7,7 @@ import {
 import type { PendingTask, TaskGroup, TaskRecording } from '@/features';
 import { appUrls } from '@/features';
 
+import { useTask } from '@/hooks';
 import { TimerTemplate } from '@/templates';
 import { fetchTaskGroups } from '../api/server/fetch/taskGroup';
 
@@ -22,14 +22,23 @@ const TimerPage: NextPage<Props> = ({
   pendingTasks,
   taskGroups,
 }) => {
-  const [initialTasksRecording, setInitialTasksRecording] =
-    useState<TaskRecording[]>(tasksRecording);
+  const {
+    initialRecordingTasks,
+    initialPendingTasks,
+    handleCreateTask,
+    handleStartTask,
+    handleStopTask,
+    handleCompleteTask,
+  } = useTask(tasksRecording, pendingTasks);
 
   return (
     <TimerTemplate
-      tasksRecording={initialTasksRecording}
-      setTasksRecording={setInitialTasksRecording}
-      pendingTasks={pendingTasks}
+      tasksRecording={initialRecordingTasks}
+      pendingTasks={initialPendingTasks}
+      handleCreateTask={handleCreateTask}
+      handleStartTask={handleStartTask}
+      handleStopTask={handleStopTask}
+      handleCompleteTask={handleCompleteTask}
       taskGroups={taskGroups}
     />
   );

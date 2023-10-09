@@ -3,6 +3,9 @@ import { StartTaskButton } from './StartTaskButton';
 
 const story = {
   component: StartTaskButton,
+  argTypes: {
+    handleStartTask: { action: 'handleStartTask' },
+  },
 };
 
 export default story;

@@ -4,14 +4,13 @@ import Head from 'next/head';
 import { signOut } from 'next-auth/react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { TitleText, HeaderNavigation, SideBar } from '@/components';
-import type { TaskGroup, TaskRecording } from '@/features';
+import type { TaskGroup, HandleCreateTask } from '@/features';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
   children: ReactNode;
   taskGroups: TaskGroup[];
-  tasksRecording: TaskRecording[];
-  setTasksRecording: (tasksRecording: TaskRecording[]) => void;
+  handleCreateTask: HandleCreateTask;
 };
 
 const onError = (error: Error, info: { componentStack: string }) => {
@@ -42,8 +41,7 @@ const handleLogout = async (event: MouseEvent<HTMLButtonElement>) => {
 export const DefaultLayout: FC<Props> = ({
   children,
   taskGroups,
-  tasksRecording,
-  setTasksRecording,
+  handleCreateTask,
 }) => {
   const { classes } = useStyles();
 
@@ -61,8 +59,7 @@ export const DefaultLayout: FC<Props> = ({
         <div className={classes.layoutWrapper}>
           <SideBar
             taskGroups={taskGroups}
-            tasksRecording={tasksRecording}
-            setTasksRecording={setTasksRecording}
+            handleCreateTask={handleCreateTask}
           />
           <div className={classes.mainContent}>
             <TitleText title={title} />

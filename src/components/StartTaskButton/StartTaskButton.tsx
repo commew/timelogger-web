@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Button, createStyles, Text } from '@mantine/core';
 import { IconPlayerPlay } from '@tabler/icons-react';
 import { useErrorHandler } from 'react-error-boundary';
-import { startTask } from '@/api/client/fetch/task';
+import type { HandleStartTask } from '@/features';
 
 const useStyles = createStyles(() => ({
   button: {
@@ -14,9 +14,10 @@ const useStyles = createStyles(() => ({
 
 type Props = {
   taskId: number;
+  handleStartTask: HandleStartTask;
 };
 
-export const StartTaskButton: FC<Props> = ({ taskId }) => {
+export const StartTaskButton: FC<Props> = ({ taskId, handleStartTask }) => {
   const { classes, theme } = useStyles();
 
   const handleError = useErrorHandler();
@@ -24,8 +25,7 @@ export const StartTaskButton: FC<Props> = ({ taskId }) => {
   const clickHandler = async (taksId: number) => {
     try {
       const startTaskDto = { taskId: taksId };
-      const response = await startTask(startTaskDto);
-      console.log(response); // TODO 118 のイシューでレスポンスデータを元にレンダリングを変更する
+      await handleStartTask(startTaskDto);
     } catch (error) {
       handleError(error);
     }

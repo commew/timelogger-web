@@ -3,6 +3,9 @@ import { StopTaskButton } from './StopTaskButton';
 
 const story = {
   component: StopTaskButton,
+  argTypes: {
+    handleStopTask: { action: 'handleStopTask' },
+  },
 };
 
 export default story;

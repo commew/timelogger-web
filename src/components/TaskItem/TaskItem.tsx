@@ -7,6 +7,11 @@ import {
   CompleteTaskButton,
 } from '@/components';
 import { ExhaustiveError } from '@/features';
+import type {
+  HandleCompleteTask,
+  HandleStartTask,
+  HandleStopTask,
+} from '@/features';
 import { useTaskTimer } from '@/hooks';
 
 const useStyles = createStyles((theme) => ({
@@ -30,6 +35,9 @@ type Props = {
   categoryGroupName: string;
   duration: number;
   status: 'recording' | 'pending' | 'completed';
+  handleStartTask: HandleStartTask;
+  handleStopTask: HandleStopTask;
+  handleCompleteTask: HandleCompleteTask;
 };
 
 export const TaskItem: FC<Props> = ({
@@ -37,6 +45,9 @@ export const TaskItem: FC<Props> = ({
   categoryGroupName,
   duration,
   status,
+  handleStartTask,
+  handleStopTask,
+  handleCompleteTask,
 }) => {
   const { classes, theme } = useStyles();
 
@@ -45,9 +56,9 @@ export const TaskItem: FC<Props> = ({
   const renderChangeStatusButton = () => {
     switch (status) {
       case 'recording':
-        return <StopTaskButton taskId={1} />;
+        return <StopTaskButton taskId={1} handleStopTask={handleStopTask} />;
       case 'pending':
-        return <StartTaskButton taskId={1} />;
+        return <StartTaskButton taskId={1} handleStartTask={handleStartTask} />;
       case 'completed':
         return;
       default:
@@ -85,7 +96,10 @@ export const TaskItem: FC<Props> = ({
 
       <Group style={{ alignSelf: 'flex-end' }}>
         {renderChangeStatusButton()}
-        <CompleteTaskButton taskId={1} />
+        <CompleteTaskButton
+          taskId={1}
+          handleCompleteTask={handleCompleteTask}
+        />
       </Group>
     </Flex>
   );

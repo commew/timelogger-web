@@ -3,6 +3,9 @@ import { TaskMeasurementCategoryButton } from './TaskMeasurementCategoryButton';
 
 const story = {
   component: TaskMeasurementCategoryButton,
+  argTypes: {
+    handleCreateTask: { action: 'handleCreateTask' },
+  },
 };
 
 export default story;
