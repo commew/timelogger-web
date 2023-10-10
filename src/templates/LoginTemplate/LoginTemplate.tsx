@@ -22,7 +22,7 @@ export const LoginTemplate: FC<Props> = ({ handleLogin }) => {
 
   return (
     <Group className={classes.loginContent} pl={20} pt={20}>
-      <Image src="/mantine_logo.webp" alt="logo" width={80} height={80} />
+      <Image src="/timmew_logo.webp" alt="logo" width={162.79} height={30} />
       <Image
         src="/btn_google_signin_dark_normal_web@2x.webp"
         alt="Google Login"
