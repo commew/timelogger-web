@@ -1,0 +1,1 @@
+export { TitleLogo } from './TitleLogo';

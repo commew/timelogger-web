@@ -1,4 +1,5 @@
 export { TitleText } from './TitleText';
+export { TitleLogo } from './TitleLogo';
 export { ErrorFallback } from './ErrorFallback';
 export { HeaderNavigation } from './HeaderNavigation';
 export { SideBar } from './SideBar';
