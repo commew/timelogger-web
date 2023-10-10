@@ -1,7 +1,7 @@
 import type { FC, MouseEventHandler } from 'react';
 import { createStyles, Header, Group, Menu, Button } from '@mantine/core';
-import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
+import { TitleLogo } from '@/components';
 import { appUrls } from '@/features';
 
 const useStyles = createStyles((theme) => ({
@@ -41,7 +41,7 @@ export const HeaderNavigation: FC<Props> = ({ handleLogout }) => {
   return (
     <Header height={60} mb={20} px={60} className={classes.header}>
       <div className={classes.inner}>
-        <MantineLogo size={28} />
+        <TitleLogo />
         <Group spacing={4} pl={30}>
           <Menu>
             <Menu.Target>
