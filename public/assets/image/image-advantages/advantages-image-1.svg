@@ -1,5 +1,5 @@
 <svg width="610" height="396" viewBox="0 0 610 396" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="1.5" y="2" width="607" height="347" fill="white"/>
+<rect x="1.5" y="2" width="607" height="392" fill="white"/>
 <mask id="mask0_928_95900" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="27" y="76" width="575" height="231">
 <rect x="27" y="76" width="575" height="231" fill="#D9D9D9"/>
 </mask>
@@ -49,5 +49,5 @@
 <path d="M443.237 225.025L425.57 216.841L433.16 208.365L443.237 225.025Z" fill="#F7CC2E"/>
 <path d="M441.613 233.211L425.861 244.654L422.155 233.897L441.613 233.211Z" fill="#F7CC2E"/>
 </g>
-<rect x="1.5" y="2" width="607" height="347" stroke="#F7CC2E" stroke-width="3"/>
+<rect x="1.5" y="2" width="607" height="392" stroke="#F7CC2E" stroke-width="3"/>
 </svg>
