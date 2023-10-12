@@ -9,3 +9,5 @@ __mocks__
 storybook-static/
 public/mockServiceWorker.js
 src/openapi/schema.ts
+public/index.html
+public/assets/
