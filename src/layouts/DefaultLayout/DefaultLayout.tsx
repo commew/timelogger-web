@@ -9,6 +9,7 @@ import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
   children: ReactNode;
+  title: string;
   taskGroups: TaskGroup[];
   handleCreateTask: HandleCreateTask;
 };
@@ -18,8 +19,6 @@ const onError = (error: Error, info: { componentStack: string }) => {
   console.log('error.message', error.message);
   console.log('info.componentStack:', info.componentStack);
 };
-
-const title = 'Time Logger（仮）';
 
 const useStyles = createStyles(() => ({
   layoutWrapper: {
@@ -40,6 +39,7 @@ const handleLogout = async (event: MouseEvent<HTMLButtonElement>) => {
 // eslint-disable-next-line max-lines-per-function
 export const DefaultLayout: FC<Props> = ({
   children,
+  title,
   taskGroups,
   handleCreateTask,
 }) => {
