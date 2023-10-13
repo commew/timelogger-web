@@ -31,6 +31,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type Props = {
+  title: string;
   tasksRecording: TaskRecording[];
   handleCreateTask: HandleCreateTask;
   handleStartTask: HandleStartTask;
@@ -41,6 +42,7 @@ type Props = {
 };
 
 export const TimerTemplate: FC<Props> = ({
+  title,
   tasksRecording,
   handleCreateTask,
   handleStartTask,
@@ -73,7 +75,11 @@ export const TimerTemplate: FC<Props> = ({
   };
 
   return (
-    <DefaultLayout taskGroups={taskGroups} handleCreateTask={handleCreateTask}>
+    <DefaultLayout
+      title={title}
+      taskGroups={taskGroups}
+      handleCreateTask={handleCreateTask}
+    >
       <Title order={2} className={classes.measuringHead} mt={'2rem'}>
         <IconPlayerPlay
           size="1.25rem"
