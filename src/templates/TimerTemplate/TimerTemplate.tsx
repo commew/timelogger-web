@@ -94,6 +94,7 @@ export const TimerTemplate: FC<Props> = ({
             return (
               <TaskItem
                 key={index}
+                taskId={taskRecording.id}
                 categoryName={
                   getTaskCategoryName(taskRecording.taskCategoryId) ?? ''
                 }
@@ -127,6 +128,7 @@ export const TimerTemplate: FC<Props> = ({
             return (
               <TaskItem
                 key={index}
+                taskId={pendingTask.id}
                 categoryName={
                   getTaskCategoryName(pendingTask.taskCategoryId) ?? ''
                 }

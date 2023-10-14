@@ -16,6 +16,7 @@ type Story = ComponentStoryObj<typeof TaskItem>;
 
 export const Default: Story = {
   args: {
+    taskId: 1,
     categoryName: 'カテゴリ名',
     categoryGroupName: 'グループ名',
     duration: 14400,
@@ -25,6 +26,7 @@ export const Default: Story = {
 
 export const Pending: Story = {
   args: {
+    taskId: 1,
     categoryName: 'カテゴリ名',
     categoryGroupName: 'グループ名',
     duration: 14400,
