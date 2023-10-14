@@ -25,7 +25,7 @@ describe('src/components/HeaderNavigation/HeaderNavigation.tsx TestCases', () =>
     const handleLogout = jest.fn();
     renderWithTheme(<HeaderNavigation handleLogout={handleLogout} />);
 
-    const linkLabels = ['計測', '集計', 'タスク履歴', '各種設定'];
+    const linkLabels = ['計測'];
     linkLabels.forEach((label) => {
       expect(screen.getByText(label)).toBeTruthy();
     });

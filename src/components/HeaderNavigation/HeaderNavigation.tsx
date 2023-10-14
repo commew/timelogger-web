@@ -50,27 +50,6 @@ export const HeaderNavigation: FC<Props> = ({ handleLogout }) => {
               </Link>
             </Menu.Target>
           </Menu>
-          <Menu>
-            <Menu.Target>
-              <Link href={'/'} className={classes.link}>
-                集計
-              </Link>
-            </Menu.Target>
-          </Menu>
-          <Menu>
-            <Menu.Target>
-              <Link href={'/'} className={classes.link}>
-                タスク履歴
-              </Link>
-            </Menu.Target>
-          </Menu>
-          <Menu>
-            <Menu.Target>
-              <Link href={'/'} className={classes.link}>
-                各種設定
-              </Link>
-            </Menu.Target>
-          </Menu>
         </Group>
         <Group position="right" ml={'auto'}>
           <Button
