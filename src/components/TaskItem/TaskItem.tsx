@@ -31,6 +31,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 type Props = {
+  taskId: number;
   categoryName: string;
   categoryGroupName: string;
   duration: number;
@@ -41,6 +42,7 @@ type Props = {
 };
 
 export const TaskItem: FC<Props> = ({
+  taskId,
   categoryName,
   categoryGroupName,
   duration,
@@ -56,9 +58,13 @@ export const TaskItem: FC<Props> = ({
   const renderChangeStatusButton = () => {
     switch (status) {
       case 'recording':
-        return <StopTaskButton taskId={1} handleStopTask={handleStopTask} />;
+        return (
+          <StopTaskButton taskId={taskId} handleStopTask={handleStopTask} />
+        );
       case 'pending':
-        return <StartTaskButton taskId={1} handleStartTask={handleStartTask} />;
+        return (
+          <StartTaskButton taskId={taskId} handleStartTask={handleStartTask} />
+        );
       case 'completed':
         return;
       default:
@@ -97,7 +103,7 @@ export const TaskItem: FC<Props> = ({
       <Group style={{ alignSelf: 'flex-end' }}>
         {renderChangeStatusButton()}
         <CompleteTaskButton
-          taskId={1}
+          taskId={taskId}
           handleCompleteTask={handleCompleteTask}
         />
       </Group>
