@@ -68,6 +68,7 @@ const taskGroups = [
 
 export const Default: Story = {
   args: {
+    title: '計測',
     tasksRecording: [
       {
         id: 1,
@@ -132,6 +133,7 @@ export const Default: Story = {
 
 export const NoTasks: Story = {
   args: {
+    title: '計測',
     tasksRecording: [],
     pendingTasks: [],
     taskGroups,
