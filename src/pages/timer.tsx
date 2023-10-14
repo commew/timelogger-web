@@ -33,6 +33,7 @@ const TimerPage: NextPage<Props> = ({
 
   return (
     <TimerTemplate
+      title={'計測'}
       tasksRecording={initialRecordingTasks}
       pendingTasks={initialPendingTasks}
       handleCreateTask={handleCreateTask}
