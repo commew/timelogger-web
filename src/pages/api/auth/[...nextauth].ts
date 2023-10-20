@@ -47,15 +47,12 @@ export const authOptions: NextAuthOptions = {
           String(process.env.NEXTAUTH_SECRET)
         );
 
-        // TODO APIが完成したらこの条件分岐を削除する、対応issueは https://github.com/commew/timelogger-web/issues/77
-        if (process.env.NEXT_PUBLIC_DEBUG_MOCK_API === '1') {
-          const account = await findAccount({ appToken: session.appToken });
-          if (account === null) {
-            await createAccount({
-              sub: token.sub,
-              oidcProvider: token.provider,
-            });
-          }
+        const account = await findAccount({ appToken: session.appToken });
+        if (account === null) {
+          await createAccount({
+            sub: token.sub,
+            oidcProvider: token.provider,
+          });
         }
       }
 
