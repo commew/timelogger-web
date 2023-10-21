@@ -22,9 +22,6 @@ export const createAccount: CreateAccount = async (dto) => {
     headers: {
       Authorization: `Basic ${createBackendApiBasicAuthCredential()}`,
       'Content-Type': 'application/json',
-      // TODO APIのDEBUGを行う時は環境変数に NEXT_PUBLIC_DEBUG_MOCK_API=1 を設定してPreferを書き換える
-      // TODO Preferは https://github.com/commew/timelogger-web/issues/77 で削除する
-      Prefer: 'code=201, example=ExampleSuccess',
     },
     body: JSON.stringify(requestBody),
   });
@@ -56,9 +53,6 @@ export const findAccount: FindAccount = async (dto) => {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${appToken}`,
-      // TODO APIのDEBUGを行う時は環境変数に NEXT_PUBLIC_DEBUG_MOCK_API=1 を設定してPreferを書き換える
-      // TODO Preferは https://github.com/commew/timelogger-web/issues/77 で削除する
-      Prefer: 'code=401,example=ExampleAuthenticated',
     },
   });
 
