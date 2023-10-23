@@ -91,10 +91,10 @@ export const TimerTemplate: FC<Props> = ({
       </Title>
       <Stack mt={'1rem'}>
         {tasksRecording.length > 0 ? (
-          tasksRecording.map((taskRecording, index) => {
+          tasksRecording.map((taskRecording) => {
             return (
               <TaskItem
-                key={index}
+                key={taskRecording.id}
                 taskId={taskRecording.id}
                 categoryName={
                   getTaskCategoryName(taskRecording.taskCategoryId) ?? ''
@@ -125,10 +125,10 @@ export const TimerTemplate: FC<Props> = ({
       </Title>
       <Stack mt={'1rem'}>
         {pendingTasks.length > 0 ? (
-          pendingTasks.map((pendingTask, index) => {
+          pendingTasks.map((pendingTask) => {
             return (
               <TaskItem
-                key={index}
+                key={pendingTask.id}
                 taskId={pendingTask.id}
                 categoryName={
                   getTaskCategoryName(pendingTask.taskCategoryId) ?? ''
