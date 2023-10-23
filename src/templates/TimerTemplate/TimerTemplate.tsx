@@ -5,6 +5,7 @@ import { useErrorHandler } from 'react-error-boundary';
 import { TaskItem } from '@/components';
 import {
   findTaskCategoryById,
+  findTaskGroupById,
   type HandleStartTask,
   type HandleCreateTask,
   type HandleCompleteTask,
@@ -56,7 +57,7 @@ export const TimerTemplate: FC<Props> = ({
 
   const getTaskGroupName = (taskGroupId: number) => {
     try {
-      const taskGroup = findTaskCategoryById(taskGroups, taskGroupId);
+      const taskGroup = findTaskGroupById(taskGroups, taskGroupId);
 
       return taskGroup.name;
     } catch (error) {
