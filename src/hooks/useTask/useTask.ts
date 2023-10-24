@@ -34,7 +34,10 @@ export const useTask: UseTask = (
       status,
     });
 
-    setRecordingTasks([...recordingTasks, createdTask]);
+    setRecordingTasks((currentRecordingTasks) => [
+      ...currentRecordingTasks,
+      createdTask,
+    ]);
   };
 
   const handleStartTask: HandleStartTask = async (dto) => {
@@ -44,8 +47,13 @@ export const useTask: UseTask = (
       taskId,
     });
 
-    setRecordingTasks([...recordingTasks, startedTask]);
-    setPendingTasks(pendingTasks.filter((task) => task.id !== startedTask.id));
+    setRecordingTasks((currentRecordingTasks) => [
+      ...currentRecordingTasks,
+      startedTask,
+    ]);
+    setPendingTasks((currentPendingTasks) =>
+      currentPendingTasks.filter((task) => task.id !== startedTask.id)
+    );
   };
 
   const handleStopTask: HandleStopTask = async (dto) => {
@@ -55,10 +63,13 @@ export const useTask: UseTask = (
       taskId,
     });
 
-    setRecordingTasks(
-      initialRecordingTasks.filter((task) => task.id !== stoppedTask.id)
+    setRecordingTasks((currentRecordingTasks) =>
+      currentRecordingTasks.filter((task) => task.id !== stoppedTask.id)
     );
-    setPendingTasks([...initialPendingTasks, stoppedTask]);
+    setPendingTasks((currentPendingTasks) => [
+      ...currentPendingTasks,
+      stoppedTask,
+    ]);
   };
 
   const handleCompleteTask: HandleCompleteTask = async (dto) => {
@@ -68,11 +79,11 @@ export const useTask: UseTask = (
       taskId,
     });
 
-    setPendingTasks(
-      initialPendingTasks.filter((task) => task.id !== completedTask.id)
+    setPendingTasks((currentPendingTasks) =>
+      currentPendingTasks.filter((task) => task.id !== completedTask.id)
     );
-    setRecordingTasks(
-      initialRecordingTasks.filter((task) => task.id !== completedTask.id)
+    setRecordingTasks((currentRecordingTasks) =>
+      currentRecordingTasks.filter((task) => task.id !== completedTask.id)
     );
   };
 
