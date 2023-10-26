@@ -84,11 +84,7 @@ const appApiPaths: AppApiPaths = {
 type AppApiPathName = keyof AppApiPaths;
 type AppApiPath = (typeof appApiPaths)[keyof typeof appApiPaths];
 
-export const getAppApiUrl = (
-  path: AppApiPathName
-): `${AppUrl}${AppApiPath}` => {
-  const apiUrl = appUrl();
-
+export const getAppApiUrl = (path: AppApiPathName): `${AppApiPath}` => {
   switch (path) {
     case 'tasks':
     case 'startTask':
@@ -96,7 +92,7 @@ export const getAppApiUrl = (
     case 'completeTask': {
       const apiPath: AppApiPath = appApiPaths[path];
 
-      return `${apiUrl}${apiPath}`;
+      return `${apiPath}`;
     }
 
     default:
